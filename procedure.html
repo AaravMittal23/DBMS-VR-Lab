@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Procedure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html" class="active">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Implementation of Aggregate Functions and Grouping Operations</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Procedure</span>
+
+  <div class="card">
+    <h2>Step-by-Step Procedure</h2>
+    <p style="color: var(--muted); margin-bottom: 24px;">
+      Follow these steps to perform the experiment on Aggregate Functions and Grouping Operations.
+    </p>
+
+    <ol>
+      <li>
+        <strong>Create a Database Table</strong><br>
+        Create a table named <code>employees</code> with the following structure:
+        <ul style="margin-top: 8px;">
+          <li>id (INT, PRIMARY KEY)</li>
+          <li>name (VARCHAR)</li>
+          <li>department (VARCHAR)</li>
+          <li>salary (DECIMAL)</li>
+          <li>age (INT)</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Insert Sample Data</strong><br>
+        Insert at least 10-15 sample records into the employees table with different departments 
+        (e.g., IT, HR, Finance, Sales) and varying salary values.
+      </li>
+
+      <li>
+        <strong>Display All Records</strong><br>
+        Use the SELECT statement to display all records from the employees table:
+        <pre>SELECT * FROM employees;</pre>
+      </li>
+
+      <li>
+        <strong>Apply COUNT() Function</strong><br>
+        Count the total number of employees:
+        <pre>SELECT COUNT(*) AS total_employees FROM employees;</pre>
+        Count employees in each department:
+        <pre>SELECT department, COUNT(*) AS emp_count 
+FROM employees 
+GROUP BY department;</pre>
+      </li>
+
+      <li>
+        <strong>Apply SUM() Function</strong><br>
+        Calculate the total salary expenditure:
+        <pre>SELECT SUM(salary) AS total_salary FROM employees;</pre>
+        Calculate total salary per department:
+        <pre>SELECT department, SUM(salary) AS dept_total 
+FROM employees 
+GROUP BY department;</pre>
+      </li>
+
+      <li>
+        <strong>Apply AVG() Function</strong><br>
+        Find the average salary:
+        <pre>SELECT AVG(salary) AS avg_salary FROM employees;</pre>
+        Find average salary per department:
+        <pre>SELECT department, AVG(salary) AS avg_salary 
+FROM employees 
+GROUP BY department;</pre>
+      </li>
+
+      <li>
+        <strong>Apply MIN() and MAX() Functions</strong><br>
+        Find the minimum and maximum salary:
+        <pre>SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary 
+FROM employees;</pre>
+        Find min and max salary per department:
+        <pre>SELECT department, MIN(salary) AS min_sal, MAX(salary) AS max_sal 
+FROM employees 
+GROUP BY department;</pre>
+      </li>
+
+      <li>
+        <strong>Use GROUP BY with Multiple Columns</strong><br>
+        Group by department and find statistics:
+        <pre>SELECT department, 
+       COUNT(*) AS emp_count,
+       AVG(salary) AS avg_salary,
+       SUM(salary) AS total_salary
+FROM employees 
+GROUP BY department;</pre>
+      </li>
+
+      <li>
+        <strong>Apply HAVING Clause</strong><br>
+        Find departments with more than 3 employees:
+        <pre>SELECT department, COUNT(*) AS emp_count 
+FROM employees 
+GROUP BY department 
+HAVING COUNT(*) > 3;</pre>
+        Find departments with average salary greater than 50000:
+        <pre>SELECT department, AVG(salary) AS avg_salary 
+FROM employees 
+GROUP BY department 
+HAVING AVG(salary) > 50000;</pre>
+      </li>
+
+      <li>
+        <strong>Combine WHERE and HAVING</strong><br>
+        Filter employees by age first, then group and filter groups:
+        <pre>SELECT department, AVG(salary) AS avg_salary 
+FROM employees 
+WHERE age > 25 
+GROUP BY department 
+HAVING AVG(salary) > 40000;</pre>
+      </li>
+
+      <li>
+        <strong>Use ORDER BY with GROUP BY</strong><br>
+        Sort the grouped results:
+        <pre>SELECT department, AVG(salary) AS avg_salary 
+FROM employees 
+GROUP BY department 
+ORDER BY avg_salary DESC;</pre>
+      </li>
+
+      <li>
+        <strong>Observe and Analyze Results</strong><br>
+        Compare the results of different queries and understand how aggregate functions 
+        work with grouping operations. Note the difference between WHERE and HAVING clauses.
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Expected Outcomes</h2>
+    <ul>
+      <li>Understanding of how aggregate functions summarize data</li>
+      <li>Knowledge of GROUP BY clause for grouping rows</li>
+      <li>Understanding the difference between WHERE and HAVING clauses</li>
+      <li>Ability to write complex queries combining aggregate functions, GROUP BY, HAVING, and ORDER BY</li>
+    </ul>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+</body>
+</html>

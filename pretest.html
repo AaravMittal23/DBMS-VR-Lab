@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Pre-Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html" class="active">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Implementation of Aggregate Functions and Grouping Operations</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Pre-Test</span>
+  <p style="margin-bottom: 24px; color: var(--muted);">Answer the following questions to test your knowledge before starting the experiment.</p>
+
+  <div class="card question">
+    <p><strong>1. Which SQL clause is used to group rows that have the same values in specified columns?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) WHERE</button>
+    <button onclick="checkAnswer(this, true)">B) GROUP BY</button>
+    <button onclick="checkAnswer(this, false)">C) ORDER BY</button>
+    <button onclick="checkAnswer(this, false)">D) HAVING</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>2. Which aggregate function returns the total number of rows in a table?</strong></p>
+    <button onclick="checkAnswer(this, true)">A) COUNT()</button>
+    <button onclick="checkAnswer(this, false)">B) SUM()</button>
+    <button onclick="checkAnswer(this, false)">C) AVG()</button>
+    <button onclick="checkAnswer(this, false)">D) TOTAL()</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>3. What does the AVG() function return?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) The sum of all values</button>
+    <button onclick="checkAnswer(this, true)">B) The average (mean) of all values</button>
+    <button onclick="checkAnswer(this, false)">C) The maximum value</button>
+    <button onclick="checkAnswer(this, false)">D) The minimum value</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>4. Which clause is used to filter groups after the GROUP BY clause has been applied?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) WHERE</button>
+    <button onclick="checkAnswer(this, true)">B) HAVING</button>
+    <button onclick="checkAnswer(this, false)">C) FILTER</button>
+    <button onclick="checkAnswer(this, false)">D) GROUP FILTER</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>5. What is the main difference between WHERE and HAVING clauses?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) WHERE is used with GROUP BY, HAVING is not</button>
+    <button onclick="checkAnswer(this, true)">B) WHERE filters rows before grouping, HAVING filters groups after grouping</button>
+    <button onclick="checkAnswer(this, false)">C) HAVING can only be used with aggregate functions</button>
+    <button onclick="checkAnswer(this, false)">D) There is no difference</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>6. Which aggregate function can be used to find the highest value in a column?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) MIN()</button>
+    <button onclick="checkAnswer(this, true)">B) MAX()</button>
+    <button onclick="checkAnswer(this, false)">C) TOP()</button>
+    <button onclick="checkAnswer(this, false)">D) HIGHEST()</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>7. In the query: SELECT department, COUNT(*) FROM employees GROUP BY department; What does COUNT(*) count?</strong></p>
+    <button onclick="checkAnswer(this, true)">A) The number of employees in each department</button>
+    <button onclick="checkAnswer(this, false)">B) The total number of departments</button>
+    <button onclick="checkAnswer(this, false)">C) The number of unique departments</button>
+    <button onclick="checkAnswer(this, false)">D) The number of NULL values</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>8. Can aggregate functions be used in the WHERE clause?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Yes, always</button>
+    <button onclick="checkAnswer(this, true)">B) No, aggregate functions cannot be used in WHERE clause</button>
+    <button onclick="checkAnswer(this, false)">C) Yes, but only with GROUP BY</button>
+    <button onclick="checkAnswer(this, false)">D) Only COUNT() can be used</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>9. What will be the result of: SELECT SUM(salary) FROM employees WHERE salary IS NULL;</strong></p>
+    <button onclick="checkAnswer(this, false)">A) 0</button>
+    <button onclick="checkAnswer(this, true)">B) NULL</button>
+    <button onclick="checkAnswer(this, false)">C) Error</button>
+    <button onclick="checkAnswer(this, false)">D) The sum of all salaries</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>10. Which of the following is a valid SQL query using GROUP BY?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) SELECT * FROM employees GROUP BY;</button>
+    <button onclick="checkAnswer(this, false)">B) SELECT name, COUNT(*) FROM employees GROUP BY;</button>
+    <button onclick="checkAnswer(this, true)">C) SELECT department, AVG(salary) FROM employees GROUP BY department;</button>
+    <button onclick="checkAnswer(this, false)">D) SELECT COUNT(*) GROUP BY department FROM employees;</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>11. What does the SUM() function do?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Counts the number of rows</button>
+    <button onclick="checkAnswer(this, true)">B) Calculates the total sum of a numeric column</button>
+    <button onclick="checkAnswer(this, false)">C) Finds the average value</button>
+    <button onclick="checkAnswer(this, false)">D) Concatenates string values</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>12. In a SELECT statement with GROUP BY, which columns can be selected without being in the GROUP BY clause?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Any column from the table</button>
+    <button onclick="checkAnswer(this, true)">B) Only columns in GROUP BY or aggregate functions</button>
+    <button onclick="checkAnswer(this, false)">C) All columns must be in GROUP BY</button>
+    <button onclick="checkAnswer(this, false)">D) Only primary key columns</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>13. What is the purpose of using aggregate functions with GROUP BY?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) To sort the results</button>
+    <button onclick="checkAnswer(this, true)">B) To perform calculations on groups of rows</button>
+    <button onclick="checkAnswer(this, false)">C) To filter rows</button>
+    <button onclick="checkAnswer(this, false)">D) To join tables</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>14. Which aggregate function ignores NULL values in its calculation?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) None of them</button>
+    <button onclick="checkAnswer(this, true)">B) All of them (COUNT(*), SUM, AVG, MIN, MAX)</button>
+    <button onclick="checkAnswer(this, false)">C) Only COUNT()</button>
+    <button onclick="checkAnswer(this, false)">D) Only SUM() and AVG()</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>15. What is the correct order of SQL clauses in a query with GROUP BY and HAVING?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) SELECT, HAVING, GROUP BY, FROM, WHERE</button>
+    <button onclick="checkAnswer(this, true)">B) SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY</button>
+    <button onclick="checkAnswer(this, false)">C) SELECT, GROUP BY, HAVING, FROM, WHERE</button>
+    <button onclick="checkAnswer(this, false)">D) SELECT, FROM, GROUP BY, WHERE, HAVING</button>
+    <p class="result"></p>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+<script src="js/lab.js"></script>
+</body>
+</html>

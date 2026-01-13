@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Feedback</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html" class="active">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Implementation of Aggregate Functions and Grouping Operations</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Feedback</span>
+
+  <div class="card">
+    <h2>Share Your Feedback</h2>
+    <p style="color: var(--muted); margin-bottom: 24px;">
+      We value your opinion! Please share your thoughts about this virtual lab experiment. 
+      Your feedback helps us improve the learning experience.
+    </p>
+
+    <form id="feedbackForm" onsubmit="handleSubmit(event)">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="feedback">Your Feedback (Maximum 50 words):</label>
+      <textarea 
+        id="feedback" 
+        name="feedback" 
+        placeholder="Please share your feedback here..." 
+        required
+        oninput="countWords()"
+        maxlength="2000"
+      ></textarea>
+      <div id="wordCount" class="word-count">Words: 0 / 50</div>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+
+    <div id="successMessage" style="display: none; margin-top: 20px; padding: 16px; background: #d1fae5; border-radius: 8px; color: #065f46; border-left: 4px solid #10b981;">
+      <strong>Thank you!</strong> Your feedback has been submitted successfully.
+    </div>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+<script>
+function countWords() {
+  const textarea = document.getElementById('feedback');
+  const wordCountDiv = document.getElementById('wordCount');
+  const text = textarea.value.trim();
+  
+  if (text === '') {
+    wordCountDiv.textContent = 'Words: 0 / 50';
+    wordCountDiv.classList.remove('warning');
+    return;
+  }
+
+  const words = text.split(/\s+/).filter(word => word.length > 0);
+  const wordCount = words.length;
+  
+  wordCountDiv.textContent = `Words: ${wordCount} / 50`;
+  
+  if (wordCount > 50) {
+    wordCountDiv.classList.add('warning');
+    wordCountDiv.textContent = `Words: ${wordCount} / 50 (Exceeded limit!)`;
+  } else {
+    wordCountDiv.classList.remove('warning');
+  }
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  
+  const textarea = document.getElementById('feedback');
+  const text = textarea.value.trim();
+  const words = text.split(/\s+/).filter(word => word.length > 0);
+  
+  if (words.length > 50) {
+    alert('Please limit your feedback to 50 words. Currently: ' + words.length + ' words.');
+    return;
+  }
+  
+  if (words.length === 0) {
+    alert('Please enter your feedback.');
+    return;
+  }
+  
+  // Show success message
+  document.getElementById('successMessage').style.display = 'block';
+  document.getElementById('feedbackForm').reset();
+  document.getElementById('wordCount').textContent = 'Words: 0 / 50';
+  document.getElementById('wordCount').classList.remove('warning');
+  
+  // Scroll to success message
+  document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  
+  // In a real application, you would send this data to a server
+  console.log('Feedback submitted:', {
+    name: document.getElementById('name').value,
+    feedback: text,
+    wordCount: words.length
+  });
+}
+</script>
+
+</body>
+</html>

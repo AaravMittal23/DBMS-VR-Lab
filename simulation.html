@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html" class="active">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Implementation of Aggregate Functions and Grouping Operations</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Interactive Simulation</span>
+
+  <div class="card">
+    <h2>Sample Data: Employees Table</h2>
+    <p style="color: var(--muted); margin-bottom: 16px;">
+      The following table contains sample employee data. Use the query builder below to experiment with aggregate functions and grouping operations.
+    </p>
+    
+    <div class="simulation-result">
+      <table class="simulation-table" id="dataTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody id="dataTableBody">
+          <!-- Data will be populated by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="simulation-container">
+    <div class="card">
+      <h2>Query Builder</h2>
+      
+      <div class="simulation-controls">
+        <label for="queryType">Select Query Type:</label>
+        <select id="queryType" onchange="updateQueryBuilder()">
+          <option value="count">COUNT - Count employees</option>
+          <option value="countGroup">COUNT with GROUP BY - Count per department</option>
+          <option value="sum">SUM - Total salary</option>
+          <option value="sumGroup">SUM with GROUP BY - Total salary per department</option>
+          <option value="avg">AVG - Average salary</option>
+          <option value="avgGroup">AVG with GROUP BY - Average salary per department</option>
+          <option value="minMax">MIN/MAX - Min and Max salary</option>
+          <option value="minMaxGroup">MIN/MAX with GROUP BY - Min/Max per department</option>
+          <option value="having">HAVING - Departments with count > 2</option>
+          <option value="complex">Complex - Multiple aggregates with HAVING</option>
+        </select>
+
+        <label for="customQuery" style="margin-top: 16px;">Or write custom SQL:</label>
+        <textarea id="customQuery" rows="4" placeholder="SELECT department, COUNT(*) FROM employees GROUP BY department;"></textarea>
+
+        <button onclick="executeQuery()" style="margin-top: 12px;">Execute Query</button>
+        <button onclick="resetQuery()" style="background: var(--muted);">Reset</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Query Result</h2>
+      <div class="simulation-result" id="resultArea">
+        <p style="color: var(--muted); text-align: center; padding: 20px;">
+          Select a query type or write a custom query and click "Execute Query" to see results.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Query Examples</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Basic COUNT</h3>
+        <pre>SELECT COUNT(*) 
+FROM employees;</pre>
+        <button onclick="runExample('SELECT COUNT(*) AS total FROM employees;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+      </div>
+
+      <div class="card">
+        <h3>COUNT with GROUP BY</h3>
+        <pre>SELECT department, 
+       COUNT(*) AS count
+FROM employees 
+GROUP BY department;</pre>
+        <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+      </div>
+
+      <div class="card">
+        <h3>AVG with GROUP BY</h3>
+        <pre>SELECT department, 
+       AVG(salary) AS avg_salary
+FROM employees 
+GROUP BY department;</pre>
+        <button onclick="runExample('SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+      </div>
+
+      <div class="card">
+        <h3>HAVING Clause</h3>
+        <pre>SELECT department, 
+       COUNT(*) AS count
+FROM employees 
+GROUP BY department 
+HAVING COUNT(*) > 2;</pre>
+        <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department HAVING COUNT(*) > 2;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+<script>
+// Sample data
+const employees = [
+  { id: 1, name: 'John Doe', department: 'IT', salary: 75000, age: 28 },
+  { id: 2, name: 'Jane Smith', department: 'HR', salary: 60000, age: 32 },
+  { id: 3, name: 'Bob Johnson', department: 'IT', salary: 80000, age: 35 },
+  { id: 4, name: 'Alice Williams', department: 'Finance', salary: 70000, age: 29 },
+  { id: 5, name: 'Charlie Brown', department: 'IT', salary: 72000, age: 26 },
+  { id: 6, name: 'Diana Prince', department: 'HR', salary: 65000, age: 31 },
+  { id: 7, name: 'Edward Lee', department: 'Sales', salary: 55000, age: 27 },
+  { id: 8, name: 'Fiona Green', department: 'Finance', salary: 68000, age: 33 },
+  { id: 9, name: 'George White', department: 'Sales', salary: 58000, age: 30 },
+  { id: 10, name: 'Helen Black', department: 'IT', salary: 78000, age: 34 },
+  { id: 11, name: 'Ivan Gray', department: 'HR', salary: 62000, age: 28 },
+  { id: 12, name: 'Julia Red', department: 'Sales', salary: 56000, age: 25 }
+];
+
+// Initialize data table
+function initDataTable() {
+  const tbody = document.getElementById('dataTableBody');
+  tbody.innerHTML = '';
+  employees.forEach(emp => {
+    const row = tbody.insertRow();
+    row.insertCell(0).textContent = emp.id;
+    row.insertCell(1).textContent = emp.name;
+    row.insertCell(2).textContent = emp.department;
+    row.insertCell(3).textContent = '$' + emp.salary.toLocaleString();
+    row.insertCell(4).textContent = emp.age;
+  });
+}
+
+// Update query builder based on selection
+function updateQueryBuilder() {
+  const queryType = document.getElementById('queryType').value;
+  const queries = {
+    'count': 'SELECT COUNT(*) AS total FROM employees;',
+    'countGroup': 'SELECT department, COUNT(*) AS count FROM employees GROUP BY department;',
+    'sum': 'SELECT SUM(salary) AS total_salary FROM employees;',
+    'sumGroup': 'SELECT department, SUM(salary) AS total_salary FROM employees GROUP BY department;',
+    'avg': 'SELECT AVG(salary) AS avg_salary FROM employees;',
+    'avgGroup': 'SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department;',
+    'minMax': 'SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary FROM employees;',
+    'minMaxGroup': 'SELECT department, MIN(salary) AS min_salary, MAX(salary) AS max_salary FROM employees GROUP BY department;',
+    'having': 'SELECT department, COUNT(*) AS count FROM employees GROUP BY department HAVING COUNT(*) > 2;',
+    'complex': 'SELECT department, COUNT(*) AS count, AVG(salary) AS avg_salary, SUM(salary) AS total FROM employees GROUP BY department HAVING COUNT(*) > 2 ORDER BY avg_salary DESC;'
+  };
+  document.getElementById('customQuery').value = queries[queryType] || '';
+}
+
+// Execute query
+function executeQuery() {
+  const query = document.getElementById('customQuery').value.trim().toUpperCase();
+  const resultArea = document.getElementById('resultArea');
+  
+  if (!query) {
+    resultArea.innerHTML = '<p style="color: #dc2626;">Please enter a query.</p>';
+    return;
+  }
+
+  try {
+    let result;
+    
+    // Parse and execute different query types
+    if (query.includes('COUNT(*)') && !query.includes('GROUP BY')) {
+      result = executeCount();
+    } else if (query.includes('COUNT') && query.includes('GROUP BY')) {
+      result = executeCountGroupBy();
+    } else if (query.includes('SUM(SALARY)') && !query.includes('GROUP BY')) {
+      result = executeSum();
+    } else if (query.includes('SUM(SALARY)') && query.includes('GROUP BY')) {
+      result = executeSumGroupBy();
+    } else if (query.includes('AVG(SALARY)') && !query.includes('GROUP BY')) {
+      result = executeAvg();
+    } else if (query.includes('AVG(SALARY)') && query.includes('GROUP BY')) {
+      result = executeAvgGroupBy();
+    } else if (query.includes('MIN(SALARY)') && query.includes('MAX(SALARY)') && !query.includes('GROUP BY')) {
+      result = executeMinMax();
+    } else if (query.includes('MIN(SALARY)') && query.includes('MAX(SALARY)') && query.includes('GROUP BY')) {
+      result = executeMinMaxGroupBy();
+    } else if (query.includes('HAVING')) {
+      result = executeHaving();
+    } else if (query.includes('GROUP BY') && query.includes('HAVING')) {
+      result = executeComplex();
+    } else {
+      resultArea.innerHTML = '<p style="color: #dc2626;">Query not supported. Please use the query builder or try the examples.</p>';
+      return;
+    }
+
+    displayResult(result);
+  } catch (error) {
+    resultArea.innerHTML = `<p style="color: #dc2626;">Error: ${error.message}</p>`;
+  }
+}
+
+function executeCount() {
+  return [{ total: employees.length }];
+}
+
+function executeCountGroupBy() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = 0;
+    }
+    groups[emp.department]++;
+  });
+  return Object.entries(groups).map(([dept, count]) => ({ department: dept, count }));
+}
+
+function executeSum() {
+  const total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+  return [{ total_salary: total }];
+}
+
+function executeSumGroupBy() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = 0;
+    }
+    groups[emp.department] += emp.salary;
+  });
+  return Object.entries(groups).map(([dept, total]) => ({ department: dept, total_salary: total }));
+}
+
+function executeAvg() {
+  const avg = employees.reduce((sum, emp) => sum + emp.salary, 0) / employees.length;
+  return [{ avg_salary: Math.round(avg) }];
+}
+
+function executeAvgGroupBy() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = { sum: 0, count: 0 };
+    }
+    groups[emp.department].sum += emp.salary;
+    groups[emp.department].count++;
+  });
+  return Object.entries(groups).map(([dept, data]) => ({
+    department: dept,
+    avg_salary: Math.round(data.sum / data.count)
+  }));
+}
+
+function executeMinMax() {
+  const salaries = employees.map(emp => emp.salary);
+  return [{ min_salary: Math.min(...salaries), max_salary: Math.max(...salaries) }];
+}
+
+function executeMinMaxGroupBy() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = [];
+    }
+    groups[emp.department].push(emp.salary);
+  });
+  return Object.entries(groups).map(([dept, salaries]) => ({
+    department: dept,
+    min_salary: Math.min(...salaries),
+    max_salary: Math.max(...salaries)
+  }));
+}
+
+function executeHaving() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = 0;
+    }
+    groups[emp.department]++;
+  });
+  return Object.entries(groups)
+    .filter(([dept, count]) => count > 2)
+    .map(([dept, count]) => ({ department: dept, count }));
+}
+
+function executeComplex() {
+  const groups = {};
+  employees.forEach(emp => {
+    if (!groups[emp.department]) {
+      groups[emp.department] = { sum: 0, count: 0 };
+    }
+    groups[emp.department].sum += emp.salary;
+    groups[emp.department].count++;
+  });
+  
+  let result = Object.entries(groups)
+    .filter(([dept, data]) => data.count > 2)
+    .map(([dept, data]) => ({
+      department: dept,
+      count: data.count,
+      avg_salary: Math.round(data.sum / data.count),
+      total: data.sum
+    }));
+  
+  // Sort by avg_salary DESC if ORDER BY is present
+  if (document.getElementById('customQuery').value.toUpperCase().includes('ORDER BY')) {
+    result.sort((a, b) => b.avg_salary - a.avg_salary);
+  }
+  
+  return result;
+}
+
+function displayResult(result) {
+  const resultArea = document.getElementById('resultArea');
+  
+  if (!result || result.length === 0) {
+    resultArea.innerHTML = '<p style="color: var(--muted);">No results found.</p>';
+    return;
+  }
+
+  const keys = Object.keys(result[0]);
+  let html = '<table class="simulation-table"><thead><tr>';
+  keys.forEach(key => {
+    html += `<th>${key.replace(/_/g, ' ').toUpperCase()}</th>`;
+  });
+  html += '</tr></thead><tbody>';
+  
+  result.forEach(row => {
+    html += '<tr>';
+    keys.forEach(key => {
+      let value = row[key];
+      if (typeof value === 'number' && key.includes('salary') || key.includes('total')) {
+        value = '$' + value.toLocaleString();
+      }
+      html += `<td>${value}</td>`;
+    });
+    html += '</tr>';
+  });
+  
+  html += '</tbody></table>';
+  resultArea.innerHTML = html;
+}
+
+function resetQuery() {
+  document.getElementById('customQuery').value = '';
+  document.getElementById('queryType').value = 'count';
+  document.getElementById('resultArea').innerHTML = '<p style="color: var(--muted); text-align: center; padding: 20px;">Select a query type or write a custom query and click "Execute Query" to see results.</p>';
+}
+
+function runExample(query) {
+  document.getElementById('customQuery').value = query;
+  executeQuery();
+}
+
+// Initialize on page load
+initDataTable();
+</script>
+
+</body>
+</html>
