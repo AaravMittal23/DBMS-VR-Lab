@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Procedure</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="../index.html">Lab Home</a>
+    <a href="index.html">Introduction</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html" class="active">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Design of Entity–Relationship (ER) Diagram and Relational Mapping</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Procedure</span>
+
+  <div class="card">
+    <h2>Step-by-Step Procedure</h2>
+    <p style="color: var(--muted); margin-bottom: 24px;">
+      Follow these steps to design an ER diagram and map it to a relational schema.
+    </p>
+
+    <ol>
+      <li>
+        <strong>Identify the Problem Domain</strong><br>
+        Choose a real-world scenario (e.g., University Management System, Library Management System, 
+        Hospital Management System). Clearly define the scope and requirements of the system.
+      </li>
+
+      <li>
+        <strong>Identify Entities</strong><br>
+        List all entities in the system. Entities are real-world objects or concepts that can be 
+        distinctly identified. Examples: Student, Course, Department, Employee, Book, etc.
+        <ul style="margin-top: 8px;">
+          <li>Write down all entities</li>
+          <li>Ensure each entity is distinct and meaningful</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Identify Attributes for Each Entity</strong><br>
+        For each entity, list all attributes that describe it. Classify attributes as:
+        <ul style="margin-top: 8px;">
+          <li>Simple attributes (atomic values)</li>
+          <li>Composite attributes (can be divided into sub-attributes)</li>
+          <li>Single-valued or multi-valued attributes</li>
+          <li>Derived attributes (calculated from other attributes)</li>
+        </ul>
+        Example: Student entity with attributes: student_id (primary key), name, email, date_of_birth, address (composite).
+      </li>
+
+      <li>
+        <strong>Identify Primary Keys</strong><br>
+        For each entity, identify the primary key attribute(s) that uniquely identify each instance. 
+        Primary keys are underlined in ER diagrams.
+        <pre>Example:
+Student: student_id (primary key)
+Course: course_id (primary key)</pre>
+      </li>
+
+      <li>
+        <strong>Identify Relationships</strong><br>
+        Identify relationships between entities. Determine the type of relationship:
+        <ul style="margin-top: 8px;">
+          <li>One-to-One (1:1): Each instance of Entity A relates to at most one instance of Entity B</li>
+          <li>One-to-Many (1:N): One instance of Entity A relates to many instances of Entity B</li>
+          <li>Many-to-Many (M:N): Many instances of Entity A relate to many instances of Entity B</li>
+        </ul>
+        <pre>Example:
+Student ENROLLS Course (M:N)
+Department HAS Employee (1:N)</pre>
+      </li>
+
+      <li>
+        <strong>Determine Cardinality and Participation</strong><br>
+        For each relationship, specify:
+        <ul style="margin-top: 8px;">
+          <li>Cardinality: The number of instances (1, N, M)</li>
+          <li>Participation: Total (double line) or Partial (single line)</li>
+        </ul>
+        <pre>Example:
+Every employee MUST belong to a department (total participation)
+Not every student enrolls in a course (partial participation)</pre>
+      </li>
+
+      <li>
+        <strong>Identify Weak Entities (if any)</strong><br>
+        Identify entities that cannot be uniquely identified without a relationship to another entity. 
+        Weak entities are represented by double rectangles and require an identifying relationship.
+        <pre>Example:
+Dependant (weak entity) depends on Employee (strong entity)</pre>
+      </li>
+
+      <li>
+        <strong>Draw the ER Diagram</strong><br>
+        Using standard ER notation, draw the complete ER diagram:
+        <ul style="margin-top: 8px;">
+          <li>Rectangles for entities</li>
+          <li>Ovals for attributes</li>
+          <li>Diamonds for relationships</li>
+          <li>Double rectangles for weak entities</li>
+          <li>Underline primary keys</li>
+          <li>Indicate cardinality on relationship lines</li>
+          <li>Use double lines for total participation</li>
+        </ul>
+      </li>
+
+      <li>
+        <strong>Map Strong Entities to Relations</strong><br>
+        For each strong entity, create a relation (table):
+        <ul style="margin-top: 8px;">
+          <li>Entity name becomes table name</li>
+          <li>All attributes become columns</li>
+          <li>Primary key becomes the table's primary key</li>
+          <li>Composite attributes are flattened into separate columns</li>
+        </ul>
+        <pre>Example:
+Entity: Student(student_id, name, email, DOB)
+Relation: Student(student_id, name, email, date_of_birth)
+          Primary Key: student_id</pre>
+      </li>
+
+      <li>
+        <strong>Map Weak Entities to Relations</strong><br>
+        For each weak entity, create a relation including:
+        <ul style="margin-top: 8px;">
+          <li>All attributes of the weak entity</li>
+          <li>Primary key of the owner entity as a foreign key</li>
+          <li>Combined primary key (owner's key + weak entity's partial key)</li>
+        </ul>
+        <pre>Example:
+Weak Entity: Dependant(dep_name, age, relationship)
+Owner Entity: Employee(emp_id, name)
+Relation: Dependant(emp_id, dep_name, age, relationship)
+          Primary Key: (emp_id, dep_name)
+          Foreign Key: emp_id references Employee</pre>
+      </li>
+
+      <li>
+        <strong>Map 1:1 Relationships</strong><br>
+        For one-to-one relationships, include the foreign key in either of the participating entities:
+        <pre>Example:
+Person(ssn, name) OWNS Passport(passport_no, country)
+Option 1: Person(ssn, name, passport_no)
+Option 2: Passport(passport_no, country, ssn)</pre>
+      </li>
+
+      <li>
+        <strong>Map 1:N Relationships</strong><br>
+        For one-to-many relationships, include the foreign key in the entity on the "many" side:
+        <pre>Example:
+Department(dept_id, dept_name) HAS Employee(emp_id, name, salary)
+Result: Employee(emp_id, name, salary, dept_id)
+        Foreign Key: dept_id references Department</pre>
+      </li>
+
+      <li>
+        <strong>Map M:N Relationships</strong><br>
+        For many-to-many relationships, create a separate relation with foreign keys from both entities:
+        <pre>Example:
+Student(student_id, name) ENROLLS Course(course_id, title)
+Result: Enrollment(student_id, course_id, grade, semester)
+        Primary Key: (student_id, course_id)
+        Foreign Keys: student_id, course_id</pre>
+      </li>
+
+      <li>
+        <strong>Handle Multi-valued Attributes</strong><br>
+        For multi-valued attributes, create a separate relation:
+        <pre>Example:
+Employee(emp_id, name) with multi-valued attribute: phone_numbers
+Result: Employee(emp_id, name)
+        Employee_Phone(emp_id, phone_number)
+        Foreign Key: emp_id references Employee</pre>
+      </li>
+
+      <li>
+        <strong>Verify the Relational Schema</strong><br>
+        Review the mapped relational schema to ensure:
+        <ul style="margin-top: 8px;">
+          <li>All entities are mapped to relations</li>
+          <li>All relationships are properly represented</li>
+          <li>Primary keys and foreign keys are correctly identified</li>
+          <li>No information is lost in the mapping process</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Expected Outcomes</h2>
+    <ul>
+      <li>Ability to identify entities, attributes, and relationships from a problem domain</li>
+      <li>Understanding of ER diagram notation and symbols</li>
+      <li>Knowledge of cardinality and participation constraints</li>
+      <li>Skill in mapping ER diagrams to normalized relational schemas</li>
+      <li>Understanding of how to handle weak entities, composite attributes, and multi-valued attributes</li>
+    </ul>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+</body>
+</html>

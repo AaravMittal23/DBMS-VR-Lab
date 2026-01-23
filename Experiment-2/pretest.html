@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Pre-Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="../index.html">Lab Home</a>
+    <a href="index.html">Introduction</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html" class="active">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Design of Entity–Relationship (ER) Diagram and Relational Mapping</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Pre-Test</span>
+  <p style="margin-bottom: 24px; color: var(--muted);">Answer the following questions to test your knowledge before starting the experiment.</p>
+
+  <div class="card question">
+    <p><strong>1. What does ER diagram stand for?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Entity-Relationship Diagram</button>
+    <button onclick="checkAnswer(this, true)">B) Entity–Relationship Diagram</button>
+    <button onclick="checkAnswer(this, false)">C) Entity-Relational Diagram</button>
+    <button onclick="checkAnswer(this, false)">D) Entity-Reference Diagram</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>2. In an ER diagram, how are entities typically represented?</strong></p>
+    <button onclick="checkAnswer(this, true)">A) Rectangles</button>
+    <button onclick="checkAnswer(this, false)">B) Ovals</button>
+    <button onclick="checkAnswer(this, false)">C) Diamonds</button>
+    <button onclick="checkAnswer(this, false)">D) Circles</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>3. How are relationships represented in an ER diagram?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Rectangles</button>
+    <button onclick="checkAnswer(this, false)">B) Ovals</button>
+    <button onclick="checkAnswer(this, true)">C) Diamonds</button>
+    <button onclick="checkAnswer(this, false)">D) Lines</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>4. What is a primary key in an ER diagram?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) An attribute that can be NULL</button>
+    <button onclick="checkAnswer(this, true)">B) An attribute that uniquely identifies an entity</button>
+    <button onclick="checkAnswer(this, false)">C) A relationship between entities</button>
+    <button onclick="checkAnswer(this, false)">D) A composite attribute</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>5. What does cardinality specify in a relationship?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) The name of the relationship</button>
+    <button onclick="checkAnswer(this, true)">B) The number of instances of one entity associated with another</button>
+    <button onclick="checkAnswer(this, false)">C) The attributes of an entity</button>
+    <button onclick="checkAnswer(this, false)">D) The primary key of an entity</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>6. Which of the following is NOT a type of cardinality?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) One-to-One (1:1)</button>
+    <button onclick="checkAnswer(this, false)">B) One-to-Many (1:N)</button>
+    <button onclick="checkAnswer(this, false)">C) Many-to-Many (M:N)</button>
+    <button onclick="checkAnswer(this, true)">D) Many-to-One-to-Many (M:1:N)</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>7. What is a weak entity?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) An entity with no attributes</button>
+    <button onclick="checkAnswer(this, true)">B) An entity that cannot be uniquely identified without a relationship to another entity</button>
+    <button onclick="checkAnswer(this, false)">C) An entity with only one attribute</button>
+    <button onclick="checkAnswer(this, false)">D) An entity that has no relationships</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>8. What does total participation mean in an ER diagram?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Some entities participate in the relationship</button>
+    <button onclick="checkAnswer(this, true)">B) Every entity must participate in the relationship</button>
+    <button onclick="checkAnswer(this, false)">C) No entities participate in the relationship</button>
+    <button onclick="checkAnswer(this, false)">D) Only one entity participates in the relationship</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>9. How is total participation represented in an ER diagram?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Single line</button>
+    <button onclick="checkAnswer(this, true)">B) Double line</button>
+    <button onclick="checkAnswer(this, false)">C) Dotted line</button>
+    <button onclick="checkAnswer(this, false)">D) Thick line</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>10. What is a composite attribute?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) An attribute that can have multiple values</button>
+    <button onclick="checkAnswer(this, true)">B) An attribute that can be divided into smaller sub-attributes</button>
+    <button onclick="checkAnswer(this, false)">C) An attribute that is a primary key</button>
+    <button onclick="checkAnswer(this, false)">D) An attribute that is derived from other attributes</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>11. When mapping a 1:N relationship to a relational schema, where is the foreign key placed?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) In the entity on the "one" side</button>
+    <button onclick="checkAnswer(this, true)">B) In the entity on the "many" side</button>
+    <button onclick="checkAnswer(this, false)">C) In both entities</button>
+    <button onclick="checkAnswer(this, false)">D) In a separate relation</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>12. How is a many-to-many (M:N) relationship mapped to a relational schema?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Foreign key in one of the entities</button>
+    <button onclick="checkAnswer(this, false)">B) Foreign key in both entities</button>
+    <button onclick="checkAnswer(this, true)">C) A separate relation with foreign keys from both entities</button>
+    <button onclick="checkAnswer(this, false)">D) It cannot be mapped</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>13. What is a derived attribute?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) An attribute that is a primary key</button>
+    <button onclick="checkAnswer(this, false)">B) An attribute that can have multiple values</button>
+    <button onclick="checkAnswer(this, true)">C) An attribute whose value can be calculated from other attributes</button>
+    <button onclick="checkAnswer(this, false)">D) An attribute that is composite</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>14. In an ER diagram, how are attributes typically represented?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) Rectangles</button>
+    <button onclick="checkAnswer(this, true)">B) Ovals or ellipses</button>
+    <button onclick="checkAnswer(this, false)">C) Diamonds</button>
+    <button onclick="checkAnswer(this, false)">D) Lines</button>
+    <p class="result"></p>
+  </div>
+
+  <div class="card question">
+    <p><strong>15. What is the purpose of mapping an ER diagram to a relational schema?</strong></p>
+    <button onclick="checkAnswer(this, false)">A) To create a visual representation</button>
+    <button onclick="checkAnswer(this, true)">B) To convert the conceptual design into a logical database design</button>
+    <button onclick="checkAnswer(this, false)">C) To identify entities</button>
+    <button onclick="checkAnswer(this, false)">D) To define relationships</button>
+    <p class="result"></p>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+<script src="../js/exp2.js"></script>
+</body>
+</html>

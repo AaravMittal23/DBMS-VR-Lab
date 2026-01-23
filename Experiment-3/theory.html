@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Theory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="../index.html">Lab Home</a>
+    <a href="index.html">Introduction</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html" class="active">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Database Normalization Using Functional Dependencies</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Theory</span>
+
+  <div class="card">
+    <h2>Introduction to Database Normalization</h2>
+    <p>
+      Database normalization is a systematic approach to organizing data in a database to eliminate redundancy 
+      and reduce anomalies. It involves decomposing a relation into smaller, well-structured relations based on 
+      functional dependencies. Normalization ensures data integrity, reduces storage space, and prevents update, 
+      insertion, and deletion anomalies.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Functional Dependencies</h2>
+    <p>
+      A functional dependency (FD) is a constraint between two sets of attributes in a relation. If attribute set 
+      X functionally determines attribute set Y (denoted as X → Y), then for any two tuples with the same values in X, 
+      they must have the same values in Y.
+    </p>
+    <pre>Example:
+If student_id → name, email
+Then: If two tuples have the same student_id, 
+      they must have the same name and email.</pre>
+    <p style="margin-top: 12px;">
+      <strong>Key Terms:</strong>
+    </p>
+    <ul>
+      <li><strong>Determinant:</strong> The left side of a functional dependency (X in X → Y)</li>
+      <li><strong>Dependent:</strong> The right side of a functional dependency (Y in X → Y)</li>
+      <li><strong>Trivial FD:</strong> Y is a subset of X (e.g., AB → A)</li>
+      <li><strong>Non-trivial FD:</strong> Y is not a subset of X</li>
+      <li><strong>Full FD:</strong> Y is functionally dependent on X but not on any proper subset of X</li>
+      <li><strong>Partial FD:</strong> Y is functionally dependent on a proper subset of X</li>
+    </ul>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>First Normal Form (1NF)</h3>
+      <p>
+        A relation is in 1NF if every attribute contains only atomic (indivisible) values. There should be no 
+        repeating groups or multivalued attributes. Each cell must contain a single value.
+      </p>
+      <pre>Example - Not in 1NF:
+Student(student_id, name, courses)
+courses: "DBMS, OS, Networks"
+
+In 1NF:
+Student(student_id, name)
+Enrollment(student_id, course)</pre>
+    </div>
+
+    <div class="card">
+      <h3>Second Normal Form (2NF)</h3>
+      <p>
+        A relation is in 2NF if it is in 1NF and every non-key attribute is fully functionally dependent on 
+        the primary key. No partial dependencies are allowed.
+      </p>
+      <pre>Example - Not in 2NF:
+Order(order_id, product_id, product_name, quantity)
+FD: order_id, product_id → quantity
+    product_id → product_name (partial dependency)
+
+In 2NF:
+Order(order_id, product_id, quantity)
+Product(product_id, product_name)</pre>
+    </div>
+
+    <div class="card">
+      <h3>Third Normal Form (3NF)</h3>
+      <p>
+        A relation is in 3NF if it is in 2NF and no non-key attribute is transitively dependent on the primary key. 
+        All non-key attributes must depend directly on the primary key.
+      </p>
+      <pre>Example - Not in 3NF:
+Student(student_id, name, dept_id, dept_name, location)
+FD: student_id → dept_id → dept_name, location
+    (transitive dependency)
+
+In 3NF:
+Student(student_id, name, dept_id)
+Department(dept_id, dept_name, location)</pre>
+    </div>
+
+    <div class="card">
+      <h3>Boyce-Codd Normal Form (BCNF)</h3>
+      <p>
+        A relation is in BCNF if it is in 3NF and every determinant is a candidate key. BCNF is stricter than 3NF 
+        and eliminates all redundancy based on functional dependencies.
+      </p>
+      <pre>Example - Not in BCNF:
+Course(course_id, instructor, time, room)
+FD: course_id → instructor
+    instructor, time → room
+    (instructor is not a key)
+
+In BCNF:
+Course(course_id, instructor, time)
+Room(instructor, time, room)</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Database Anomalies</h2>
+    <p>
+      Unnormalized databases suffer from three types of anomalies that can lead to data inconsistency:
+    </p>
+    <ul>
+      <li><strong>Insertion Anomaly:</strong> Cannot insert certain information without other information (e.g., cannot add a department without an employee)</li>
+      <li><strong>Deletion Anomaly:</strong> Deleting one piece of information causes loss of other information (e.g., deleting last employee deletes department info)</li>
+      <li><strong>Update Anomaly:</strong> Changing one value requires updating multiple rows (e.g., updating department name in multiple employee records)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Keys in Relations</h2>
+    <ul>
+      <li><strong>Superkey:</strong> A set of attributes that uniquely identifies a tuple</li>
+      <li><strong>Candidate Key:</strong> A minimal superkey (no proper subset is a superkey)</li>
+      <li><strong>Primary Key:</strong> The chosen candidate key for the relation</li>
+      <li><strong>Foreign Key:</strong> An attribute that references the primary key of another relation</li>
+      <li><strong>Composite Key:</strong> A key consisting of multiple attributes</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Normalization Process</h2>
+    <p>
+      The normalization process involves:
+    </p>
+    <ol>
+      <li>Identifying all functional dependencies in the relation</li>
+      <li>Determining candidate keys and primary keys</li>
+      <li>Checking if the relation is in 1NF, 2NF, 3NF, or BCNF</li>
+      <li>Decomposing the relation if it violates normalization rules</li>
+      <li>Ensuring lossless decomposition (no information loss)</li>
+      <li>Preserving functional dependencies</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Practical Example</h2>
+    <p>Consider an unnormalized table: <code>Student_Course(student_id, name, course_id, course_name, grade, instructor)</code></p>
+    <pre>Functional Dependencies:
+student_id → name
+course_id → course_name, instructor
+student_id, course_id → grade
+
+Normalized to 3NF:
+Student(student_id, name)
+Course(course_id, course_name, instructor)
+Enrollment(student_id, course_id, grade)</pre>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+</body>
+</html>

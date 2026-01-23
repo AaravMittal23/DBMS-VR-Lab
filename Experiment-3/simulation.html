@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab | Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>DBMS Virtual Lab</h2>
+    <p>Navigation</p>
+  </div>
+  <nav>
+    <a href="../index.html">Lab Home</a>
+    <a href="index.html">Introduction</a>
+    <a href="aim.html">Aim</a>
+    <a href="theory.html">Theory</a>
+    <a href="pretest.html">Pre-Test</a>
+    <a href="procedure.html">Procedure</a>
+    <a href="simulation.html" class="active">Simulation</a>
+    <a href="posttest.html">Post-Test</a>
+    <a href="references.html">References</a>
+    <a href="feedback.html">Feedback</a>
+  </nav>
+</div>
+
+<div class="content-wrapper">
+  <header>
+    <div class="header-left">
+      <h1>DBMS Virtual Laboratory</h1>
+      <p>Experiment: Database Normalization Using Functional Dependencies</p>
+    </div>
+    <div class="header-right">
+      <div class="institution">SRM Institute of Science and Technology</div>
+      <div class="department">Department of Computer Science</div>
+    </div>
+  </header>
+
+  <main>
+  <span class="badge">Interactive Simulation</span>
+
+  <div class="card">
+    <h2>Database Normalization Simulation</h2>
+    <p style="color: var(--muted); margin-bottom: 16px;">
+      Follow the steps below to understand how to normalize a database relation using functional dependencies. 
+      This simulation demonstrates the normalization process from an unnormalized relation through 1NF, 2NF, and 3NF.
+    </p>
+
+    <div style="display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap;">
+      <button onclick="showStep(0)" id="step0Btn" class="step-button active">Original Relation</button>
+      <button onclick="showStep(1)" id="step1Btn" class="step-button">Step 1: 1NF</button>
+      <button onclick="showStep(2)" id="step2Btn" class="step-button">Step 2: 2NF</button>
+      <button onclick="showStep(3)" id="step3Btn" class="step-button">Step 3: 3NF</button>
+    </div>
+  </div>
+
+  <!-- Step 0: Original Unnormalized Relation -->
+  <div id="step0" class="simulation-step">
+    <div class="card">
+      <h2>Original Unnormalized Relation</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        We start with an unnormalized relation that contains redundancy and potential anomalies. 
+        This relation represents student course enrollment information.
+      </p>
+
+      <div class="card" style="background: #fff5f5; border-left: 4px solid #dc2626;">
+        <h3>Student_Course Relation (Unnormalized)</h3>
+        <div class="simulation-result">
+          <table class="simulation-table">
+            <thead>
+              <tr>
+                <th>student_id</th>
+                <th>student_name</th>
+                <th>dept_id</th>
+                <th>dept_name</th>
+                <th>course_id</th>
+                <th>course_name</th>
+                <th>instructor</th>
+                <th>grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S001</td>
+                <td>John Doe</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C001</td>
+                <td>Database Systems</td>
+                <td>Dr. Smith</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>S001</td>
+                <td>John Doe</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C002</td>
+                <td>Data Structures</td>
+                <td>Dr. Johnson</td>
+                <td>B</td>
+              </tr>
+              <tr>
+                <td>S002</td>
+                <td>Jane Smith</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C001</td>
+                <td>Database Systems</td>
+                <td>Dr. Smith</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>S003</td>
+                <td>Bob Wilson</td>
+                <td>D02</td>
+                <td>Mathematics</td>
+                <td>C003</td>
+                <td>Calculus</td>
+                <td>Dr. Brown</td>
+                <td>B</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px;">
+        <h3>Functional Dependencies Identified:</h3>
+        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; font-family: monospace;">
+          <div style="margin-bottom: 8px;"><strong>student_id</strong> → <strong>student_name, dept_id</strong></div>
+          <div style="margin-bottom: 8px;"><strong>dept_id</strong> → <strong>dept_name</strong></div>
+          <div style="margin-bottom: 8px;"><strong>course_id</strong> → <strong>course_name, instructor</strong></div>
+          <div style="margin-bottom: 8px;"><strong>student_id, course_id</strong> → <strong>grade</strong></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; background: var(--yellow-light);">
+        <h3>Problems Identified:</h3>
+        <ul>
+          <li><strong>Data Redundancy:</strong> Student name and department information is repeated for each course enrollment</li>
+          <li><strong>Update Anomaly:</strong> Changing a student's name requires updating multiple rows</li>
+          <li><strong>Insertion Anomaly:</strong> Cannot add a new department without a student</li>
+          <li><strong>Deletion Anomaly:</strong> Deleting a student's last enrollment may lose department information</li>
+          <li><strong>Partial Dependency:</strong> student_name depends only on student_id (part of composite key)</li>
+          <li><strong>Transitive Dependency:</strong> dept_name depends on dept_id, which depends on student_id</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 1: First Normal Form (1NF) -->
+  <div id="step1" class="simulation-step" style="display: none;">
+    <div class="card">
+      <h2>Step 1: First Normal Form (1NF)</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        A relation is in 1NF if all attributes contain atomic (indivisible) values. 
+        In our example, all values are already atomic, so the relation is already in 1NF.
+      </p>
+
+      <div class="card" style="background: #fff5f5; border-left: 4px solid #f59e0b;">
+        <h3>Student_Course Relation (1NF)</h3>
+        <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+          <strong>Primary Key:</strong> (student_id, course_id)
+        </p>
+        <div class="simulation-result">
+          <table class="simulation-table">
+            <thead>
+              <tr>
+                <th>student_id<br><small>PK</small></th>
+                <th>student_name</th>
+                <th>dept_id</th>
+                <th>dept_name</th>
+                <th>course_id<br><small>PK</small></th>
+                <th>course_name</th>
+                <th>instructor</th>
+                <th>grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>S001</td>
+                <td>John Doe</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C001</td>
+                <td>Database Systems</td>
+                <td>Dr. Smith</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>S001</td>
+                <td>John Doe</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C002</td>
+                <td>Data Structures</td>
+                <td>Dr. Johnson</td>
+                <td>B</td>
+              </tr>
+              <tr>
+                <td>S002</td>
+                <td>Jane Smith</td>
+                <td>D01</td>
+                <td>Computer Science</td>
+                <td>C001</td>
+                <td>Database Systems</td>
+                <td>Dr. Smith</td>
+                <td>A</td>
+              </tr>
+              <tr>
+                <td>S003</td>
+                <td>Bob Wilson</td>
+                <td>D02</td>
+                <td>Mathematics</td>
+                <td>C003</td>
+                <td>Calculus</td>
+                <td>Dr. Brown</td>
+                <td>B</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; background: var(--yellow-light);">
+        <h3>1NF Status:</h3>
+        <p>
+          ✓ All attributes contain atomic values<br>
+          ✓ No repeating groups<br>
+          ✓ Relation is in 1NF<br><br>
+          <strong>Note:</strong> The relation still has redundancy and anomalies. We need to proceed to 2NF.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Second Normal Form (2NF) -->
+  <div id="step2" class="simulation-step" style="display: none;">
+    <div class="card">
+      <h2>Step 2: Second Normal Form (2NF)</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        A relation is in 2NF if it is in 1NF and every non-key attribute is fully functionally dependent on the primary key. 
+        We need to eliminate partial dependencies. Here, student_name and dept_id depend only on student_id (partial dependency).
+      </p>
+
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div class="card" style="background: #f0fdf4; border-left: 4px solid #10b981;">
+          <h3>Enrollment Relation (2NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> (student_id, course_id)
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>student_id<br><small>PK, FK</small></th>
+                  <th>course_id<br><small>PK, FK</small></th>
+                  <th>grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S001</td>
+                  <td>C001</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td>S001</td>
+                  <td>C002</td>
+                  <td>B</td>
+                </tr>
+                <tr>
+                  <td>S002</td>
+                  <td>C001</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td>S003</td>
+                  <td>C003</td>
+                  <td>B</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="background: #f0fdf4; border-left: 4px solid #10b981;">
+          <h3>Student Relation (2NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> student_id
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>student_id<br><small>PK</small></th>
+                  <th>student_name</th>
+                  <th>dept_id<br><small>FK</small></th>
+                  <th>dept_name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S001</td>
+                  <td>John Doe</td>
+                  <td>D01</td>
+                  <td>Computer Science</td>
+                </tr>
+                <tr>
+                  <td>S002</td>
+                  <td>Jane Smith</td>
+                  <td>D01</td>
+                  <td>Computer Science</td>
+                </tr>
+                <tr>
+                  <td>S003</td>
+                  <td>Bob Wilson</td>
+                  <td>D02</td>
+                  <td>Mathematics</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; background: #fef3c7; border-left: 4px solid #f59e0b;">
+        <h3>⚠️ Still Not Fully Normalized:</h3>
+        <p>
+          The Student relation still has a <strong>transitive dependency</strong>: student_id → dept_id → dept_name<br>
+          This violates 3NF. We need to decompose further.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: Third Normal Form (3NF) -->
+  <div id="step3" class="simulation-step" style="display: none;">
+    <div class="card">
+      <h2>Step 3: Third Normal Form (3NF)</h2>
+      <p style="color: var(--muted); margin-bottom: 20px;">
+        A relation is in 3NF if it is in 2NF and no non-key attribute is transitively dependent on the primary key. 
+        We eliminate the transitive dependency by separating Department information.
+      </p>
+
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <div class="card" style="background: #ecfdf5; border-left: 4px solid #10b981;">
+          <h3>Enrollment Relation (3NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> (student_id, course_id)
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>student_id<br><small>PK, FK</small></th>
+                  <th>course_id<br><small>PK, FK</small></th>
+                  <th>grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S001</td>
+                  <td>C001</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td>S001</td>
+                  <td>C002</td>
+                  <td>B</td>
+                </tr>
+                <tr>
+                  <td>S002</td>
+                  <td>C001</td>
+                  <td>A</td>
+                </tr>
+                <tr>
+                  <td>S003</td>
+                  <td>C003</td>
+                  <td>B</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="background: #ecfdf5; border-left: 4px solid #10b981;">
+          <h3>Student Relation (3NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> student_id
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>student_id<br><small>PK</small></th>
+                  <th>student_name</th>
+                  <th>dept_id<br><small>FK</small></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>S001</td>
+                  <td>John Doe</td>
+                  <td>D01</td>
+                </tr>
+                <tr>
+                  <td>S002</td>
+                  <td>Jane Smith</td>
+                  <td>D01</td>
+                </tr>
+                <tr>
+                  <td>S003</td>
+                  <td>Bob Wilson</td>
+                  <td>D02</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="background: #ecfdf5; border-left: 4px solid #10b981;">
+          <h3>Department Relation (3NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> dept_id
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>dept_id<br><small>PK</small></th>
+                  <th>dept_name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>D01</td>
+                  <td>Computer Science</td>
+                </tr>
+                <tr>
+                  <td>D02</td>
+                  <td>Mathematics</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="background: #ecfdf5; border-left: 4px solid #10b981;">
+          <h3>Course Relation (3NF)</h3>
+          <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">
+            <strong>Primary Key:</strong> course_id
+          </p>
+          <div class="simulation-result">
+            <table class="simulation-table">
+              <thead>
+                <tr>
+                  <th>course_id<br><small>PK</small></th>
+                  <th>course_name</th>
+                  <th>instructor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>C001</td>
+                  <td>Database Systems</td>
+                  <td>Dr. Smith</td>
+                </tr>
+                <tr>
+                  <td>C002</td>
+                  <td>Data Structures</td>
+                  <td>Dr. Johnson</td>
+                </tr>
+                <tr>
+                  <td>C003</td>
+                  <td>Calculus</td>
+                  <td>Dr. Brown</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 20px; background: #d1fae5; border-left: 4px solid #10b981;">
+        <h3>✓ Normalization Complete (3NF)</h3>
+        <ul>
+          <li>✓ All relations are in 3NF</li>
+          <li>✓ No partial dependencies</li>
+          <li>✓ No transitive dependencies</li>
+          <li>✓ Data redundancy eliminated</li>
+          <li>✓ Anomalies removed</li>
+          <li>✓ Lossless decomposition achieved</li>
+          <li>✓ Functional dependencies preserved</li>
+        </ul>
+        <p style="margin-top: 12px;">
+          <strong>Result:</strong> The database is now properly normalized with four relations that maintain data integrity 
+          and eliminate redundancy while preserving all information from the original relation.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  </main>
+
+  <footer>
+    © 2026 DBMS Virtual Lab | Department of Computer Science
+  </footer>
+</div>
+
+<script src="../js/exp3.js"></script>
+</body>
+</html>
