@@ -65,79 +65,83 @@
     </div>
   </div>
 
-  <div class="simulation-container">
-    <div class="card">
-      <h2>Query Builder</h2>
-      
-      <div class="simulation-controls">
-        <label for="queryType">Select Query Type:</label>
-        <select id="queryType" onchange="updateQueryBuilder()">
-          <option value="count">COUNT - Count employees</option>
-          <option value="countGroup">COUNT with GROUP BY - Count per department</option>
-          <option value="sum">SUM - Total salary</option>
-          <option value="sumGroup">SUM with GROUP BY - Total salary per department</option>
-          <option value="avg">AVG - Average salary</option>
-          <option value="avgGroup">AVG with GROUP BY - Average salary per department</option>
-          <option value="minMax">MIN/MAX - Min and Max salary</option>
-          <option value="minMaxGroup">MIN/MAX with GROUP BY - Min/Max per department</option>
-          <option value="having">HAVING - Departments with count > 2</option>
-          <option value="complex">Complex - Multiple aggregates with HAVING</option>
-        </select>
-
-        <label for="customQuery" style="margin-top: 16px;">Or write custom SQL:</label>
-        <textarea id="customQuery" rows="4" placeholder="SELECT department, COUNT(*) FROM employees GROUP BY department;"></textarea>
-
-        <button onclick="executeQuery()" style="margin-top: 12px;">Execute Query</button>
-        <button onclick="resetQuery()" style="background: var(--muted);">Reset</button>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Query Result</h2>
-      <div class="simulation-result" id="resultArea">
-        <p style="color: var(--muted); text-align: center; padding: 20px;">
-          Select a query type or write a custom query and click "Execute Query" to see results.
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>Query Examples</h2>
-    <div class="grid">
+  <div class="simulation-layout">
+    <div class="simulation-left">
       <div class="card">
-        <h3>Basic COUNT</h3>
-        <pre>SELECT COUNT(*) 
+        <h2>Query Builder</h2>
+        
+        <div class="simulation-controls">
+          <label for="queryType">Select Query Type:</label>
+          <select id="queryType" onchange="updateQueryBuilder()">
+            <option value="count">COUNT - Count employees</option>
+            <option value="countGroup">COUNT with GROUP BY - Count per department</option>
+            <option value="sum">SUM - Total salary</option>
+            <option value="sumGroup">SUM with GROUP BY - Total salary per department</option>
+            <option value="avg">AVG - Average salary</option>
+            <option value="avgGroup">AVG with GROUP BY - Average salary per department</option>
+            <option value="minMax">MIN/MAX - Min and Max salary</option>
+            <option value="minMaxGroup">MIN/MAX with GROUP BY - Min/Max per department</option>
+            <option value="having">HAVING - Departments with count > 2</option>
+            <option value="complex">Complex - Multiple aggregates with HAVING</option>
+          </select>
+          
+          <label for="customQuery" style="margin-top: 16px;">Or write custom SQL:</label>
+          <textarea id="customQuery" rows="4" placeholder="SELECT department, COUNT(*) FROM employees GROUP BY department;"></textarea>
+          
+          <button onclick="executeQuery()" style="margin-top: 12px;">Execute Query</button>
+          <button onclick="resetQuery()" style="background: var(--muted);">Reset</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Query Examples</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Basic COUNT</h3>
+            <pre>SELECT COUNT(*) 
 FROM employees;</pre>
-        <button onclick="runExample('SELECT COUNT(*) AS total FROM employees;')" style="margin-top: 8px; width: 100%;">Run Example</button>
-      </div>
-
-      <div class="card">
-        <h3>COUNT with GROUP BY</h3>
-        <pre>SELECT department, 
+            <button onclick="runExample('SELECT COUNT(*) AS total FROM employees;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+          </div>
+          
+          <div class="card">
+            <h3>COUNT with GROUP BY</h3>
+            <pre>SELECT department, 
        COUNT(*) AS count
 FROM employees 
 GROUP BY department;</pre>
-        <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
-      </div>
-
-      <div class="card">
-        <h3>AVG with GROUP BY</h3>
-        <pre>SELECT department, 
+            <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+          </div>
+          
+          <div class="card">
+            <h3>AVG with GROUP BY</h3>
+            <pre>SELECT department, 
        AVG(salary) AS avg_salary
 FROM employees 
 GROUP BY department;</pre>
-        <button onclick="runExample('SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
-      </div>
-
-      <div class="card">
-        <h3>HAVING Clause</h3>
-        <pre>SELECT department, 
+            <button onclick="runExample('SELECT department, AVG(salary) AS avg_salary FROM employees GROUP BY department;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+          </div>
+          
+          <div class="card">
+            <h3>HAVING Clause</h3>
+            <pre>SELECT department, 
        COUNT(*) AS count
 FROM employees 
 GROUP BY department 
 HAVING COUNT(*) > 2;</pre>
-        <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department HAVING COUNT(*) > 2;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+            <button onclick="runExample('SELECT department, COUNT(*) AS count FROM employees GROUP BY department HAVING COUNT(*) > 2;')" style="margin-top: 8px; width: 100%;">Run Example</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="simulation-right">
+      <div class="card sticky-result">
+        <h2>Query Result</h2>
+        <div class="simulation-result" id="resultArea">
+          <p style="color: var(--muted); text-align: center; padding: 20px;">
+            Select a query type or write a custom query and click "Execute Query" to see results.
+          </p>
+        </div>
       </div>
     </div>
   </div>
