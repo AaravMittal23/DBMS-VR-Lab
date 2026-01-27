@@ -1,4 +1,4 @@
-function checkAnswer(button, isCorrect) {
+/* function checkAnswer(button, isCorrect) {
   const questionBox = button.closest(".question");
   const result = questionBox.querySelector(".result");
 
@@ -24,4 +24,4 @@ function checkAnswer(button, isCorrect) {
     result.textContent = "Incorrect Answer ❌ The correct answer is highlighted in green.";
     result.style.color = "#dc2626";
   }
-}
+} */
