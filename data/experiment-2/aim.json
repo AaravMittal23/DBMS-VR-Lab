@@ -1,0 +1,17 @@
+{
+  "objective": "Understand and implement ER diagram design and relational mapping for database systems.",
+  "learningObjectives": [
+    "Design ER diagrams for given problem domains using standard notation",
+    "Identify and represent entities, attributes, and relationships correctly",
+    "Apply cardinality and participation constraints appropriately",
+    "Map ER diagrams to relational schemas following standard mapping rules",
+    "Create relational tables with primary keys, foreign keys, and constraints",
+    "Handle complex scenarios including weak entities and composite attributes"
+  ],
+  "expectedOutcomes": [
+    "Produce clear ER diagrams for typical application domains",
+    "Translate ER models into equivalent relational schemas",
+    "Define tables with appropriate keys and integrity constraints",
+    "Explain the relationship between conceptual (ER) and logical (relational) design"
+  ]
+}

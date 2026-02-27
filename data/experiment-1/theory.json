@@ -1,0 +1,10 @@
+{
+  "introduction": "This experiment covers SQL aggregate functions and grouping operations. Aggregate functions are used to perform calculations on sets of rows and return a single summary value, while GROUP BY and HAVING are used to organize and filter aggregated results.",
+  "sections": [],
+  "functionalDependencies": null,
+  "havingClause": null,
+  "whereVsHaving": null,
+  "mappingRules": null,
+  "anomalies": null,
+  "practicalExample": null
+}

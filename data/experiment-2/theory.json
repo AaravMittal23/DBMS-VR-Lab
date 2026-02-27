@@ -1,0 +1,14 @@
+{
+  "introduction": "This experiment introduces Entity–Relationship (ER) modeling for database design. You will learn about entities, attributes, relationships, and how to translate ER diagrams into relational schemas.",
+  "sections": [],
+  "functionalDependencies": null,
+  "havingClause": null,
+  "whereVsHaving": null,
+  "mappingRules": {
+    "title": "ER to Relational Mapping Rules",
+    "content": "When converting an ER diagram to a relational schema, standard mapping rules are followed.",
+    "rules": []
+  },
+  "anomalies": null,
+  "practicalExample": null
+}

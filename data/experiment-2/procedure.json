@@ -1,0 +1,9 @@
+{
+  "introduction": "This procedure outlines the steps to design ER diagrams and convert them to relational schemas.",
+  "steps": [],
+  "expectedOutcomes": [
+    "Follow a systematic approach to modeling a problem domain with ER diagrams",
+    "Translate each part of the ER model into corresponding relational tables",
+    "Validate the resulting schema for completeness and correctness"
+  ]
+}

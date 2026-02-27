@@ -1,0 +1,9 @@
+{
+  "introduction": "This procedure explains how to analyze relational schemas, identify dependencies, and apply normalization steps.",
+  "steps": [],
+  "expectedOutcomes": [
+    "Systematically inspect relations for redundancy and anomalies",
+    "Apply 1NF, 2NF, and 3NF transformations step by step",
+    "Document the resulting normalized schema clearly"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "id": 3,
+  "title": "Database Normalization and Functional Dependencies",
+  "shortTitle": "Normalization & FDs",
+  "badge": "Normalization",
+  "description": "identify functional dependencies, study anomalies, and apply normalization rules to transform unnormalized relations into well-structured schemas."
+}

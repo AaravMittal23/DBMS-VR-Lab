@@ -1,0 +1,19 @@
+{
+  "introduction": "This experiment focuses on database normalization and functional dependencies. Normalization is a step-by-step process used to reduce redundancy and anomalies in relational schemas.",
+  "sections": [],
+  "functionalDependencies": {
+    "title": "Functional Dependencies",
+    "content": "A functional dependency X → Y in a relation R indicates that for each value of X there is exactly one associated value of Y.",
+    "code": "X -> Y",
+    "keyTerms": []
+  },
+  "havingClause": null,
+  "whereVsHaving": null,
+  "mappingRules": null,
+  "anomalies": {
+    "title": "Anomalies",
+    "content": "Unnormalized relations may suffer from insertion, update, and deletion anomalies.",
+    "types": []
+  },
+  "practicalExample": null
+}

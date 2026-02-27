@@ -2,27 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>DBMS Virtual Lab | Home</title>
+  <title>DBMS Virtual Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<div class="sidebar">
+<!-- Mobile menu toggle -->
+<button class="mobile-menu-toggle" onclick="toggleSidebar()" aria-label="Toggle menu">☰</button>
+
+<!-- Loading overlay -->
+<!--<div id="loading">Loading…</div>-->
+
+<!-- ── Sidebar (populated by app.js) ── -->
+<div class="sidebar" id="sidebar">
   <div class="sidebar-header">
     <h2>DBMS Virtual Lab</h2>
-    <p>Navigation</p>
+    <p>Loading…</p>
   </div>
-  <nav>
-    <a href="index.html" class="active">Home</a>
-  </nav>
 </div>
 
+<!-- ── Main content wrapper ── -->
 <div class="content-wrapper">
-  <header>
+
+  <header id="header">
     <div class="header-left">
       <h1>DBMS Virtual Laboratory</h1>
-      <p>Welcome to the Database Management Systems Virtual Lab</p>
+      <p>Loading…</p>
     </div>
     <div class="header-right">
       <div class="institution">SRM Institute of Science and Technology</div>
@@ -30,76 +36,39 @@
     </div>
   </header>
 
-  <main>
-    <span class="badge">Welcome</span>
-
-    <div class="card">
-      <h2>Welcome to DBMS Virtual Lab</h2>
-      <p>
-        Welcome to the Database Management Systems Virtual Laboratory. This virtual lab platform is designed to help 
-        students understand and practice various concepts in database management systems through interactive simulations 
-        and hands-on experiments.
-      </p>
-      <p style="margin-top: 16px;">
-        Each experiment in this virtual lab combines theoretical knowledge with practical implementation, helping 
-        you acquire practical learning experiences in the field of database management systems.
-      </p>
+  <main id="main">
+    <!-- Content injected by app.js -->
+    <div style="text-align:center;padding:60px;color:var(--muted)">
+      <p style="font-size:18px">Loading content…</p>
     </div>
-
-    <div class="grid">
-      <div class="card">
-        <h3>Experiment 1: Aggregate Functions</h3>
-        <p>
-          Learn about SQL aggregate functions (COUNT, SUM, AVG, MIN, MAX) and grouping operations using GROUP BY and HAVING clauses.
-        </p>
-        <a href="Experiment-1/index.html" style="display: inline-block; margin-top: 12px; color: var(--secondary); font-weight: 600; text-decoration: none;">
-          Start Experiment →
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>Experiment 2: ER Diagrams</h3>
-        <p>
-          Understand Entity-Relationship modeling and learn to design database schemas using ER diagrams.
-        </p>
-        <a href="Experiment-2/index.html" style="display: inline-block; margin-top: 12px; color: var(--secondary); font-weight: 600; text-decoration: none;">
-          Start Experiment →
-        </a>
-      </div>
-
-      <div class="card">
-        <h3>Experiment 3: Normalization</h3>
-        <p>
-          Learn about database normalization techniques to eliminate redundancy and improve data integrity.
-        </p>
-        <a href="Experiment-3/index.html" style="display: inline-block; margin-top: 12px; color: var(--secondary); font-weight: 600; text-decoration: none;">
-          Start Experiment →
-        </a>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>How to Use This Virtual Lab</h2>
-      <ol>
-        <li><strong>Select an Experiment:</strong> Choose from the available experiments above</li>
-        <li><strong>Start with the Aim:</strong> Understand the objectives of the experiment</li>
-        <li><strong>Read the Theory:</strong> Learn the fundamental concepts and syntax</li>
-        <li><strong>Take the Pre-Test:</strong> Assess your prior knowledge with multiple-choice questions</li>
-        <li><strong>Follow the Procedure:</strong> Step through the experiment systematically</li>
-        <li><strong>Try the Simulation:</strong> Practice with interactive examples and visualize results</li>
-        <li><strong>Take the Post-Test:</strong> Evaluate your understanding after completing the experiment</li>
-        <li><strong>Check References:</strong> Explore additional resources for deeper learning</li>
-        <li><strong>Provide Feedback:</strong> Share your thoughts and suggestions</li>
-      </ol>
-    </div>
-
   </main>
 
   <footer>
     © 2026 DBMS Virtual Lab | Department of Computer Science<br>
-    This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.
+    <small>This work is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</small>
   </footer>
+
 </div>
+
+<!-- ── Scripts ── -->
+<script src="router.js"></script>
+<script src="renderer.js"></script>
+<script src="mcq.js"></script>
+<script src="app.js"></script>
+
+<script>
+  /* Mobile sidebar toggle */
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  /* Close sidebar when a nav link is clicked on mobile */
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('.sidebar nav a')) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  });
+</script>
 
 </body>
 </html>

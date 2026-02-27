@@ -1,0 +1,9 @@
+{
+  "introduction": "This procedure describes how to execute SQL queries using aggregate functions and grouping operations in a database management system.",
+  "steps": [],
+  "expectedOutcomes": [
+    "Gain hands-on experience writing SQL queries with aggregate functions",
+    "Learn to interpret query results that use GROUP BY and HAVING",
+    "Relate the practical steps to the theoretical concepts covered in this experiment"
+  ]
+}
