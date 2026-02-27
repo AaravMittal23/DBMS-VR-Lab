@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DBMS Virtual Lab</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=./">
+  <script>
+    // GitHub Pages SPA fallback:
+    // If a user lands on /DBMS-VR-Lab/some/path (no hash),
+    // redirect them to the SPA entry with an equivalent hash URL.
+    (function() {
+      var path = window.location.pathname || '';
+      // Expect project to be hosted at /DBMS-VR-Lab/
+      var base = '/DBMS-VR-Lab';
+      if (path.indexOf(base) === 0) {
+        path = path.substring(base.length);
+      }
+      if (!path || path === '/' || path === '/404.html') {
+        window.location.replace(base + '/');
+        return;
+      }
+      // Redirect to hash-based route understood by the SPA router
+      window.location.replace(base + '/#' + path);
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting… If you are not redirected, <a href="./">click here</a>.</p>
+</body>
+</html>
+
