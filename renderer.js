@@ -21,7 +21,7 @@ const Renderer = {
       </div>`;
   },
 
-  theory(data) {
+  theory(data, type, expId) {
     const sections = data.sections.map(s => `
       <div class="card">
         <h3>${s.title}</h3>
