@@ -356,7 +356,7 @@ class App {
       html = Renderer.aim(data);
     } else if (page === 'theory') {
       const data = await this.fetchJSON(`data/experiment-${expId}/theory.json`);
-      html = Renderer.theory(data);
+      html = Renderer.theory(data, 'theory', expId);
     } else if (page === 'pretest') {
       const data = await this.fetchJSON(`data/experiment-${expId}/pretest.json`);
       html = Renderer.mcq(data, 'pretest', expId);
@@ -373,7 +373,18 @@ class App {
       html = Renderer.feedback();
     }
 
-    document.getElementById('main').innerHTML = html;
+    const mainEl = document.getElementById('main');
+    mainEl.innerHTML = html;
+    
+    // Execute any script tags injected via innerHTML
+    const scripts = mainEl.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement('script');
+      Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+
     document.title = `DBMS Virtual Lab | ${PAGE_TITLES[page] || page}`;
     window.scrollTo(0, 0);
     this.wireNav();
