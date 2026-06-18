@@ -13,5 +13,9 @@
       "title": "EXISTS Operator",
       "content": "The EXISTS operator is used to test for the existence of any record in a subquery. It returns TRUE if the subquery returns one or more records."
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Uber's Ride Receipts",
+    "scenario": "In Uber's database, Drivers are in one table, Riders in another, and Trips in a third. When your ride ends and Uber generates your receipt, the app MUST use an `INNER JOIN` to instantly stitch together the Driver's name, your name, and the trip cost from those three separate tables into one cohesive view."
+  }
 }

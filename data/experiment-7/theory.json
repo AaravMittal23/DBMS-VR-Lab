@@ -9,35 +9,35 @@
     {
       "title": "Second Normal Form (2NF)",
       "content": "A relation is in 2NF if it is in 1NF and every non-key attribute is fully functionally dependent on \n        the primary key. No partial dependencies are allowed.",
-      "code": "Example - Not in 2NF:\nOrder(order_id, product_id, product_name, quantity)\nFD: order_id, product_id → quantity\n    product_id → product_name (partial dependency)\n\nIn 2NF:\nOrder(order_id, product_id, quantity)\nProduct(product_id, product_name)"
+      "code": "Example - Not in 2NF:\nOrder(order_id, product_id, product_name, quantity)\nFD: order_id, product_id \u2192 quantity\n    product_id \u2192 product_name (partial dependency)\n\nIn 2NF:\nOrder(order_id, product_id, quantity)\nProduct(product_id, product_name)"
     },
     {
       "title": "Third Normal Form (3NF)",
       "content": "A relation is in 3NF if it is in 2NF and no non-key attribute is transitively dependent on the primary key. \n        All non-key attributes must depend directly on the primary key.",
-      "code": "Example - Not in 3NF:\nStudent(student_id, name, dept_id, dept_name, location)\nFD: student_id → dept_id → dept_name, location\n    (transitive dependency)\n\nIn 3NF:\nStudent(student_id, name, dept_id)\nDepartment(dept_id, dept_name, location)"
+      "code": "Example - Not in 3NF:\nStudent(student_id, name, dept_id, dept_name, location)\nFD: student_id \u2192 dept_id \u2192 dept_name, location\n    (transitive dependency)\n\nIn 3NF:\nStudent(student_id, name, dept_id)\nDepartment(dept_id, dept_name, location)"
     },
     {
       "title": "Boyce-Codd Normal Form (BCNF)",
       "content": "A relation is in BCNF if it is in 3NF and every determinant is a candidate key. BCNF is stricter than 3NF \n        and eliminates all redundancy based on functional dependencies.",
-      "code": "Example - Not in BCNF:\nCourse(course_id, instructor, time, room)\nFD: course_id → instructor\n    instructor, time → room\n    (instructor is not a key)\n\nIn BCNF:\nCourse(course_id, instructor, time)\nRoom(instructor, time, room)"
+      "code": "Example - Not in BCNF:\nCourse(course_id, instructor, time, room)\nFD: course_id \u2192 instructor\n    instructor, time \u2192 room\n    (instructor is not a key)\n\nIn BCNF:\nCourse(course_id, instructor, time)\nRoom(instructor, time, room)"
     }
   ],
   "functionalDependencies": {
     "title": "Functional Dependencies",
-    "content": "A functional dependency (FD) is a constraint between two sets of attributes in a relation. If attribute set \n      X functionally determines attribute set Y (denoted as X → Y), then for any two tuples with the same values in X, \n      they must have the same values in Y.",
-    "code": "Example:\nIf student_id → name, email\nThen: If two tuples have the same student_id, \n      they must have the same name and email.",
+    "content": "A functional dependency (FD) is a constraint between two sets of attributes in a relation. If attribute set \n      X functionally determines attribute set Y (denoted as X \u2192 Y), then for any two tuples with the same values in X, \n      they must have the same values in Y.",
+    "code": "Example:\nIf student_id \u2192 name, email\nThen: If two tuples have the same student_id, \n      they must have the same name and email.",
     "keyTerms": [
       {
         "term": "Determinant",
-        "description": "The left side of a functional dependency (X in X → Y)"
+        "description": "The left side of a functional dependency (X in X \u2192 Y)"
       },
       {
         "term": "Dependent",
-        "description": "The right side of a functional dependency (Y in X → Y)"
+        "description": "The right side of a functional dependency (Y in X \u2192 Y)"
       },
       {
         "term": "Trivial FD",
-        "description": "Y is a subset of X (e.g., AB → A)"
+        "description": "Y is a subset of X (e.g., AB \u2192 A)"
       },
       {
         "term": "Non-trivial FD",
@@ -74,6 +74,10 @@
   "practicalExample": {
     "title": "Practical Example",
     "description": "Consider an unnormalized table: Student_Course(student_id, name, course_id, course_name, grade, instructor)",
-    "code": "Functional Dependencies:\nstudent_id → name\ncourse_id → course_name, instructor\nstudent_id, course_id → grade\n\nNormalized to 3NF:\nStudent(student_id, name)\nCourse(course_id, course_name, instructor)\nEnrollment(student_id, course_id, grade)"
+    "code": "Functional Dependencies:\nstudent_id \u2192 name\ncourse_id \u2192 course_name, instructor\nstudent_id, course_id \u2192 grade\n\nNormalized to 3NF:\nStudent(student_id, name)\nCourse(course_id, course_name, instructor)\nEnrollment(student_id, course_id, grade)"
+  },
+  "realWorldApplication": {
+    "title": "Preventing Catastrophe in a School Database",
+    "scenario": "Imagine storing a student's home address on every single test grade they receive. If they move to a new house, the school has to update 50 different rows. If the system crashes halfway and only updates 25 rows, the data is corrupted! Normalization solves this by splitting the data into a `Students` table and a `Grades` table, so the address is only stored and updated in exactly one place."
   }
 }

@@ -21,5 +21,9 @@
       "content": "Used to remove all records from a table, including all spaces allocated for the records are removed. The table structure remains.",
       "code": "TRUNCATE TABLE Students;"
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Launching a Social Media App",
+    "scenario": "Before anyone can post on a new app like Instagram, software engineers must define the structure using DDL. They write `CREATE TABLE Users` to define the blueprint. If two years later the company decides to let users add 'Pronouns' to their profiles, the engineers don't delete the database\u2014they use `ALTER TABLE Users ADD COLUMN Pronouns` to modify the structure live."
+  }
 }

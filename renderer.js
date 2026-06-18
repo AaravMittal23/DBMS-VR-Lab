@@ -79,12 +79,22 @@ const Renderer = {
         <pre>${escHtml(data.practicalExample.code)}</pre>
       </div>` : '';
 
+    const realWorld = data.realWorldApplication ? `
+      <div class="card" style="background: linear-gradient(to right, rgba(59, 130, 246, 0.05), transparent); border-left: 4px solid var(--imperial-blue); margin-bottom: 24px;">
+        <h2 style="display: flex; align-items: center; gap: 8px; color: var(--imperial-blue);">
+          🌍 Real-World Application: ${data.realWorldApplication.title}
+        </h2>
+        <p style="font-size: 16px; line-height: 1.6;">${data.realWorldApplication.scenario}</p>
+      </div>` : '';
+
     return `
       <span class="badge">Theory</span>
       <div class="card">
         <h2>Introduction</h2>
         <p>${data.introduction}</p>
       </div>
+      
+      ${realWorld}
       
       ${String(expId) === '4' ? this.joinVisualizer() : ''}
       ${String(expId) === '5' ? this.groupByVisualizer() : ''}

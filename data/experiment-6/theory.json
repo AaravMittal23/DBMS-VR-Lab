@@ -1,5 +1,5 @@
 {
-  "introduction": "Entity–Relationship (ER) modeling is a conceptual database design technique used to model the structure \n      and relationships of data in a database system. The ER model provides a graphical representation of entities, \n      their attributes, and the relationships between entities. It serves as a bridge between real-world requirements \n      and the implementation of a relational database.",
+  "introduction": "Entity\u2013Relationship (ER) modeling is a conceptual database design technique used to model the structure \n      and relationships of data in a database system. The ER model provides a graphical representation of entities, \n      their attributes, and the relationships between entities. It serves as a bridge between real-world requirements \n      and the implementation of a relational database.",
   "sections": [
     {
       "title": "Entities",
@@ -36,5 +36,9 @@
     "title": "Practical Example",
     "description": "Consider a university database with entities: Student, Course, and Department",
     "code": "ER Diagram:\n- Student (student_id, name, email)\n- Course (course_id, title, credits)\n- Department (dept_id, dept_name)\n- Student ENROLLS Course (M:N)\n- Department OFFERS Course (1:N)\n\nRelational Schema:\nStudent(student_id, name, email, dept_id)\nCourse(course_id, title, credits, dept_id)\nDepartment(dept_id, dept_name)\nEnrollment(student_id, course_id, grade)"
+  },
+  "realWorldApplication": {
+    "title": "Designing a Hospital System",
+    "scenario": "Before writing a single line of code for a Hospital, engineers sit with doctors to draw an ER Diagram. They map out 'Entities' (Patients, Doctors, Wards) and 'Relationships' (A Doctor *treats* 1 to Many Patients). If they get this blueprint wrong, a patient might get assigned to a room that doesn't exist!"
   }
 }

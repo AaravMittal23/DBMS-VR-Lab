@@ -9,5 +9,9 @@
       "title": "TCL Commands",
       "content": "Transaction Control Language includes COMMIT (saves the work), ROLLBACK (undoes the work since last commit), and SAVEPOINT (sets a point to which you can later roll back)."
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Buying the Last Plane Ticket",
+    "scenario": "You click 'Buy' on the last seat to Hawaii. The database deducts $500 from your account and assigns you the seat. But what if the server loses power exactly after taking your money, but before assigning the seat? ACID properties ensure the transaction is **Atomic** (all-or-nothing). When the server reboots, it sees the incomplete transaction and instantly rolls back your $500 deduction."
+  }
 }

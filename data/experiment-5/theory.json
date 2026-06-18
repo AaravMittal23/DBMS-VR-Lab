@@ -70,5 +70,9 @@
     "title": "Practical Example",
     "description": "Consider a table employees with columns: id, name, department, salary",
     "code": "-- Find average salary per department with more than 5 employees\nSELECT department, AVG(salary) as avg_salary, COUNT(*) as emp_count\nFROM employees\nGROUP BY department\nHAVING COUNT(*) > 5\nORDER BY avg_salary DESC;"
+  },
+  "realWorldApplication": {
+    "title": "YouTube Analytics Dashboard",
+    "scenario": "Imagine a YouTuber looking at their dashboard. They don't want to see a list of 5 million individual video clicks. They want to know their total views (`SUM`), average watch time (`AVG`), and most popular video (`MAX`). The database uses `GROUP BY` to aggregate millions of rows into a clean summary by Month or by Video."
   }
 }

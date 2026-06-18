@@ -13,5 +13,9 @@
       "title": "Deadlocks",
       "content": "A deadlock occurs when two or more transactions are waiting for locks held by each other, creating a circular wait. The DBMS resolves this by choosing a 'victim' transaction and aborting it."
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "The Taylor Swift Ticketmaster Crash",
+    "scenario": "Imagine 10,000 fans clicking 'Buy' on the exact same front-row seat at the exact same millisecond. Without Concurrency Control, the database would sell the same seat 10,000 times! The DBMS uses strict 'Locks' to ensure transactions are processed safely, preventing race conditions while trying to avoid 'Deadlocks' (where users get permanently stuck waiting on each other)."
+  }
 }

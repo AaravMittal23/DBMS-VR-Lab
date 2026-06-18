@@ -13,5 +13,9 @@
       "title": "Client-Server Architecture",
       "content": "Modern DBMS typically use a client-server architecture where the database server runs on a centralized machine, and client applications connect to it over a network to request data using protocols like TCP/IP."
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Amazon's E-Commerce Architecture",
+    "scenario": "Think about Amazon. The **External Level** is what you see on your phone (the app UI). The **Conceptual Level** is the invisible master blueprint containing all Products, Users, and Orders. The **Internal Level** is how data is stored on physical AWS hard drives. Because of Data Independence, Amazon can upgrade their hard drives (Internal) without you having to download a new app update (External)!"
+  }
 }

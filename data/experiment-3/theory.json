@@ -21,5 +21,9 @@
       "content": "Although sometimes categorized as DQL (Data Query Language), SELECT is often grouped with DML. It retrieves data from one or more tables.",
       "code": "SELECT * FROM Students;"
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Interacting with Spotify",
+    "scenario": "Every time you interact with an app, you are triggering DML commands. When you create a Spotify account, the app runs an `INSERT` command. When you rename your playlist, it runs an `UPDATE`. When you remove a song from your library, it runs a `DELETE`. DML is the bridge between the user interface and the data."
+  }
 }

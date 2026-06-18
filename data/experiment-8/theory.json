@@ -11,5 +11,9 @@
       "content": "Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot see the indexes, they are just used to speed up searches/queries. Updating a table with indexes takes more time than updating a table without.",
       "code": "CREATE INDEX idx_lastname ON Persons (LastName);"
     }
-  ]
+  ],
+  "realWorldApplication": {
+    "title": "Netflix Search & Kids Profiles",
+    "scenario": "When you search Netflix for 'Action', the database doesn't check all 100,000 movies one-by-one; it uses an **Index** to jump instantly to the answer. Furthermore, when a child logs into a Kids Profile, Netflix uses a **View**\u2014a virtual table that filters out R-rated movies, providing a safe, restricted lens into the main database without duplicating data."
+  }
 }
