@@ -75,7 +75,7 @@ SELECT * FROM Employees WHERE Salary > 70000;"></textarea>
           <p>This simulation explores performance optimization and data abstraction.</p>
           <ul>
             <li><strong>Indexes:</strong> Running a search on an unindexed column performs a Full Table Scan (slow). Creating an index on that column changes it to an Indexed Lookup (fast).</li>
-            <li><strong>Views:</strong> Allow you to encapsulate complex queries into a virtual table. You can then `SELECT * FROM ViewName` directly.</li>
+            <li><strong>Views:</strong> Allow you to encapsulate complex queries into a virtual table. You can then <code>SELECT * FROM ViewName</code> directly.</li>
           </ul>
         </div>
       </div>
@@ -222,10 +222,10 @@ window.startQuiz8Timer = function() {
 window.displayQuiz8 = function(question) {
   const content = document.getElementById('quiz8Content');
   if (!content) return;
-  let html = \`<p style="margin-top: 0; font-size: 16px; font-weight: 500;">\${question.question}</p>\`;
+  let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += \`<button onclick="checkAnswer8(\${index}, \${question.correct}, '\${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">\${option}</button>\`;
+    html += `<button onclick="checkAnswer8(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;
@@ -237,9 +237,9 @@ window.checkAnswer8 = function(selected, correct, explanation) {
   const isCorrect = selected === correct;
   const resultColor = isCorrect ? '#10b981' : '#dc2626';
   const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
-  let html = \`<div style="background: \${resultColor}20; border-left: 4px solid \${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">\`;
-  html += \`<p style="color: \${resultColor}; font-weight: 600; margin: 0 0 8px 0;">\${resultMessage}</p>\`;
-  html += \`<p style="margin: 0; color: var(--text);">\${explanation}</p></div>\`;
+  let html = `<div style="background: ${resultColor}20; border-left: 4px solid ${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">`;
+  html += `<p style="color: ${resultColor}; font-weight: 600; margin: 0 0 8px 0;">${resultMessage}</p>`;
+  html += `<p style="margin: 0; color: var(--text);">${explanation}</p></div>`;
   html += '<button onclick="closeQuiz8()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
   content.innerHTML = html;
 };

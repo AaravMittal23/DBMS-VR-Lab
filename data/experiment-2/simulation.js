@@ -187,21 +187,21 @@ window.renderSchema = function() {
   
   let html = '';
   for (const [tableName, tableData] of Object.entries(dbSchema)) {
-    html += \`<div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+    html += `<div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
       <div style="background: var(--bg-color); padding: 12px 16px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary);">
-        🗄️ \${tableName}
+        🗄️ ${tableName}
       </div>
       <table style="width: 100%; border-collapse: collapse;">
-        <tbody>\`;
+        <tbody>`;
     tableData.columns.forEach(col => {
       let badge = '';
       if (col.type.toUpperCase().includes('PRIMARY KEY')) badge = '<span style="background:#fef08a; color:#a16207; font-size:10px; padding:2px 6px; border-radius:10px; margin-left:8px;">PK</span>';
-      html += \`<tr>
-        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); width: 40%;"><strong>\${col.name}</strong>\${badge}</td>
-        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">\${col.type.replace('PRIMARY KEY', '').trim()}</td>
-      </tr>\`;
+      html += `<tr>
+        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); width: 40%;"><strong>${col.name}</strong>${badge}</td>
+        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">${col.type.replace('PRIMARY KEY', '').trim()}</td>
+      </tr>`;
     });
-    html += \`</tbody></table></div>\`;
+    html += `</tbody></table></div>`;
   }
   viewer.innerHTML = html;
 };
@@ -236,10 +236,10 @@ window.startQuiz2Timer = function() {
 window.displayQuiz2 = function(question) {
   const content = document.getElementById('quiz2Content');
   if (!content) return;
-  let html = \`<p style="margin-top: 0; font-size: 16px; font-weight: 500;">\${question.question}</p>\`;
+  let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += \`<button onclick="checkAnswer2(\${index}, \${question.correct}, '\${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">\${option}</button>\`;
+    html += `<button onclick="checkAnswer2(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;
@@ -251,9 +251,9 @@ window.checkAnswer2 = function(selected, correct, explanation) {
   const isCorrect = selected === correct;
   const resultColor = isCorrect ? '#10b981' : '#dc2626';
   const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
-  let html = \`<div style="background: \${resultColor}20; border-left: 4px solid \${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">\`;
-  html += \`<p style="color: \${resultColor}; font-weight: 600; margin: 0 0 8px 0;">\${resultMessage}</p>\`;
-  html += \`<p style="margin: 0; color: var(--text);">\${explanation}</p></div>\`;
+  let html = `<div style="background: ${resultColor}20; border-left: 4px solid ${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">`;
+  html += `<p style="color: ${resultColor}; font-weight: 600; margin: 0 0 8px 0;">${resultMessage}</p>`;
+  html += `<p style="margin: 0; color: var(--text);">${explanation}</p></div>`;
   html += '<button onclick="closeQuiz2()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
   content.innerHTML = html;
 };
