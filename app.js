@@ -216,10 +216,10 @@ class App {
         if (!input) return;
         
         const timestamp = new Date().toLocaleTimeString();
-        output.innerHTML = \`<div style="margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px;">
-          <div style="color: #60a5fa; margin-bottom: 4px;">[\${timestamp}] \${input}</div>
-          \${window.DB.executeQuery(input)}
-        </div>\` + output.innerHTML;
+        output.innerHTML = `<div style="margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px;">
+          <div style="color: #60a5fa; margin-bottom: 4px;">[${timestamp}] ${input}</div>
+          ${window.DB.executeQuery(input)}
+        </div>` + output.innerHTML;
         
         window.sandboxRenderSchema();
       };
@@ -249,19 +249,19 @@ class App {
         
         let html = '';
         for (const [tableName, tableData] of Object.entries(schema)) {
-          html += \`<div style="border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; font-size: 14px;">
+          html += `<div style="border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; font-size: 14px;">
             <div style="background: var(--bg-color); padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary);">
-              🗄️ \${tableName}
+              🗄️ ${tableName}
             </div>
             <table style="width: 100%; border-collapse: collapse;">
-              <tbody>\`;
+              <tbody>`;
           tableData.columns.forEach(col => {
-            html += \`<tr>
-              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--text);">\${col.name}</td>
-              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">\${col.type}</td>
-            </tr>\`;
+            html += `<tr>
+              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--text);">${col.name}</td>
+              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">${col.type}</td>
+            </tr>`;
           });
-          html += \`</tbody></table></div>\`;
+          html += `</tbody></table></div>`;
         }
         viewer.innerHTML = html;
       };
