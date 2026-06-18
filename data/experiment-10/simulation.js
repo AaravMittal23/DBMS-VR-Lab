@@ -3,277 +3,237 @@ window.sim10_renderSimulation = function() {
     <span class="badge">Interactive Simulation</span>
 
     <div class="card" style="margin-bottom: 24px;">
-      <h2 style="margin-top: 0;">Database Normalisation Simulator</h2>
+      <h2 style="margin-top: 0;">Concurrency Control & Deadlock Simulator</h2>
       <p style="color: var(--muted); margin-bottom: 0;">
-        Decompose a poorly structured, unnormalized table into 1NF, 2NF, and 3NF to eliminate data redundancy and insertion/deletion anomalies.
+        Simulate two transactions attempting to acquire exclusive locks on two resources. 
+        Observe how a deadlock occurs when both transactions wait for locks held by each other.
       </p>
     </div>
 
     <div class="simulation-layout">
+      <!-- Left side: Controls -->
       <div class="simulation-left" style="flex: 1;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2 style="margin: 0;">Normalisation Stages</h2>
+            <h2 style="margin: 0;">Transactions</h2>
             <button onclick="openGuide10()" style="background: var(--accent); color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">📖 Guide</button>
           </div>
           
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <button onclick="setNormStage('UNF')" id="btn-unf" style="padding: 16px; text-align: left; background: var(--bg-color); border: 2px solid var(--primary); border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px; display: flex; justify-content: space-between; align-items: center;">
-              <span>Unnormalized Form (UNF)</span>
-              <span style="font-size: 12px; font-weight: normal; background: var(--primary); color: white; padding: 2px 8px; border-radius: 12px;">Start</span>
-            </button>
-            
-            <button onclick="setNormStage('1NF')" id="btn-1nf" style="padding: 16px; text-align: left; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;">
-              First Normal Form (1NF)
-              <div style="font-size: 12px; font-weight: normal; color: var(--muted); margin-top: 4px;">Atomic values, no repeating groups.</div>
-            </button>
-            
-            <button onclick="setNormStage('2NF')" id="btn-2nf" style="padding: 16px; text-align: left; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;">
-              Second Normal Form (2NF)
-              <div style="font-size: 12px; font-weight: normal; color: var(--muted); margin-top: 4px;">No partial dependencies.</div>
-            </button>
-            
-            <button onclick="setNormStage('3NF')" id="btn-3nf" style="padding: 16px; text-align: left; background: white; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;">
-              Third Normal Form (3NF)
-              <div style="font-size: 12px; font-weight: normal; color: var(--muted); margin-top: 4px;">No transitive dependencies.</div>
-            </button>
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Transaction A -->
+            <div style="border: 2px solid #3b82f6; border-radius: 8px; padding: 16px; background: #eff6ff;">
+              <h3 style="margin-top: 0; color: #1d4ed8;">Transaction A</h3>
+              <div style="display: flex; gap: 8px;">
+                <button onclick="window.sim10_lock('A', 'R1')" class="sim-btn" style="flex:1; background: #3b82f6; color: white;">Lock Resource 1</button>
+                <button onclick="window.sim10_lock('A', 'R2')" class="sim-btn" style="flex:1; background: #3b82f6; color: white;">Lock Resource 2</button>
+              </div>
+              <div style="margin-top: 8px;">
+                <button onclick="window.sim10_unlock('A')" class="sim-btn" style="width: 100%; background: white; color: #1d4ed8; border: 1px solid #3b82f6;">Release All & Commit</button>
+              </div>
+            </div>
+
+            <!-- Transaction B -->
+            <div style="border: 2px solid #ef4444; border-radius: 8px; padding: 16px; background: #fef2f2;">
+              <h3 style="margin-top: 0; color: #b91c1c;">Transaction B</h3>
+              <div style="display: flex; gap: 8px;">
+                <button onclick="window.sim10_lock('B', 'R2')" class="sim-btn" style="flex:1; background: #ef4444; color: white;">Lock Resource 2</button>
+                <button onclick="window.sim10_lock('B', 'R1')" class="sim-btn" style="flex:1; background: #ef4444; color: white;">Lock Resource 1</button>
+              </div>
+              <div style="margin-top: 8px;">
+                <button onclick="window.sim10_unlock('B')" class="sim-btn" style="width: 100%; background: white; color: #b91c1c; border: 1px solid #ef4444;">Release All & Commit</button>
+              </div>
+            </div>
+
+            <button onclick="window.sim10_reset()" class="sim-btn" style="background: var(--text-color); color: white;">Reset Simulator</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side: Resource visualization and Logs -->
+      <div class="simulation-right" style="flex: 1;">
+        <div class="card" style="margin-bottom: 24px;">
+          <h2 style="margin-top: 0;">Resources State</h2>
+          <div style="display: flex; gap: 16px; justify-content: center; padding: 20px 0;">
+            <!-- Resource 1 -->
+            <div id="res-R1" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; transition: all 0.3s;">
+              <h3 style="margin: 0;">Resource 1</h3>
+              <span id="lock-R1" style="font-size: 12px; margin-top: 4px; font-weight: bold; color: #64748b;">UNLOCKED</span>
+            </div>
+
+            <!-- Resource 2 -->
+            <div id="res-R2" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; transition: all 0.3s;">
+              <h3 style="margin: 0;">Resource 2</h3>
+              <span id="lock-R2" style="font-size: 12px; margin-top: 4px; font-weight: bold; color: #64748b;">UNLOCKED</span>
+            </div>
           </div>
           
-          <div id="norm-explanation" style="margin-top: 24px; padding: 16px; background: #e0f2fe; border-left: 4px solid #0284c7; border-radius: 8px;">
-            <h4 style="margin-top: 0; color: #0369a1;">UNF Issues</h4>
-            <p style="margin: 0; font-size: 14px; color: #0c4a6e;">The initial table contains multiple values in the "Subjects" column (Repeating Groups). This violates 1NF.</p>
+          <div id="deadlock-alert" style="display: none; padding: 16px; background: #fee2e2; border-left: 4px solid #ef4444; border-radius: 4px; margin-top: 16px;">
+            <h3 style="margin: 0; color: #b91c1c;">⚠️ DEADLOCK DETECTED!</h3>
+            <p style="margin: 4px 0 0 0; font-size: 14px; color: #7f1d1d;">
+              Tx A is waiting for R2 (held by Tx B) AND Tx B is waiting for R1 (held by Tx A). Both are blocked forever.
+            </p>
           </div>
         </div>
-      </div>
 
-      <div class="simulation-right" style="flex: 2;">
-        <div class="card sticky-result">
-          <h2 style="margin-top: 0;">Database Schema</h2>
-          <div id="schema-display" style="display: flex; flex-wrap: wrap; gap: 24px;">
-            <!-- Tables will be injected here -->
-          </div>
+        <div class="card">
+          <h2 style="margin-top: 0;">Transaction Log</h2>
+          <div id="tx-log" style="background: #1e293b; color: #38bdf8; padding: 16px; border-radius: 8px; font-family: monospace; font-size: 14px; height: 150px; overflow-y: auto; white-space: pre-wrap;">System initialized. Waiting for transactions...</div>
         </div>
       </div>
     </div>
 
-    <!-- Guide Modal -->
-    <div id="guideModal10" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal10') closeGuide10()">
-      <div style="background: white; border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-          <h2 style="margin: 0;">📖 Normalisation Guide</h2>
-          <button onclick="closeGuide10()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
+    <!-- Modals -->
+    <div id="guide10-modal" class="modal-overlay" style="display: none;">
+      <div class="modal-content" style="max-width: 600px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h2 style="margin: 0;">Deadlock Simulator Guide</h2>
+          <button onclick="closeGuide10()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
         </div>
-        <div style="color: var(--text);">
-          <p>Normalisation is the process of organizing data to reduce redundancy.</p>
-          <ul>
-            <li><strong>1NF:</strong> Ensure each cell holds a single (atomic) value.</li>
-            <li><strong>2NF:</strong> Must be in 1NF. Remove Partial Dependencies (non-key attributes depending on only part of a composite primary key).</li>
-            <li><strong>3NF:</strong> Must be in 2NF. Remove Transitive Dependencies (non-key attributes depending on other non-key attributes).</li>
-          </ul>
+        <div style="line-height: 1.6;">
+          <p><strong>How to create a deadlock:</strong></p>
+          <ol>
+            <li>Have Transaction A acquire a lock on <strong>Resource 1</strong>.</li>
+            <li>Have Transaction B acquire a lock on <strong>Resource 2</strong>.</li>
+            <li>Now tell Transaction A to lock <strong>Resource 2</strong> (it will wait).</li>
+            <li>Tell Transaction B to lock <strong>Resource 1</strong> (it will wait).</li>
+          </ol>
+          <p>This creates a circular dependency, leading to a <strong>Deadlock</strong>!</p>
         </div>
-      </div>
-    </div>
-    
-    <!-- Quiz Modal -->
-    <div id="quizModal10" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal10') closeQuiz10()">
-      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-          <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
-          <button onclick="closeQuiz10()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
-        </div>
-        <div id="quiz10Content" style="color: var(--text);"></div>
       </div>
     </div>
   `;
 };
 
-const normStages = {
-  UNF: {
-    title: "UNF Issues",
-    desc: "The initial table contains multiple values in the 'Subjects' column (Repeating Groups). This violates 1NF.",
-    tables: [
-      {
-        name: "StudentReport",
-        cols: ["StudentID", "StudentName", "Department", "DeptHead", "Subjects"],
-        rows: [
-          ["S1", "Alice", "CS", "Dr. Smith", "DB, OS"],
-          ["S2", "Bob", "IT", "Dr. Jones", "DB"],
-          ["S3", "Charlie", "CS", "Dr. Smith", "OS, Net"]
-        ]
-      }
-    ]
-  },
-  '1NF': {
-    title: "1NF Applied",
-    desc: "Repeating groups are removed by creating multiple rows. Now each cell is atomic. However, we have a Composite Key (StudentID, Subject). Department and DeptHead depend only on StudentID, not the whole key (Partial Dependency).",
-    tables: [
-      {
-        name: "StudentReport_1NF",
-        cols: ["StudentID (PK)", "Subject (PK)", "StudentName", "Department", "DeptHead"],
-        rows: [
-          ["S1", "DB", "Alice", "CS", "Dr. Smith"],
-          ["S1", "OS", "Alice", "CS", "Dr. Smith"],
-          ["S2", "DB", "Bob", "IT", "Dr. Jones"],
-          ["S3", "OS", "Charlie", "CS", "Dr. Smith"],
-          ["S3", "Net", "Charlie", "CS", "Dr. Smith"]
-        ]
-      }
-    ]
-  },
-  '2NF': {
-    title: "2NF Applied",
-    desc: "Partial dependencies are removed. The table is split. But DeptHead depends on Department, not StudentID. This is a Transitive Dependency.",
-    tables: [
-      {
-        name: "StudentEnrollment",
-        cols: ["StudentID (PK)", "Subject (PK)"],
-        rows: [
-          ["S1", "DB"], ["S1", "OS"], ["S2", "DB"], ["S3", "OS"], ["S3", "Net"]
-        ]
-      },
-      {
-        name: "StudentInfo",
-        cols: ["StudentID (PK)", "StudentName", "Department", "DeptHead"],
-        rows: [
-          ["S1", "Alice", "CS", "Dr. Smith"],
-          ["S2", "Bob", "IT", "Dr. Jones"],
-          ["S3", "Charlie", "CS", "Dr. Smith"]
-        ]
-      }
-    ]
-  },
-  '3NF': {
-    title: "3NF Applied",
-    desc: "Transitive dependencies are removed. Department information is moved to its own table. The schema is now fully normalised and anomalies are prevented.",
-    tables: [
-      {
-        name: "StudentEnrollment",
-        cols: ["StudentID (PK)", "Subject (PK)"],
-        rows: [
-          ["S1", "DB"], ["S1", "OS"], ["S2", "DB"], ["S3", "OS"], ["S3", "Net"]
-        ]
-      },
-      {
-        name: "Students",
-        cols: ["StudentID (PK)", "StudentName", "DeptID (FK)"],
-        rows: [
-          ["S1", "Alice", "CS"],
-          ["S2", "Bob", "IT"],
-          ["S3", "Charlie", "CS"]
-        ]
-      },
-      {
-        name: "Departments",
-        cols: ["DeptID (PK)", "DeptHead"],
-        rows: [
-          ["CS", "Dr. Smith"],
-          ["IT", "Dr. Jones"]
-        ]
-      }
-    ]
+// State
+window.sim10_locks = {
+  'R1': null, // null, 'A', or 'B'
+  'R2': null
+};
+window.sim10_waiting = {
+  'A': null,
+  'B': null
+};
+
+window.sim10_log = function(msg) {
+  const logDiv = document.getElementById('tx-log');
+  if (logDiv) {
+    const time = new Date().toLocaleTimeString('en-US', { hour12: false });
+    logDiv.innerHTML += `\n[${time}] ${msg}`;
+    logDiv.scrollTop = logDiv.scrollHeight;
   }
 };
 
-window.setNormStage = function(stage) {
-  ['btn-unf', 'btn-1nf', 'btn-2nf', 'btn-3nf'].forEach(id => {
-    const el = document.getElementById(id);
-    el.style.border = '1px solid var(--border)';
-    el.style.background = 'white';
-  });
-  
-  const activeBtn = document.getElementById('btn-' + stage.toLowerCase());
-  activeBtn.style.border = '2px solid var(--primary)';
-  activeBtn.style.background = 'var(--bg-color)';
-  
-  const exp = document.getElementById('norm-explanation');
-  const data = normStages[stage];
-  
-  exp.innerHTML = `
-    <h4 style="margin-top: 0; color: #0369a1;">${data.title}</h4>
-    <p style="margin: 0; font-size: 14px; color: #0c4a6e;">${data.desc}</p>
-  `;
-  
-  const display = document.getElementById('schema-display');
-  let html = '';
-  
-  data.tables.forEach(table => {
-    html += `
-      <div style="flex: 1; min-width: 300px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-        <div style="background: var(--primary); color: white; padding: 8px 16px; font-weight: bold; font-size: 14px;">
-          🗄️ ${table.name}
-        </div>
-        <div style="overflow-x: auto;">
-          <table class="simulation-table" style="margin: 0; font-size: 12px; border: none; width: 100%;">
-            <thead><tr>${table.cols.map(c => `<th style="border-top: none;">${c}</th>`).join('')}</tr></thead>
-            <tbody>${table.rows.map(r => `<tr>${r.map(v => `<td>${v}</td>`).join('')}</tr>`).join('')}</tbody>
-          </table>
-        </div>
-      </div>
-    `;
-  });
-  
-  display.innerHTML = html;
-};
+window.sim10_updateUI = function() {
+  const colors = {
+    'A': { border: '#3b82f6', bg: '#eff6ff', text: '#1d4ed8', name: 'Locked by Tx A' },
+    'B': { border: '#ef4444', bg: '#fef2f2', text: '#b91c1c', name: 'Locked by Tx B' },
+    'null': { border: '#cbd5e1', bg: '#f8fafc', text: '#64748b', name: 'UNLOCKED' }
+  };
 
-window.openGuide10 = function() { document.getElementById('guideModal10').style.display = 'flex'; };
-window.closeGuide10 = function() { document.getElementById('guideModal10').style.display = 'none'; };
-
-const quiz10Questions = [
-  { question: "What violates 1NF?", options: ["Composite Keys", "Foreign Keys", "Repeating Groups/Multi-valued attributes"], correct: 2, explanation: "1NF strictly forbids multi-valued attributes in a single cell." },
-  { question: "To achieve 3NF, what dependency must be removed?", options: ["Partial Dependency", "Transitive Dependency", "Functional Dependency"], correct: 1, explanation: "3NF requires the removal of transitive dependencies (when a non-key attribute depends on another non-key attribute)." }
-];
-
-let quiz10Timer = null;
-window.startQuiz10Timer = function() {
-  const randomDelay = Math.random() * 8000 + 15000;
-  quiz10Timer = setTimeout(() => {
-    if (Math.random() > 0.4) {
-      const q = quiz10Questions[Math.floor(Math.random() * quiz10Questions.length)];
-      displayQuiz10(q);
+  ['R1', 'R2'].forEach(res => {
+    const owner = window.sim10_locks[res];
+    const el = document.getElementById('res-' + res);
+    const textEl = document.getElementById('lock-' + res);
+    if (el && textEl) {
+      const state = colors[String(owner)];
+      el.style.borderColor = state.border;
+      el.style.backgroundColor = state.bg;
+      el.style.borderStyle = owner ? 'solid' : 'dashed';
+      textEl.style.color = state.text;
+      textEl.innerText = state.name;
     }
-    window.startQuiz10Timer();
-  }, randomDelay);
-};
-
-window.displayQuiz10 = function(question) {
-  const content = document.getElementById('quiz10Content');
-  if (!content) return;
-  let html = \`<p style="margin-top: 0; font-size: 16px; font-weight: 500;">\${question.question}</p>\`;
-  html += '<div style="margin: 20px 0;">';
-  question.options.forEach((option, index) => {
-    html += \`<button onclick="checkAnswer10(\${index}, \${question.correct}, '\${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">\${option}</button>\`;
   });
-  html += '</div>';
-  content.innerHTML = html;
-  document.getElementById('quizModal10').style.display = 'flex';
-};
 
-window.checkAnswer10 = function(selected, correct, explanation) {
-  const content = document.getElementById('quiz10Content');
-  const isCorrect = selected === correct;
-  const resultColor = isCorrect ? '#10b981' : '#dc2626';
-  const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
-  let html = \`<div style="background: \${resultColor}20; border-left: 4px solid \${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">\`;
-  html += \`<p style="color: \${resultColor}; font-weight: 600; margin: 0 0 8px 0;">\${resultMessage}</p>\`;
-  html += \`<p style="margin: 0; color: var(--text);">\${explanation}</p></div>\`;
-  html += '<button onclick="closeQuiz10()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
-  content.innerHTML = html;
-};
-
-window.closeQuiz10 = function() {
-  const modal = document.getElementById('quizModal10');
-  if (modal) modal.style.display = 'none';
-};
-
-window.initQuiz10 = function() {
-  if (window.quiz10Timer) clearTimeout(window.quiz10Timer);
-  window.startQuiz10Timer();
-  setNormStage('UNF');
-};
-
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.getElementById('btn-unf')) {
-    window.startQuiz10Timer();
-    setNormStage('UNF');
+  // Check deadlock
+  if (window.sim10_waiting['A'] && window.sim10_waiting['B']) {
+    const aWait = window.sim10_waiting['A'];
+    const bWait = window.sim10_waiting['B'];
+    if (window.sim10_locks[aWait] === 'B' && window.sim10_locks[bWait] === 'A') {
+      document.getElementById('deadlock-alert').style.display = 'block';
+      window.sim10_log("ERROR: Circular wait detected. DEADLOCK occurred.");
+    }
+  } else {
+    document.getElementById('deadlock-alert').style.display = 'none';
   }
-});
+};
+
+window.sim10_lock = function(tx, res) {
+  // If already waiting, block clicks
+  if (window.sim10_waiting[tx]) {
+    window.sim10_log(`Tx ${tx} is blocked waiting for ${window.sim10_waiting[tx]}.`);
+    return;
+  }
+
+  // If already holds it
+  if (window.sim10_locks[res] === tx) {
+    window.sim10_log(`Tx ${tx} already holds lock on ${res}.`);
+    return;
+  }
+
+  // Try to acquire
+  if (window.sim10_locks[res] === null) {
+    window.sim10_locks[res] = tx;
+    window.sim10_log(`Tx ${tx} successfully acquired Exclusive Lock on ${res}.`);
+    window.sim10_updateUI();
+  } else {
+    // Wait
+    window.sim10_waiting[tx] = res;
+    window.sim10_log(`Tx ${tx} attempts to lock ${res} but it's held by Tx ${window.sim10_locks[res]}. Tx ${tx} is now WAITING.`);
+    window.sim10_updateUI();
+  }
+};
+
+window.sim10_unlock = function(tx) {
+  let released = false;
+  ['R1', 'R2'].forEach(res => {
+    if (window.sim10_locks[res] === tx) {
+      window.sim10_locks[res] = null;
+      released = true;
+      window.sim10_log(`Tx ${tx} released lock on ${res}.`);
+      
+      // Check if other tx is waiting for this resource
+      const otherTx = tx === 'A' ? 'B' : 'A';
+      if (window.sim10_waiting[otherTx] === res) {
+        window.sim10_waiting[otherTx] = null;
+        window.sim10_locks[res] = otherTx; // grant lock
+        window.sim10_log(`Tx ${otherTx} was waiting and now acquired lock on ${res}.`);
+      }
+    }
+  });
+
+  if (window.sim10_waiting[tx]) {
+    window.sim10_waiting[tx] = null;
+  }
+
+  if (released) {
+    window.sim10_log(`Tx ${tx} committed successfully.`);
+  } else {
+    window.sim10_log(`Tx ${tx} holds no locks. Committed.`);
+  }
+  window.sim10_updateUI();
+};
+
+window.sim10_reset = function() {
+  window.sim10_locks = { 'R1': null, 'R2': null };
+  window.sim10_waiting = { 'A': null, 'B': null };
+  const logDiv = document.getElementById('tx-log');
+  if (logDiv) logDiv.innerHTML = 'System reset. Waiting for transactions...';
+  window.sim10_updateUI();
+};
+
+window.openGuide10 = function() { document.getElementById('guide10-modal').style.display = 'flex'; };
+window.closeGuide10 = function() { document.getElementById('guide10-modal').style.display = 'none'; };
+
+// Auto-quiz system
+window.initQuiz10 = function() {
+  if (window.quizTimer) clearTimeout(window.quizTimer);
+  window.quizTimer = setTimeout(() => {
+    const q10 = {
+      q: "Which property ensures that a transaction is never left in a partially complete state?",
+      opts: ["Atomicity", "Consistency", "Isolation", "Durability"],
+      ans: 0,
+      exp: "Atomicity ensures 'all or nothing' execution."
+    };
+    if (window.showPopQuiz) window.showPopQuiz(q10);
+  }, Math.random() * 20000 + 15000);
+};

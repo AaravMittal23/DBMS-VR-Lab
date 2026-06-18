@@ -213,7 +213,7 @@ class App {
 
   async fetchJSON(path) {
     if (cache[path]) return cache[path];
-    const res = await fetch(path);
+    const res = await fetch(path + '?v=' + Date.now());
     if (!res.ok) throw new Error(`Failed to load ${path}`);
     const data = await res.json();
     cache[path] = data;
