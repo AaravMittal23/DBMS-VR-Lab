@@ -87,6 +87,9 @@ const Renderer = {
       </div>
       
       ${String(expId) === '4' ? this.joinVisualizer() : ''}
+      ${String(expId) === '5' ? this.groupByVisualizer() : ''}
+      ${String(expId) === '8' ? this.indexRaceVisualizer() : ''}
+      ${String(expId) === '9' ? this.bankTransferVisualizer() : ''}
 
       ${fdSection}
       <div class="grid">${sections}</div>
@@ -152,6 +155,216 @@ const Renderer = {
               inter.style.background = '#10b981';
               desc.innerHTML = "<strong>FULL OUTER JOIN:</strong> Returns ALL records from both tables, matching where possible.";
             }
+          };
+        </script>
+      </div>
+    `;
+  },
+
+  groupByVisualizer() {
+    return `
+      <div class="card" style="margin-top: 24px; text-align: center; background: var(--bg); border: 2px solid var(--border);">
+        <h2 style="margin-bottom: 16px;">Interactive GROUP BY Visualizer</h2>
+        <p style="color: var(--muted); margin-bottom: 24px;">Watch how individual rows are bucketed together and aggregated.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 32px;">
+          <button onclick="window.animateGroupBy('reset')" class="sim-btn" style="background: var(--muted); color: white;">1. Reset Data</button>
+          <button onclick="window.animateGroupBy('group')" class="sim-btn" style="background: var(--imperial-blue); color: white;">2. GROUP BY Dept</button>
+          <button onclick="window.animateGroupBy('aggregate')" class="sim-btn" style="background: var(--accent); color: white;">3. COUNT()</button>
+        </div>
+
+        <div style="position: relative; width: 100%; height: 250px; border: 1px dashed var(--border); border-radius: 8px; overflow: hidden; background: var(--card);">
+          <!-- Buckets -->
+          <div id="gb-bucket-hr" style="position: absolute; left: 10%; bottom: 10px; width: 120px; height: 180px; border: 2px solid #3b82f6; border-radius: 8px; opacity: 0; transition: opacity 0.5s;">
+            <div style="background: #3b82f6; color: white; font-weight: bold; padding: 4px;">HR Dept</div>
+          </div>
+          <div id="gb-bucket-it" style="position: absolute; left: 40%; bottom: 10px; width: 120px; height: 180px; border: 2px solid #f59e0b; border-radius: 8px; opacity: 0; transition: opacity 0.5s;">
+            <div style="background: #f59e0b; color: white; font-weight: bold; padding: 4px;">IT Dept</div>
+          </div>
+          <div id="gb-bucket-sales" style="position: absolute; left: 70%; bottom: 10px; width: 120px; height: 180px; border: 2px solid #10b981; border-radius: 8px; opacity: 0; transition: opacity 0.5s;">
+            <div style="background: #10b981; color: white; font-weight: bold; padding: 4px;">Sales Dept</div>
+          </div>
+          
+          <!-- Rows -->
+          <div class="gb-row" id="gb-row-1" data-dept="hr" style="position: absolute; left: 10%; top: 20px; background: #bfdbfe; color: #1e3a8a; padding: 4px 8px; border-radius: 4px; transition: all 1s ease;">Alice (HR)</div>
+          <div class="gb-row" id="gb-row-2" data-dept="it" style="position: absolute; left: 30%; top: 20px; background: #fde68a; color: #78350f; padding: 4px 8px; border-radius: 4px; transition: all 1s ease;">Bob (IT)</div>
+          <div class="gb-row" id="gb-row-3" data-dept="sales" style="position: absolute; left: 50%; top: 20px; background: #a7f3d0; color: #064e3b; padding: 4px 8px; border-radius: 4px; transition: all 1s ease;">Charlie (Sales)</div>
+          <div class="gb-row" id="gb-row-4" data-dept="hr" style="position: absolute; left: 70%; top: 20px; background: #bfdbfe; color: #1e3a8a; padding: 4px 8px; border-radius: 4px; transition: all 1s ease;">David (HR)</div>
+          <div class="gb-row" id="gb-row-5" data-dept="it" style="position: absolute; left: 85%; top: 20px; background: #fde68a; color: #78350f; padding: 4px 8px; border-radius: 4px; transition: all 1s ease;">Eve (IT)</div>
+          
+          <!-- Aggregate Results (Hidden initially) -->
+          <div class="gb-agg" id="gb-agg-hr" style="position: absolute; left: 10%; bottom: 80px; width: 120px; text-align: center; font-size: 24px; font-weight: bold; color: #1e3a8a; opacity: 0; transition: opacity 0.5s;">COUNT: 2</div>
+          <div class="gb-agg" id="gb-agg-it" style="position: absolute; left: 40%; bottom: 80px; width: 120px; text-align: center; font-size: 24px; font-weight: bold; color: #78350f; opacity: 0; transition: opacity 0.5s;">COUNT: 2</div>
+          <div class="gb-agg" id="gb-agg-sales" style="position: absolute; left: 70%; bottom: 80px; width: 120px; text-align: center; font-size: 24px; font-weight: bold; color: #064e3b; opacity: 0; transition: opacity 0.5s;">COUNT: 1</div>
+        </div>
+        
+        <script>
+          window.animateGroupBy = function(step) {
+            const rows = [
+              { id: 'gb-row-1', startLeft: '10%', dept: 'hr', groupLeft: '15%', groupTop: '100px' },
+              { id: 'gb-row-2', startLeft: '30%', dept: 'it', groupLeft: '45%', groupTop: '100px' },
+              { id: 'gb-row-3', startLeft: '50%', dept: 'sales', groupLeft: '75%', groupTop: '100px' },
+              { id: 'gb-row-4', startLeft: '70%', dept: 'hr', groupLeft: '15%', groupTop: '140px' },
+              { id: 'gb-row-5', startLeft: '85%', dept: 'it', groupLeft: '45%', groupTop: '140px' }
+            ];
+            
+            if (step === 'reset') {
+              rows.forEach(r => {
+                const el = document.getElementById(r.id);
+                el.style.left = r.startLeft;
+                el.style.top = '20px';
+                el.style.opacity = '1';
+                el.style.transform = 'scale(1)';
+              });
+              document.getElementById('gb-bucket-hr').style.opacity = '0';
+              document.getElementById('gb-bucket-it').style.opacity = '0';
+              document.getElementById('gb-bucket-sales').style.opacity = '0';
+              
+              document.querySelectorAll('.gb-agg').forEach(el => el.style.opacity = '0');
+            } else if (step === 'group') {
+              document.getElementById('gb-bucket-hr').style.opacity = '1';
+              document.getElementById('gb-bucket-it').style.opacity = '1';
+              document.getElementById('gb-bucket-sales').style.opacity = '1';
+              
+              rows.forEach(r => {
+                const el = document.getElementById(r.id);
+                el.style.left = r.groupLeft;
+                el.style.top = r.groupTop;
+                el.style.opacity = '1';
+                el.style.transform = 'scale(1)';
+              });
+              document.querySelectorAll('.gb-agg').forEach(el => el.style.opacity = '0');
+            } else if (step === 'aggregate') {
+              rows.forEach(r => {
+                const el = document.getElementById(r.id);
+                el.style.opacity = '0';
+                el.style.transform = 'scale(0)';
+              });
+              setTimeout(() => {
+                document.querySelectorAll('.gb-agg').forEach(el => el.style.opacity = '1');
+              }, 500);
+            }
+          };
+        </script>
+      </div>
+    `;
+  },
+
+  indexRaceVisualizer() {
+    return `
+      <div class="card" style="margin-top: 24px; text-align: center; background: var(--bg); border: 2px solid var(--border);">
+        <h2 style="margin-bottom: 16px;">The Great Scan Race: Full Table vs. Index Scan</h2>
+        <p style="color: var(--muted); margin-bottom: 24px;">Finding ID = 75 in a database of 100 records.</p>
+        
+        <button onclick="window.startRace()" class="sim-btn" style="background: var(--primary); color: white; margin-bottom: 24px; font-size: 16px; padding: 10px 24px;">🏁 Start Race</button>
+
+        <!-- Full Table Scan Track -->
+        <div style="margin-bottom: 24px; text-align: left;">
+          <strong style="color: #ef4444;">🐌 Full Table Scan (No Index): O(N)</strong>
+          <div style="background: var(--card); border: 1px solid var(--border); height: 40px; border-radius: 20px; margin-top: 8px; position: relative; overflow: hidden;">
+            <div id="race-bar-full" style="background: #ef4444; height: 100%; width: 0%; transition: width linear;"></div>
+            <span style="position: absolute; right: 16px; top: 10px; font-family: monospace; color: var(--muted);">100 checks</span>
+          </div>
+        </div>
+
+        <!-- Index Scan Track -->
+        <div style="text-align: left;">
+          <strong style="color: #10b981;">🚀 B-Tree Index Scan: O(log N)</strong>
+          <div style="background: var(--card); border: 1px solid var(--border); height: 40px; border-radius: 20px; margin-top: 8px; position: relative; overflow: hidden;">
+            <div id="race-bar-index" style="background: #10b981; height: 100%; width: 0%; transition: width ease-out;"></div>
+            <span style="position: absolute; right: 16px; top: 10px; font-family: monospace; color: var(--muted);">~7 checks</span>
+          </div>
+        </div>
+        
+        <script>
+          window.startRace = function() {
+            const fullBar = document.getElementById('race-bar-full');
+            const indexBar = document.getElementById('race-bar-index');
+            
+            // Reset
+            fullBar.style.transition = 'none';
+            indexBar.style.transition = 'none';
+            fullBar.style.width = '0%';
+            indexBar.style.width = '0%';
+            
+            // Reflow
+            void fullBar.offsetWidth;
+            
+            // Animate
+            fullBar.style.transition = 'width 4s linear';
+            indexBar.style.transition = 'width 0.5s ease-out';
+            
+            fullBar.style.width = '100%';
+            indexBar.style.width = '100%';
+          };
+        </script>
+      </div>
+    `;
+  },
+
+  bankTransferVisualizer() {
+    return `
+      <div class="card" style="margin-top: 24px; text-align: center; background: var(--bg); border: 2px solid var(--border);">
+        <h2 style="margin-bottom: 16px;">ACID Simulator: The Bank Transfer (Atomicity)</h2>
+        <p style="color: var(--muted); margin-bottom: 24px;">Transfer $50 from Account A to Account B.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 32px; align-items: center;">
+          <div style="border: 2px solid #3b82f6; border-radius: 12px; padding: 20px; width: 120px; background: var(--card);">
+            <h3 style="margin: 0 0 12px 0;">Acc A</h3>
+            <div id="bank-acc-a" style="font-size: 28px; font-weight: bold; color: #3b82f6;">$100</div>
+          </div>
+          
+          <div style="font-size: 32px; color: var(--muted);">➡️</div>
+          
+          <div style="border: 2px solid #10b981; border-radius: 12px; padding: 20px; width: 120px; background: var(--card);">
+            <h3 style="margin: 0 0 12px 0;">Acc B</h3>
+            <div id="bank-acc-b" style="font-size: 28px; font-weight: bold; color: #10b981;">$100</div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 16px;">
+          <button onclick="window.simBank(true)" class="sim-btn" style="background: var(--imperial-blue); color: white;">Transfer (Success)</button>
+          <button onclick="window.simBank(false)" class="sim-btn" style="background: #ef4444; color: white;">Transfer (Server Crash!)</button>
+          <button onclick="window.simBankReset()" class="sim-btn" style="background: var(--muted); color: white;">Reset</button>
+        </div>
+        
+        <div id="bank-log" style="font-family: monospace; text-align: left; background: #1e1e1e; color: #a3a3a3; padding: 12px; border-radius: 6px; min-height: 80px;">
+          > Waiting to start transaction...
+        </div>
+
+        <script>
+          window.simBankReset = function() {
+            document.getElementById('bank-acc-a').textContent = '$100';
+            document.getElementById('bank-acc-b').textContent = '$100';
+            document.getElementById('bank-log').innerHTML = '> Accounts reset to $100.';
+          };
+          
+          window.simBank = function(success) {
+            const accA = document.getElementById('bank-acc-a');
+            const accB = document.getElementById('bank-acc-b');
+            const log = document.getElementById('bank-log');
+            
+            // Initial state is $100
+            if (accA.textContent !== '$100') window.simBankReset();
+            
+            log.innerHTML = '> BEGIN TRANSACTION;<br>> UPDATE Accounts SET balance = balance - 50 WHERE id = A;';
+            accA.textContent = '$50';
+            
+            setTimeout(() => {
+              if (success) {
+                log.innerHTML += '<br>> UPDATE Accounts SET balance = balance + 50 WHERE id = B;';
+                accB.textContent = '$150';
+                setTimeout(() => {
+                  log.innerHTML += '<br>> COMMIT;<br><span style="color: #10b981;">> Transaction Successful!</span>';
+                }, 800);
+              } else {
+                log.innerHTML += '<br><span style="color: #ef4444;">> FATAL ERROR: Server crashed before updating Account B!</span>';
+                setTimeout(() => {
+                  log.innerHTML += '<br>> ROLLBACK;<br>> Restoring original values to maintain ATOMICITY (all or nothing).';
+                  accA.textContent = '$100';
+                }, 1500);
+              }
+            }, 1000);
           };
         </script>
       </div>
