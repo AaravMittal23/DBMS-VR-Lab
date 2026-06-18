@@ -1,0 +1,25 @@
+{
+  "instructions": "Evaluate your understanding.",
+  "questions": [
+    {
+      "question": "What does the Durability property ensure?",
+      "options": [
+        "Data is isolated",
+        "Data changes are permanently saved",
+        "Transactions are atomic",
+        "Constraints are not violated"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "If a system crash occurs right after a COMMIT, what happens to the transaction data?",
+      "options": [
+        "It is lost",
+        "It is rolled back",
+        "It is permanently saved",
+        "It is locked indefinitely"
+      ],
+      "correctIndex": 2
+    }
+  ]
+}

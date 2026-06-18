@@ -1,0 +1,25 @@
+{
+  "instructions": "Test your concurrency knowledge.",
+  "questions": [
+    {
+      "question": "Which lock type must a transaction acquire before modifying a data item?",
+      "options": [
+        "Shared Lock",
+        "Exclusive Lock",
+        "Read Lock",
+        "Update Lock"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is it called when two transactions are waiting for each other indefinitely?",
+      "options": [
+        "Starvation",
+        "Livelock",
+        "Deadlock",
+        "Infinite Loop"
+      ],
+      "correctIndex": 2
+    }
+  ]
+}

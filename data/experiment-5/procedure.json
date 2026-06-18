@@ -1,0 +1,75 @@
+{
+  "introduction": "Follow these steps to perform the experiment on Aggregate Functions and Grouping Operations.",
+  "steps": [
+    {
+      "title": "Create a Database Table",
+      "content": "Create a table named employees with the following structure:",
+      "subpoints": [
+        "id (INT, PRIMARY KEY)",
+        "name (VARCHAR)",
+        "department (VARCHAR)",
+        "salary (DECIMAL)",
+        "age (INT)"
+      ]
+    },
+    {
+      "title": "Insert Sample Data",
+      "content": "Insert at least 10-15 sample records into the employees table with different departments \n        (e.g., IT, HR, Finance, Sales) and varying salary values."
+    },
+    {
+      "title": "Display All Records",
+      "content": "Use the SELECT statement to display all records from the employees table:",
+      "code": "SELECT * FROM employees;"
+    },
+    {
+      "title": "Apply COUNT() Function",
+      "content": "Count the total number of employees:\n        \n        Count employees in each department:\n        SELECT department, COUNT(*) AS emp_count \nFROM employees \nGROUP BY department;",
+      "code": "SELECT COUNT(*) AS total_employees FROM employees;"
+    },
+    {
+      "title": "Apply SUM() Function",
+      "content": "Calculate the total salary expenditure:\n        \n        Calculate total salary per department:\n        SELECT department, SUM(salary) AS dept_total \nFROM employees \nGROUP BY department;",
+      "code": "SELECT SUM(salary) AS total_salary FROM employees;"
+    },
+    {
+      "title": "Apply AVG() Function",
+      "content": "Find the average salary:\n        \n        Find average salary per department:\n        SELECT department, AVG(salary) AS avg_salary \nFROM employees \nGROUP BY department;",
+      "code": "SELECT AVG(salary) AS avg_salary FROM employees;"
+    },
+    {
+      "title": "Apply MIN() and MAX() Functions",
+      "content": "Find the minimum and maximum salary:\n        \n        Find min and max salary per department:\n        SELECT department, MIN(salary) AS min_sal, MAX(salary) AS max_sal \nFROM employees \nGROUP BY department;",
+      "code": "SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary \nFROM employees;"
+    },
+    {
+      "title": "Use GROUP BY with Multiple Columns",
+      "content": "Group by department and find statistics:",
+      "code": "SELECT department, \n       COUNT(*) AS emp_count,\n       AVG(salary) AS avg_salary,\n       SUM(salary) AS total_salary\nFROM employees \nGROUP BY department;"
+    },
+    {
+      "title": "Apply HAVING Clause",
+      "content": "Find departments with more than 3 employees:\n        \n        Find departments with average salary greater than 50000:\n        SELECT department, AVG(salary) AS avg_salary \nFROM employees \nGROUP BY department \nHAVING AVG(salary) > 50000;",
+      "code": "SELECT department, COUNT(*) AS emp_count \nFROM employees \nGROUP BY department \nHAVING COUNT(*) > 3;"
+    },
+    {
+      "title": "Combine WHERE and HAVING",
+      "content": "Filter employees by age first, then group and filter groups:",
+      "code": "SELECT department, AVG(salary) AS avg_salary \nFROM employees \nWHERE age > 25 \nGROUP BY department \nHAVING AVG(salary) > 40000;"
+    },
+    {
+      "title": "Use ORDER BY with GROUP BY",
+      "content": "Sort the grouped results:",
+      "code": "SELECT department, AVG(salary) AS avg_salary \nFROM employees \nGROUP BY department \nORDER BY avg_salary DESC;"
+    },
+    {
+      "title": "Observe and Analyze Results",
+      "content": "Compare the results of different queries and understand how aggregate functions \n        work with grouping operations. Note the difference between WHERE and HAVING clauses."
+    }
+  ],
+  "expectedOutcomes": [
+    "Understanding of how aggregate functions summarize data",
+    "Knowledge of GROUP BY clause for grouping rows",
+    "Understanding the difference between WHERE and HAVING clauses",
+    "Ability to write complex queries combining aggregate functions, GROUP BY, HAVING, and ORDER BY"
+  ]
+}

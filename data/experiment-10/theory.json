@@ -1,0 +1,17 @@
+{
+  "introduction": "When multiple transactions execute concurrently, the data can become inconsistent. Concurrency control mechanisms like Locking and Timestamping ensure Isolation is maintained.",
+  "sections": [
+    {
+      "title": "Concurrency Problems",
+      "content": "Common issues include the Lost Update anomaly (one transaction overwrites another), Dirty Read (reading uncommitted data), and Non-repeatable Read (reading the same data twice and getting different results)."
+    },
+    {
+      "title": "Locks",
+      "content": "A Shared Lock (S-Lock) allows reading but not writing. An Exclusive Lock (X-Lock) allows both reading and writing. No other transaction can hold a lock if an X-Lock is held."
+    },
+    {
+      "title": "Deadlocks",
+      "content": "A deadlock occurs when two or more transactions are waiting for locks held by each other, creating a circular wait. The DBMS resolves this by choosing a 'victim' transaction and aborting it."
+    }
+  ]
+}

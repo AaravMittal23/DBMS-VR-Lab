@@ -1,4 +1,25 @@
 {
-  "instructions": "Answer the following questions to assess your prior knowledge of ER modeling and relational mapping.",
-  "questions": []
+  "instructions": "Test your knowledge of database schema definition.",
+  "questions": [
+    {
+      "question": "Which command is used to add a new column to an existing table?",
+      "options": [
+        "MODIFY TABLE",
+        "ALTER TABLE",
+        "UPDATE TABLE",
+        "ADD COLUMN"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the difference between DROP and TRUNCATE?",
+      "options": [
+        "DROP removes data, TRUNCATE removes structure",
+        "DROP removes structure and data, TRUNCATE removes only data",
+        "They are identical",
+        "TRUNCATE is a DML command"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

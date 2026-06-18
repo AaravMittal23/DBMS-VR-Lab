@@ -1,4 +1,9 @@
 {
-  "references": [],
-  "acknowledgment": "This experiment content is adapted for the DBMS Virtual Lab for educational purposes."
+  "references": [
+    {
+      "title": "SQL Queries for Mere Mortals",
+      "source": "John L. Viescas"
+    }
+  ],
+  "acknowledgment": "Developed for the DBMS Virtual Laboratory."
 }

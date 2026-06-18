@@ -1,4 +1,25 @@
 {
-  "instructions": "Answer the following questions to assess your prior knowledge of functional dependencies and normalization.",
-  "questions": []
+  "instructions": "Test your knowledge of data manipulation.",
+  "questions": [
+    {
+      "question": "Which command is used to change data inside an existing row?",
+      "options": [
+        "CHANGE",
+        "MODIFY",
+        "ALTER",
+        "UPDATE"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question": "What happens if you omit the WHERE clause in a DELETE statement?",
+      "options": [
+        "Syntax error is thrown",
+        "The first row is deleted",
+        "All rows are deleted",
+        "The table structure is deleted"
+      ],
+      "correctIndex": 2
+    }
+  ]
 }

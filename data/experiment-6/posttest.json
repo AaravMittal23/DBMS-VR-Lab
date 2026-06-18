@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to evaluate your understanding after completing the experiment.",
+  "questions": [
+    {
+      "question": "When mapping a weak entity to a relational schema, what must be included in the relation?",
+      "options": [
+        "Only the weak entity's attributes",
+        "The weak entity's attributes plus the primary key of the owner entity",
+        "Only the owner entity's primary key",
+        "A separate relation is not needed"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In a one-to-one relationship, where should the foreign key be placed?",
+      "options": [
+        "In either of the participating entities",
+        "In both entities",
+        "In a separate relation",
+        "Foreign keys are not needed for 1:1 relationships"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the primary key of a relation created from a many-to-many relationship?",
+      "options": [
+        "The primary key of one of the participating entities",
+        "A combination of foreign keys from both participating entities",
+        "A new unique identifier",
+        "There is no primary key"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "How should a composite attribute be handled when mapping to a relational schema?",
+      "options": [
+        "Create a separate relation for the composite attribute",
+        "Flatten it into separate columns in the same relation",
+        "Keep it as a single column",
+        "Ignore composite attributes"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does total participation (double line) in an ER diagram indicate?",
+      "options": [
+        "Some entities participate in the relationship",
+        "Every entity instance must participate in the relationship",
+        "No entities participate in the relationship",
+        "The relationship is optional"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In an ER diagram, how is a weak entity typically represented?",
+      "options": [
+        "Single rectangle",
+        "Double rectangle",
+        "Oval",
+        "Diamond"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the difference between a strong entity and a weak entity?",
+      "options": [
+        "Strong entities have more attributes",
+        "Weak entities cannot be uniquely identified without a relationship to a strong entity",
+        "Strong entities have relationships, weak entities do not",
+        "There is no difference"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "When mapping a multi-valued attribute to a relational schema, what approach is typically used?",
+      "options": [
+        "Include it as a single column in the entity's relation",
+        "Create a separate relation for the multi-valued attribute",
+        "Ignore multi-valued attributes",
+        "Convert it to a composite attribute"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the purpose of an identifying relationship in an ER diagram?",
+      "options": [
+        "To connect two strong entities",
+        "To connect a weak entity to its owner entity",
+        "To represent a many-to-many relationship",
+        "To show cardinality"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In a one-to-many relationship, where is the foreign key placed in the relational schema?",
+      "options": [
+        "In the entity on the \"one\" side",
+        "In the entity on the \"many\" side",
+        "In both entities",
+        "In a separate relation"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does the notation \"1:N\" represent in an ER diagram?",
+      "options": [
+        "One-to-one relationship",
+        "One-to-many relationship",
+        "Many-to-many relationship",
+        "Many-to-one relationship"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "How are derived attributes typically handled in a relational schema?",
+      "options": [
+        "They are always stored as separate columns",
+        "They are usually not stored but calculated when needed",
+        "They become primary keys",
+        "They are ignored in the mapping"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the first step in mapping an ER diagram to a relational schema?",
+      "options": [
+        "Map strong entities to relations",
+        "Map relationships first",
+        "Map weak entities first",
+        "Map attributes first"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In an ER diagram, what does a double line connecting an entity to a relationship indicate?",
+      "options": [
+        "Partial participation",
+        "Total participation",
+        "One-to-one relationship",
+        "Many-to-many relationship"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the main purpose of mapping an ER diagram to a relational schema?",
+      "options": [
+        "To create a visual representation",
+        "To convert conceptual design into implementable database tables",
+        "To identify entities",
+        "To define relationships only"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

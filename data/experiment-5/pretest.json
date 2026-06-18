@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to test your knowledge before starting the experiment.",
+  "questions": [
+    {
+      "question": "Which SQL clause is used to group rows that have the same values in specified columns?",
+      "options": [
+        "WHERE",
+        "GROUP BY",
+        "ORDER BY",
+        "HAVING"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which aggregate function returns the total number of rows in a table?",
+      "options": [
+        "COUNT()",
+        "SUM()",
+        "AVG()",
+        "TOTAL()"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does the AVG() function return?",
+      "options": [
+        "The sum of all values",
+        "The average (mean) of all values",
+        "The maximum value",
+        "The minimum value"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which clause is used to filter groups after the GROUP BY clause has been applied?",
+      "options": [
+        "WHERE",
+        "HAVING",
+        "FILTER",
+        "GROUP FILTER"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the main difference between WHERE and HAVING clauses?",
+      "options": [
+        "WHERE is used with GROUP BY, HAVING is not",
+        "WHERE filters rows before grouping, HAVING filters groups after grouping",
+        "HAVING can only be used with aggregate functions",
+        "There is no difference"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which aggregate function can be used to find the highest value in a column?",
+      "options": [
+        "MIN()",
+        "MAX()",
+        "TOP()",
+        "HIGHEST()"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In the query: SELECT department, COUNT(*) FROM employees GROUP BY department; What does COUNT(*) count?",
+      "options": [
+        "The number of employees in each department",
+        "The total number of departments",
+        "The number of unique departments",
+        "The number of NULL values"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can aggregate functions be used in the WHERE clause?",
+      "options": [
+        "Yes, always",
+        "No, aggregate functions cannot be used in WHERE clause",
+        "Yes, but only with GROUP BY",
+        "Only COUNT() can be used"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What will be the result of: SELECT SUM(salary) FROM employees WHERE salary IS NULL;",
+      "options": [
+        "0",
+        "NULL",
+        "Error",
+        "The sum of all salaries"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which of the following is a valid SQL query using GROUP BY?",
+      "options": [
+        "SELECT * FROM employees GROUP BY;",
+        "SELECT name, COUNT(*) FROM employees GROUP BY;",
+        "SELECT department, AVG(salary) FROM employees GROUP BY department;",
+        "SELECT COUNT(*) GROUP BY department FROM employees;"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What does the SUM() function do?",
+      "options": [
+        "Counts the number of rows",
+        "Calculates the total sum of a numeric column",
+        "Finds the average value",
+        "Concatenates string values"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In a SELECT statement with GROUP BY, which columns can be selected without being in the GROUP BY clause?",
+      "options": [
+        "Any column from the table",
+        "Only columns in GROUP BY or aggregate functions",
+        "All columns must be in GROUP BY",
+        "Only primary key columns"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the purpose of using aggregate functions with GROUP BY?",
+      "options": [
+        "To sort the results",
+        "To perform calculations on groups of rows",
+        "To filter rows",
+        "To join tables"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which aggregate function ignores NULL values in its calculation?",
+      "options": [
+        "None of them",
+        "All of them (COUNT(*), SUM, AVG, MIN, MAX)",
+        "Only COUNT()",
+        "Only SUM() and AVG()"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the correct order of SQL clauses in a query with GROUP BY and HAVING?",
+      "options": [
+        "SELECT, HAVING, GROUP BY, FROM, WHERE",
+        "SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY",
+        "SELECT, GROUP BY, HAVING, FROM, WHERE",
+        "SELECT, FROM, GROUP BY, WHERE, HAVING"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

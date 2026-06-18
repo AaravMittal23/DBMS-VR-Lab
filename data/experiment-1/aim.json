@@ -1,19 +1,15 @@
 {
-  "objective": "Understand and implement SQL aggregate functions (COUNT, SUM, AVG, MIN, MAX) and apply grouping operations using GROUP BY and HAVING clauses to generate summarized reports from relational databases.",
+  "objective": "The aim of this experiment is to study the fundamental architecture of Database Management Systems and set up a working database environment for executing subsequent laboratory experiments.",
   "learningObjectives": [
-    "Understand the concept and usage of SQL aggregate functions",
-    "Use COUNT, SUM, AVG, MIN, and MAX functions effectively",
-    "Implement GROUP BY clause for grouping rows based on column values",
-    "Apply HAVING clause to filter grouped results",
-    "Differentiate between WHERE and HAVING clauses",
-    "Write complex SQL queries combining aggregate functions with grouping operations",
-    "Analyze and summarize data from relational databases"
+    "Understand the Three-Schema Architecture of a DBMS",
+    "Differentiate between Internal, Conceptual, and External levels",
+    "Understand Client-Server database architecture",
+    "Install and configure a relational database management system",
+    "Connect to the database using command-line and graphical interfaces"
   ],
   "expectedOutcomes": [
-    "Write SQL queries using various aggregate functions",
-    "Group data using GROUP BY clause",
-    "Filter grouped data using HAVING clause",
-    "Generate meaningful reports and summaries from database tables",
-    "Understand the practical applications of aggregate functions in real-world scenarios"
+    "Ability to describe the components of a DBMS",
+    "Successful setup of a database environment",
+    "Ability to connect and interact with a database engine"
   ]
 }

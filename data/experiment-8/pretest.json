@@ -1,0 +1,25 @@
+{
+  "instructions": "Test your knowledge.",
+  "questions": [
+    {
+      "question": "What is a View in SQL?",
+      "options": [
+        "A physical table",
+        "A virtual table based on a query",
+        "An index",
+        "A data type"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the main purpose of an Index?",
+      "options": [
+        "To slow down data retrieval",
+        "To speed up data retrieval",
+        "To enforce referential integrity",
+        "To store backup data"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

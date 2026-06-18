@@ -1,17 +1,15 @@
 {
-  "objective": "Understand and implement ER diagram design and relational mapping for database systems.",
+  "objective": "To learn and implement SQL Data Definition Language (DDL) commands to define and modify database schemas.",
   "learningObjectives": [
-    "Design ER diagrams for given problem domains using standard notation",
-    "Identify and represent entities, attributes, and relationships correctly",
-    "Apply cardinality and participation constraints appropriately",
-    "Map ER diagrams to relational schemas following standard mapping rules",
-    "Create relational tables with primary keys, foreign keys, and constraints",
-    "Handle complex scenarios including weak entities and composite attributes"
+    "Understand the purpose of DDL in SQL",
+    "Learn to create tables with appropriate data types",
+    "Apply primary key and foreign key constraints",
+    "Modify existing table structures using ALTER",
+    "Remove objects using DROP and TRUNCATE"
   ],
   "expectedOutcomes": [
-    "Produce clear ER diagrams for typical application domains",
-    "Translate ER models into equivalent relational schemas",
-    "Define tables with appropriate keys and integrity constraints",
-    "Explain the relationship between conceptual (ER) and logical (relational) design"
+    "Ability to design and create relational tables",
+    "Understanding of constraint enforcement",
+    "Proficiency in modifying database schema structures"
   ]
 }

@@ -1,0 +1,25 @@
+{
+  "instructions": "Evaluate your understanding of Deadlocks.",
+  "questions": [
+    {
+      "question": "How does a DBMS typically recover from a deadlock?",
+      "options": [
+        "By restarting the server",
+        "By dropping the tables",
+        "By aborting (rolling back) one of the transactions",
+        "By merging the transactions"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which concurrency anomaly occurs when a transaction reads data that has been modified by another transaction that has not yet committed?",
+      "options": [
+        "Lost Update",
+        "Phantom Read",
+        "Non-repeatable Read",
+        "Dirty Read"
+      ],
+      "correctIndex": 3
+    }
+  ]
+}

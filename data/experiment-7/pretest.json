@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to test your knowledge before starting the experiment.",
+  "questions": [
+    {
+      "question": "What is the primary purpose of database normalization?",
+      "options": [
+        "To increase database size",
+        "To eliminate data redundancy and reduce anomalies",
+        "To make queries faster",
+        "To add more tables"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a functional dependency?",
+      "options": [
+        "A relationship between two tables",
+        "A constraint where one set of attributes determines another set of attributes",
+        "A foreign key relationship",
+        "A primary key constraint"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does 1NF (First Normal Form) require?",
+      "options": [
+        "All attributes must contain atomic (indivisible) values",
+        "No partial dependencies",
+        "No transitive dependencies",
+        "All determinants must be candidate keys"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a partial dependency?",
+      "options": [
+        "A dependency where Y depends on X",
+        "A dependency where a non-key attribute depends on part of a composite key",
+        "A dependency where Y depends on a non-key attribute",
+        "A transitive dependency"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does 2NF (Second Normal Form) require?",
+      "options": [
+        "The relation must be in 1NF only",
+        "The relation must be in 1NF and have no partial dependencies",
+        "The relation must have no transitive dependencies",
+        "All determinants must be candidate keys"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a transitive dependency?",
+      "options": [
+        "A → B and B → C, so A → C",
+        "A non-key attribute depends on another non-key attribute, which depends on the primary key",
+        "A partial dependency on a composite key",
+        "A dependency where X → Y and Y → X"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does 3NF (Third Normal Form) require?",
+      "options": [
+        "The relation must be in 1NF only",
+        "The relation must be in 2NF only",
+        "The relation must be in 2NF and have no transitive dependencies",
+        "All determinants must be candidate keys"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is an insertion anomaly?",
+      "options": [
+        "Cannot delete data without losing other information",
+        "Cannot insert certain information without other information",
+        "Updating one value requires updating multiple rows",
+        "Data redundancy in the database"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a candidate key?",
+      "options": [
+        "Any set of attributes that uniquely identifies a tuple",
+        "A minimal superkey (no proper subset is a superkey)",
+        "A foreign key in another table",
+        "A composite key"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the difference between BCNF and 3NF?",
+      "options": [
+        "There is no difference",
+        "BCNF requires that every determinant is a candidate key, while 3NF allows non-key determinants",
+        "BCNF is less strict than 3NF",
+        "3NF eliminates all redundancy, BCNF does not"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a deletion anomaly?",
+      "options": [
+        "Deleting one piece of information causes loss of other information",
+        "Cannot insert data without other information",
+        "Updating one value requires updating multiple rows",
+        "Data is stored redundantly"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In the relation R(A, B, C) with functional dependencies A → B and B → C, what normal form is it in?",
+      "options": [
+        "1NF",
+        "2NF",
+        "2NF (but not 3NF due to transitive dependency)",
+        "3NF"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is a superkey?",
+      "options": [
+        "A set of attributes that uniquely identifies a tuple",
+        "A minimal set of attributes that uniquely identifies a tuple",
+        "A foreign key",
+        "A primary key"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is an update anomaly?",
+      "options": [
+        "Cannot insert data without other information",
+        "Deleting data causes loss of other information",
+        "Changing one value requires updating multiple rows",
+        "Data redundancy"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is the goal of normalization?",
+      "options": [
+        "To make queries faster",
+        "To eliminate redundancy and reduce anomalies while maintaining data integrity",
+        "To increase database size",
+        "To add more tables"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

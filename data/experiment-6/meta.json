@@ -1,0 +1,7 @@
+{
+  "id": 6,
+  "title": "ER Diagram Design and Relational Mapping",
+  "shortTitle": "ER Diagrams & Mapping",
+  "badge": "Data Modeling",
+  "description": "design ER diagrams for problem domains and map them step-by-step to relational schemas with proper keys and constraints."
+}

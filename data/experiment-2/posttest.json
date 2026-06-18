@@ -1,4 +1,25 @@
 {
-  "instructions": "Answer the following questions to evaluate your understanding of ER diagram design and relational mapping after completing the experiment.",
-  "questions": []
+  "instructions": "Evaluate your understanding of DDL commands.",
+  "questions": [
+    {
+      "question": "Which constraint ensures that a column cannot have a NULL value?",
+      "options": [
+        "UNIQUE",
+        "PRIMARY KEY",
+        "NOT NULL",
+        "Both PRIMARY KEY and NOT NULL"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question": "If you want to change the data type of an existing column, which command do you use?",
+      "options": [
+        "ALTER TABLE ... MODIFY",
+        "UPDATE TABLE ... SET",
+        "CHANGE COLUMN",
+        "MODIFY COLUMN"
+      ],
+      "correctIndex": 0
+    }
+  ]
 }

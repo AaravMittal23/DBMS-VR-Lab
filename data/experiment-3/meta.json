@@ -1,7 +1,7 @@
 {
   "id": 3,
-  "title": "Database Normalization and Functional Dependencies",
-  "shortTitle": "Normalization & FDs",
-  "badge": "Normalization",
-  "description": "identify functional dependencies, study anomalies, and apply normalization rules to transform unnormalized relations into well-structured schemas."
+  "title": "Implementation of Data Manipulation Language (DML) Commands",
+  "shortTitle": "DML Commands",
+  "badge": "SQL DML",
+  "description": "implement DML commands such as INSERT, UPDATE, DELETE, and SELECT to manipulate database data."
 }

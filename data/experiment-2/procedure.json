@@ -1,9 +1,30 @@
 {
-  "introduction": "This procedure outlines the steps to design ER diagrams and convert them to relational schemas.",
-  "steps": [],
+  "introduction": "Follow these steps to construct a database schema using DDL commands.",
+  "steps": [
+    {
+      "title": "Step 1: Create a Table",
+      "content": "Use the CREATE TABLE statement to define a new table with a primary key.",
+      "code": "CREATE TABLE Employees (\n  EmpID INT PRIMARY KEY,\n  Name VARCHAR(50)\n);"
+    },
+    {
+      "title": "Step 2: Add a Column",
+      "content": "Use the ALTER TABLE statement to add a new attribute to the table.",
+      "code": "ALTER TABLE Employees ADD Department VARCHAR(30);"
+    },
+    {
+      "title": "Step 3: Truncate the Table",
+      "content": "Use TRUNCATE to clear all data while keeping the structure.",
+      "code": "TRUNCATE TABLE Employees;"
+    },
+    {
+      "title": "Step 4: Drop the Table",
+      "content": "Use DROP TABLE to completely remove the table from the database.",
+      "code": "DROP TABLE Employees;"
+    }
+  ],
   "expectedOutcomes": [
-    "Follow a systematic approach to modeling a problem domain with ER diagrams",
-    "Translate each part of the ER model into corresponding relational tables",
-    "Validate the resulting schema for completeness and correctness"
+    "Table successfully created with constraints.",
+    "Schema altered without dropping the table.",
+    "Understanding of destructive commands (DROP/TRUNCATE)."
   ]
 }

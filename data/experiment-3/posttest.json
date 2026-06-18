@@ -1,4 +1,25 @@
 {
-  "instructions": "Answer the following questions to evaluate your understanding of database normalization after completing the experiment.",
-  "questions": []
+  "instructions": "Evaluate your understanding of DML.",
+  "questions": [
+    {
+      "question": "Which is a valid INSERT statement?",
+      "options": [
+        "INSERT Students VALUES (1, 'Bob');",
+        "INSERT INTO Students (ID, Name) VALUES (1, 'Bob');",
+        "ADD INTO Students VALUES (1, 'Bob');",
+        "INSERT ROW Students (1, 'Bob');"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "How do you select all columns from a table named 'Orders'?",
+      "options": [
+        "SELECT all FROM Orders;",
+        "SELECT columns FROM Orders;",
+        "SELECT * FROM Orders;",
+        "GET * FROM Orders;"
+      ],
+      "correctIndex": 2
+    }
+  ]
 }

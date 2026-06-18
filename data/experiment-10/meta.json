@@ -1,0 +1,7 @@
+{
+  "id": 10,
+  "title": "Implementation of Concurrency Control Techniques and Deadlock Handling",
+  "shortTitle": "Concurrency Control",
+  "badge": "Concurrency",
+  "description": "implement concurrency control techniques and handle database deadlocks effectively."
+}

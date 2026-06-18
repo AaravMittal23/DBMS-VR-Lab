@@ -1,0 +1,22 @@
+{
+  "objective": "The aim of this experiment is to understand database normalization techniques and functional dependencies \n      to eliminate data redundancy, reduce anomalies, and improve data integrity in relational databases. This \n      experiment focuses on identifying functional dependencies and applying normalization rules (1NF, 2NF, 3NF, BCNF) \n      to decompose unnormalized tables into well-structured, normalized database schemas.",
+  "learningObjectives": [
+    "To understand the concept of functional dependencies and their role in database design",
+    "To identify functional dependencies in a given relation",
+    "To understand the problems caused by data redundancy and anomalies (insertion, deletion, update anomalies)",
+    "To learn and apply First Normal Form (1NF) to eliminate repeating groups",
+    "To learn and apply Second Normal Form (2NF) to eliminate partial dependencies",
+    "To learn and apply Third Normal Form (3NF) to eliminate transitive dependencies",
+    "To understand Boyce-Codd Normal Form (BCNF) and its application",
+    "To decompose unnormalized relations into normalized forms while preserving data integrity"
+  ],
+  "expectedOutcomes": [
+    "Identify functional dependencies in relational schemas",
+    "Recognize data redundancy and anomalies in unnormalized tables",
+    "Apply normalization rules to decompose tables into 1NF, 2NF, 3NF, and BCNF",
+    "Determine candidate keys, primary keys, and superkeys in relations",
+    "Understand the trade-offs between normalization and performance",
+    "Design normalized database schemas that minimize redundancy while maintaining data integrity",
+    "Evaluate when normalization is appropriate and when denormalization might be necessary"
+  ]
+}

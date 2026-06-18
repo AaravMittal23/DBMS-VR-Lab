@@ -1,0 +1,25 @@
+{
+  "instructions": "Evaluate your understanding of Joins.",
+  "questions": [
+    {
+      "question": "If Table A has 5 rows and Table B has 10 rows, and they are joined via an INNER JOIN on a column where all rows match exactly 1-to-1, how many rows will be returned?",
+      "options": [
+        "5",
+        "10",
+        "15",
+        "50"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which operator is typically used to test if a value is returned by a subquery?",
+      "options": [
+        "LIKE",
+        "IN",
+        "BETWEEN",
+        "HAS"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "objective": "To understand and implement Views for data abstraction and Indexes for query optimization.",
+  "learningObjectives": [
+    "Create, modify, and drop Views",
+    "Understand Updatable vs Non-Updatable Views",
+    "Create Indexes to speed up data retrieval",
+    "Understand B-Tree indexes and their performance impact"
+  ],
+  "expectedOutcomes": [
+    "Ability to use Views to simplify complex queries",
+    "Ability to optimize database performance using Indexes"
+  ]
+}

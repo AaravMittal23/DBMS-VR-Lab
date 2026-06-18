@@ -1,4 +1,25 @@
 {
-  "instructions": "Answer the following questions to evaluate your understanding of aggregate functions and grouping after completing the experiment.",
-  "questions": []
+  "instructions": "Answer these questions to evaluate your understanding after completing the experiment.",
+  "questions": [
+    {
+      "question": "Logical data independence means we can change the conceptual schema without affecting which schema?",
+      "options": [
+        "Internal Schema",
+        "Physical Schema",
+        "External Schema",
+        "Storage Schema"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "In a Client-Server DBMS architecture, where does query parsing and optimization typically occur?",
+      "options": [
+        "On the Client machine",
+        "On the Database Server",
+        "In the Network Router",
+        "In the Display Monitor"
+      ],
+      "correctIndex": 1
+    }
+  ]
 }

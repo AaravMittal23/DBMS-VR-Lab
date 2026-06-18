@@ -1,0 +1,12 @@
+{
+  "objective": "To study Transaction Management and ensure the ACID properties in database operations.",
+  "learningObjectives": [
+    "Understand the concept of a Database Transaction",
+    "Learn the four ACID properties (Atomicity, Consistency, Isolation, Durability)",
+    "Apply COMMIT, ROLLBACK, and SAVEPOINT commands"
+  ],
+  "expectedOutcomes": [
+    "Ability to write transactional SQL blocks",
+    "Understanding of how to recover from mid-transaction failures"
+  ]
+}

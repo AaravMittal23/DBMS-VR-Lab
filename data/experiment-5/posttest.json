@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to evaluate your understanding after completing the experiment.",
+  "questions": [
+    {
+      "question": "Which clause is used to filter grouped data based on aggregate function results?",
+      "options": [
+        "WHERE",
+        "HAVING",
+        "FILTER",
+        "GROUP FILTER"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What will the query \"SELECT COUNT(DISTINCT department) FROM employees;\" return?",
+      "options": [
+        "The number of unique departments",
+        "The total number of employees",
+        "The number of departments with employees",
+        "An error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which of the following queries will find departments with average salary greater than 50000?",
+      "options": [
+        "SELECT department FROM employees WHERE AVG(salary) > 50000 GROUP BY department;",
+        "SELECT department FROM employees GROUP BY department HAVING AVG(salary) > 50000;",
+        "SELECT department FROM employees WHERE salary > 50000 GROUP BY department;",
+        "SELECT department FROM employees GROUP BY department WHERE AVG(salary) > 50000;"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the result of COUNT(*) when all rows have NULL values in a column?",
+      "options": [
+        "COUNT(*) still counts all rows, including NULLs",
+        "Returns 0",
+        "Returns NULL",
+        "Causes an error"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which aggregate function can be used with both numeric and non-numeric data types?",
+      "options": [
+        "SUM()",
+        "AVG()",
+        "COUNT()",
+        "All of them"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "In a query with GROUP BY, can you use ORDER BY to sort the grouped results?",
+      "options": [
+        "Yes, ORDER BY can be used after GROUP BY",
+        "No, ORDER BY cannot be used with GROUP BY",
+        "Only if HAVING is also used",
+        "Only with aggregate functions"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does the query \"SELECT department, MAX(salary), MIN(salary) FROM employees GROUP BY department;\" return?",
+      "options": [
+        "Each department with its highest and lowest salary",
+        "The overall maximum and minimum salary across all departments",
+        "An error because multiple aggregates are used",
+        "Only the maximum salary per department"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can you use multiple columns in a GROUP BY clause?",
+      "options": [
+        "Yes, you can group by multiple columns",
+        "No, only one column is allowed",
+        "Only if they are in the same table",
+        "Only with HAVING clause"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the difference between COUNT(*) and COUNT(column_name)?",
+      "options": [
+        "There is no difference",
+        "COUNT(*) counts all rows, COUNT(column_name) counts non-NULL values",
+        "COUNT(*) only counts unique values",
+        "COUNT(column_name) counts all rows including NULLs"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which of the following is a valid use of aggregate functions?",
+      "options": [
+        "SELECT name, COUNT(*) FROM employees WHERE COUNT(*) > 5;",
+        "SELECT department, COUNT(*) FROM employees GROUP BY department HAVING COUNT(*) > 5;",
+        "SELECT COUNT(*) FROM employees WHERE AVG(salary) > 50000;",
+        "SELECT name, SUM(salary) FROM employees;"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What happens if you use an aggregate function without GROUP BY on a table with multiple rows?",
+      "options": [
+        "It returns a single row with the aggregate result",
+        "It returns an error",
+        "It returns one row per table row",
+        "It requires GROUP BY to work"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In the query \"SELECT department, AVG(salary) as avg_sal FROM employees GROUP BY department ORDER BY avg_sal DESC;\", what does ORDER BY sort by?",
+      "options": [
+        "The average salary in descending order",
+        "The department name in descending order",
+        "The number of employees in descending order",
+        "An error occurs"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can you use aggregate functions in the SELECT clause without GROUP BY?",
+      "options": [
+        "Yes, it will aggregate all rows into a single result",
+        "No, GROUP BY is always required",
+        "Only COUNT() can be used without GROUP BY",
+        "Only if HAVING is used"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the purpose of using DISTINCT with COUNT()?",
+      "options": [
+        "To count only unique values in a column",
+        "To count all values including duplicates",
+        "To exclude NULL values",
+        "To sort the results"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which query correctly finds the total salary expenditure per department for departments with more than 10 employees?",
+      "options": [
+        "SELECT department, SUM(salary) FROM employees WHERE COUNT(*) > 10 GROUP BY department;",
+        "SELECT department, SUM(salary) FROM employees GROUP BY department HAVING COUNT(*) > 10;",
+        "SELECT department, SUM(salary) FROM employees GROUP BY department WHERE COUNT(*) > 10;",
+        "SELECT department, SUM(salary) FROM employees HAVING COUNT(*) > 10 GROUP BY department;"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

@@ -42,13 +42,13 @@ class App {
 
   async handleRoute(route) {
     // Clean up any running quiz timers from previous simulations
-    if (window.quiz1Timer) clearTimeout(window.quiz1Timer);
-    if (window.quiz2Timer) clearTimeout(window.quiz2Timer);
-    if (window.quiz3Timer) clearTimeout(window.quiz3Timer);
+    if (window.quiz5Timer) clearTimeout(window.quiz5Timer);
+    if (window.quiz6Timer) clearTimeout(window.quiz6Timer);
+    if (window.quiz7Timer) clearTimeout(window.quiz7Timer);
     // Close any open quiz modals
-    if (document.getElementById('quizModal1')) document.getElementById('quizModal1').style.display = 'none';
-    if (document.getElementById('quizModal2')) document.getElementById('quizModal2').style.display = 'none';
-    if (document.getElementById('quizModal3')) document.getElementById('quizModal3').style.display = 'none';
+    if (document.getElementById('quizModal5')) document.getElementById('quizModal5').style.display = 'none';
+    if (document.getElementById('quizModal6')) document.getElementById('quizModal6').style.display = 'none';
+    if (document.getElementById('quizModal7')) document.getElementById('quizModal7').style.display = 'none';
 
     if (route.view === 'home') {
       this.renderHome();
@@ -62,7 +62,7 @@ class App {
   /* ------------------------------------------------------------------ */
 
   async renderHome() {
-    const metas = await Promise.all([1,2,3].map(id => this.fetchJSON(`data/experiment-${id}/meta.json`)));
+    const metas = await Promise.all([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(id => this.fetchJSON(`data/experiment-${id}/meta.json`)));
 
     document.getElementById('sidebar').innerHTML = this.buildSidebar(null, null);
     document.getElementById('header').innerHTML  = this.buildHeader('DBMS Virtual Laboratory', 'Welcome to the Database Management Systems Virtual Lab');
@@ -190,7 +190,7 @@ class App {
     }
 
     // Fallback: experiment 1 uses the generic name from the original build
-    if (String(expId) === '1' && typeof window.renderSimulation === 'function') {
+    if (String(expId) === '5' && typeof window.renderSimulation === 'function') {
       return window.renderSimulation();
     }
 

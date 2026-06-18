@@ -1,0 +1,7 @@
+{
+  "id": 4,
+  "title": "Implementation of SQL Queries Using Joins and Subqueries",
+  "shortTitle": "Joins & Subqueries",
+  "badge": "SQL Joins",
+  "description": "write advanced SQL queries using INNER JOIN, LEFT JOIN, RIGHT JOIN, and nested subqueries."
+}

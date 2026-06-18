@@ -1,9 +1,30 @@
 {
-  "introduction": "This procedure explains how to analyze relational schemas, identify dependencies, and apply normalization steps.",
-  "steps": [],
+  "introduction": "Follow these steps to manipulate data within a table.",
+  "steps": [
+    {
+      "title": "Step 1: Insert Records",
+      "content": "Add new data to the table using the INSERT statement.",
+      "code": "INSERT INTO Employees (EmpID, Name, Salary) VALUES (101, 'John Doe', 50000);"
+    },
+    {
+      "title": "Step 2: Select Data",
+      "content": "Retrieve and view the data you just inserted.",
+      "code": "SELECT * FROM Employees;"
+    },
+    {
+      "title": "Step 3: Update Records",
+      "content": "Modify the salary of the employee using UPDATE.",
+      "code": "UPDATE Employees SET Salary = 55000 WHERE EmpID = 101;"
+    },
+    {
+      "title": "Step 4: Delete Records",
+      "content": "Remove the employee record from the table.",
+      "code": "DELETE FROM Employees WHERE EmpID = 101;"
+    }
+  ],
   "expectedOutcomes": [
-    "Systematically inspect relations for redundancy and anomalies",
-    "Apply 1NF, 2NF, and 3NF transformations step by step",
-    "Document the resulting normalized schema clearly"
+    "Data successfully inserted and verified.",
+    "Specific rows conditionally updated without affecting others.",
+    "Specific rows conditionally deleted."
   ]
 }

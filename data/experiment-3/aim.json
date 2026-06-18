@@ -1,16 +1,14 @@
 {
-  "objective": "Understand functional dependencies, database anomalies, and normalization up to Third Normal Form (3NF).",
+  "objective": "To understand and apply SQL Data Manipulation Language (DML) commands to manage and query data within relational tables.",
   "learningObjectives": [
-    "Identify functional dependencies in relational schemas",
-    "Recognize redundancy and anomalies in unnormalized tables",
-    "Apply normalization rules to decompose relations into 1NF, 2NF, and 3NF",
-    "Determine candidate keys, primary keys, and superkeys",
-    "Understand trade-offs between normalization and performance"
+    "Use INSERT to add new records to a table",
+    "Use UPDATE to modify existing data",
+    "Use DELETE to remove specific records",
+    "Use SELECT to retrieve data from tables"
   ],
   "expectedOutcomes": [
-    "Analyze a relation to find its functional dependencies",
-    "Detect insertion, update, and deletion anomalies",
-    "Normalize relations to appropriate normal forms",
-    "Design well-structured schemas that minimize redundancy while preserving dependencies"
+    "Ability to populate tables with data",
+    "Proficiency in modifying data conditionally",
+    "Understanding the impact of DML operations on data integrity"
   ]
 }

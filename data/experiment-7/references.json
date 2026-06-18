@@ -1,0 +1,53 @@
+{
+  "references": [
+    {
+      "title": "SQL Aggregate Functions Tutorial",
+      "source": "W3Schools - SQL Aggregate Functions",
+      "url": "https://www.w3schools.com/sql/sql_aggregate_functions.asp"
+    },
+    {
+      "title": "SQL GROUP BY Clause",
+      "source": "W3Schools - SQL GROUP BY",
+      "url": "https://www.w3schools.com/sql/sql_groupby.asp"
+    },
+    {
+      "title": "SQL HAVING Clause",
+      "source": "W3Schools - SQL HAVING",
+      "url": "https://www.w3schools.com/sql/sql_having.asp"
+    },
+    {
+      "title": "Database System Concepts",
+      "source": "Silberschatz, A., Korth, H. F., & Sudarshan, S.\n        McGraw-Hill Education, 7th Edition"
+    },
+    {
+      "title": "SQL Tutorial - Aggregate Functions",
+      "source": "GeeksforGeeks",
+      "url": "https://www.geeksforgeeks.org/sql-aggregate-functions/"
+    },
+    {
+      "title": "MySQL Documentation - Aggregate Functions",
+      "source": "Oracle Corporation",
+      "url": "https://dev.mysql.com/doc/refman/8.0/en/aggregate-functions.html"
+    },
+    {
+      "title": "PostgreSQL Documentation - Aggregate Functions",
+      "source": "PostgreSQL Global Development Group",
+      "url": "https://www.postgresql.org/docs/current/functions-aggregate.html"
+    },
+    {
+      "title": "SQL Tutorial - GROUP BY and HAVING",
+      "source": "TutorialsPoint",
+      "url": "https://www.tutorialspoint.com/sql/sql-group-by.htm"
+    },
+    {
+      "title": "Database Management Systems",
+      "source": "Ramakrishnan, R., & Gehrke, J.\n        McGraw-Hill Education, 3rd Edition"
+    },
+    {
+      "title": "SQL Practice Problems",
+      "source": "LeetCode - Database Problems",
+      "url": "https://leetcode.com/problemset/database/"
+    }
+  ],
+  "acknowledgment": "This virtual laboratory experiment was developed as part of the Database Management Systems \n      curriculum. Special thanks to the academic community and educational platforms that provide \n      comprehensive resources on database design, normalization, and functional dependencies."
+}

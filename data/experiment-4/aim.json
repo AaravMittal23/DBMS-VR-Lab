@@ -1,0 +1,13 @@
+{
+  "objective": "To understand and apply SQL Joins and Subqueries to fetch data across multiple tables.",
+  "learningObjectives": [
+    "Understand the difference between INNER, LEFT, RIGHT, and FULL joins",
+    "Apply table aliases and ON clauses",
+    "Write queries that use nested subqueries",
+    "Use IN and EXISTS operators effectively"
+  ],
+  "expectedOutcomes": [
+    "Ability to join multiple relational tables",
+    "Proficiency in solving complex queries using subqueries"
+  ]
+}

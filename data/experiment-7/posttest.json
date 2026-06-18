@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to evaluate your understanding after completing the experiment.",
+  "questions": [
+    {
+      "question": "In a relation R(A, B, C) with FDs: A → B and B → C, what normal form is it in after normalizing to 3NF?",
+      "options": [
+        "3NF (decomposed into R1(A, B) and R2(B, C))",
+        "2NF only",
+        "1NF only",
+        "BCNF"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the main difference between 3NF and BCNF?",
+      "options": [
+        "3NF is stricter than BCNF",
+        "BCNF requires every determinant to be a candidate key, while 3NF allows non-key determinants",
+        "There is no difference",
+        "3NF eliminates all redundancy, BCNF does not"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In the relation Order(order_id, product_id, product_name, quantity), if order_id, product_id is the primary key and product_id → product_name, what normal form is it in?",
+      "options": [
+        "1NF",
+        "1NF but not 2NF (due to partial dependency)",
+        "2NF",
+        "3NF"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is lossless decomposition?",
+      "options": [
+        "A decomposition where joining the decomposed tables recovers the original table without spurious tuples",
+        "A decomposition that loses some data",
+        "A decomposition that creates new data",
+        "A decomposition that eliminates all dependencies"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In a relation with composite primary key (A, B), if attribute C depends only on A, what type of dependency is this?",
+      "options": [
+        "Full functional dependency",
+        "Partial functional dependency",
+        "Transitive dependency",
+        "Trivial dependency"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a trivial functional dependency?",
+      "options": [
+        "A dependency where Y is not a subset of X",
+        "A dependency where Y is a subset of X (e.g., AB → A)",
+        "A dependency that cannot be removed",
+        "A partial dependency"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "When normalizing a relation, what should be preserved?",
+      "options": [
+        "Only the primary key",
+        "All functional dependencies and ensure lossless decomposition",
+        "Only the data",
+        "Only the structure"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In the relation Student(student_id, name, dept_id, dept_name), if student_id → dept_id and dept_id → dept_name, what normal form is it in?",
+      "options": [
+        "1NF",
+        "2NF",
+        "2NF but not 3NF (due to transitive dependency)",
+        "3NF"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is the primary reason for normalizing a database beyond 3NF to BCNF?",
+      "options": [
+        "To improve query performance",
+        "To eliminate all redundancy based on functional dependencies",
+        "To reduce the number of tables",
+        "To simplify the schema"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In a relation R(A, B, C, D) with FDs: A → B, B → C, and A, D → C, what is a candidate key?",
+      "options": [
+        "A",
+        "A, D (since A, D determines all attributes)",
+        "B",
+        "C"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What happens when you normalize a table that is already in 3NF to BCNF?",
+      "options": [
+        "The table structure remains the same",
+        "The table may be decomposed further if there are non-key determinants",
+        "All attributes are removed",
+        "The primary key changes"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is dependency preservation in normalization?",
+      "options": [
+        "Keeping all foreign keys",
+        "Ensuring all functional dependencies from the original relation can be derived from the decomposed relations",
+        "Maintaining the same number of tables",
+        "Keeping all primary keys"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In normalization, what is the trade-off between higher normal forms?",
+      "options": [
+        "Higher normal forms always improve performance",
+        "Higher normal forms reduce redundancy but may require more joins, potentially affecting performance",
+        "Higher normal forms increase redundancy",
+        "There is no trade-off"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the minimum normal form required to eliminate insertion anomalies?",
+      "options": [
+        "1NF",
+        "2NF",
+        "3NF (effectively eliminates most anomalies)",
+        "BCNF"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "When should you consider denormalization?",
+      "options": [
+        "Always, to improve normalization",
+        "When query performance is critical and some redundancy is acceptable",
+        "Never, normalization is always better",
+        "Only for small databases"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

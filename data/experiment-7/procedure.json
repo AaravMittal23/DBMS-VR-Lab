@@ -1,0 +1,130 @@
+{
+  "introduction": "Follow these steps to perform the experiment on Database Normalization Using Functional Dependencies.",
+  "steps": [
+    {
+      "title": "Start with an Unnormalized Table",
+      "content": "Create or analyze an unnormalized table. Example: Student_Course(student_id, name, course_id, course_name, grade, instructor, dept_name)",
+      "subpoints": [
+        "Observe the structure and identify potential problems",
+        "Note any repeating groups or multivalued attributes",
+        "Identify data redundancy"
+      ]
+    },
+    {
+      "title": "Identify Functional Dependencies",
+      "content": "Analyze the table and list all functional dependencies:\n        \n        Document all FDs clearly, noting which are partial or transitive.",
+      "code": "Example:\nstudent_id → name\ncourse_id → course_name, instructor\nstudent_id, course_id → grade\ncourse_id → dept_name"
+    },
+    {
+      "title": "Identify Keys",
+      "content": "Determine candidate keys, primary key, and superkeys:",
+      "subpoints": [
+        "Find all superkeys (sets of attributes that uniquely identify tuples)",
+        "Identify candidate keys (minimal superkeys)",
+        "Choose a primary key"
+      ],
+      "code": "Example:\nSuperkeys: (student_id, course_id), (student_id, course_id, grade), etc.\nCandidate Key: (student_id, course_id)\nPrimary Key: (student_id, course_id)"
+    },
+    {
+      "title": "Check for 1NF Violations",
+      "content": "Verify if the table is in First Normal Form:",
+      "subpoints": [
+        "Check for multivalued attributes or repeating groups",
+        "Ensure all attributes contain atomic values",
+        "If not in 1NF, decompose to eliminate repeating groups"
+      ],
+      "code": "If not in 1NF:\n- Separate repeating groups into new tables\n- Ensure each cell contains a single value"
+    },
+    {
+      "title": "Normalize to 1NF",
+      "content": "If the table violates 1NF, decompose it:\n        \n        Verify that all attributes are atomic and there are no repeating groups.",
+      "code": "Example:\nBefore 1NF: Student(student_id, name, courses[])\nAfter 1NF: Student(student_id, name)\n           Enrollment(student_id, course_id)"
+    },
+    {
+      "title": "Check for 2NF Violations",
+      "content": "Verify if the table is in Second Normal Form:",
+      "subpoints": [
+        "Check if the table is in 1NF",
+        "Identify partial dependencies (non-key attributes depending on part of composite key)",
+        "If partial dependencies exist, the table is not in 2NF"
+      ],
+      "code": "Example - Not in 2NF:\nOrder(order_id, product_id, product_name, quantity)\nFD: order_id, product_id → quantity\n    product_id → product_name (partial dependency)"
+    },
+    {
+      "title": "Normalize to 2NF",
+      "content": "If the table violates 2NF, decompose it:\n        \n        Ensure all non-key attributes are fully functionally dependent on the primary key.",
+      "code": "Example:\nBefore 2NF: Order(order_id, product_id, product_name, quantity)\nAfter 2NF: Order(order_id, product_id, quantity)\n           Product(product_id, product_name)"
+    },
+    {
+      "title": "Check for 3NF Violations",
+      "content": "Verify if the table is in Third Normal Form:",
+      "subpoints": [
+        "Check if the table is in 2NF",
+        "Identify transitive dependencies (non-key attribute depends on another non-key attribute)",
+        "If transitive dependencies exist, the table is not in 3NF"
+      ],
+      "code": "Example - Not in 3NF:\nStudent(student_id, name, dept_id, dept_name, location)\nFD: student_id → dept_id → dept_name, location\n    (transitive dependency)"
+    },
+    {
+      "title": "Normalize to 3NF",
+      "content": "If the table violates 3NF, decompose it:\n        \n        Ensure no non-key attribute is transitively dependent on the primary key.",
+      "code": "Example:\nBefore 3NF: Student(student_id, name, dept_id, dept_name, location)\nAfter 3NF: Student(student_id, name, dept_id)\n           Department(dept_id, dept_name, location)"
+    },
+    {
+      "title": "Check for BCNF Violations",
+      "content": "Verify if the table is in Boyce-Codd Normal Form:",
+      "subpoints": [
+        "Check if the table is in 3NF",
+        "Verify that every determinant is a candidate key",
+        "If a non-key attribute determines another attribute, it violates BCNF"
+      ],
+      "code": "Example - Not in BCNF:\nCourse(course_id, instructor, time, room)\nFD: course_id → instructor\n    instructor, time → room\n    (instructor is not a key)"
+    },
+    {
+      "title": "Normalize to BCNF (if needed)",
+      "content": "If the table violates BCNF, decompose it:\n        \n        Ensure every determinant is a candidate key.",
+      "code": "Example:\nBefore BCNF: Course(course_id, instructor, time, room)\nAfter BCNF: Course(course_id, instructor, time)\n            Room(instructor, time, room)"
+    },
+    {
+      "title": "Verify Lossless Decomposition",
+      "content": "Ensure that the decomposition is lossless (no information is lost):",
+      "subpoints": [
+        "Check that joining the decomposed tables recovers the original table",
+        "Verify that all functional dependencies are preserved",
+        "Ensure no spurious tuples are generated"
+      ]
+    },
+    {
+      "title": "Create Normalized Tables",
+      "content": "Create the normalized tables in your database:",
+      "code": "CREATE TABLE Student (\n    student_id VARCHAR(10) PRIMARY KEY,\n    name VARCHAR(50),\n    dept_id VARCHAR(10),\n    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)\n);\n\nCREATE TABLE Course (\n    course_id VARCHAR(10) PRIMARY KEY,\n    course_name VARCHAR(50),\n    instructor VARCHAR(50),\n    dept_id VARCHAR(10),\n    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)\n);\n\nCREATE TABLE Enrollment (\n    student_id VARCHAR(10),\n    course_id VARCHAR(10),\n    grade CHAR(2),\n    PRIMARY KEY (student_id, course_id),\n    FOREIGN KEY (student_id) REFERENCES Student(student_id),\n    FOREIGN KEY (course_id) REFERENCES Course(course_id)\n);\n\nCREATE TABLE Department (\n    dept_id VARCHAR(10) PRIMARY KEY,\n    dept_name VARCHAR(50),\n    location VARCHAR(50)\n);"
+    },
+    {
+      "title": "Insert Sample Data",
+      "content": "Insert sample data into the normalized tables and verify:",
+      "subpoints": [
+        "Data integrity is maintained",
+        "No redundancy exists",
+        "All relationships are properly represented"
+      ]
+    },
+    {
+      "title": "Compare Before and After",
+      "content": "Compare the unnormalized and normalized versions:",
+      "subpoints": [
+        "Note the reduction in redundancy",
+        "Verify that anomalies are eliminated",
+        "Check that all information is preserved",
+        "Understand the trade-offs (more tables vs. less redundancy)"
+      ]
+    }
+  ],
+  "expectedOutcomes": [
+    "Understanding of functional dependencies and their identification",
+    "Knowledge of normalization forms (1NF, 2NF, 3NF, BCNF)",
+    "Ability to identify and eliminate partial and transitive dependencies",
+    "Skill in decomposing unnormalized tables into normalized schemas",
+    "Understanding of lossless decomposition and dependency preservation",
+    "Recognition of the benefits and trade-offs of normalization"
+  ]
+}

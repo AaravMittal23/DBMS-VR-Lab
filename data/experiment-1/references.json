@@ -1,4 +1,13 @@
 {
-  "references": [],
-  "acknowledgment": "This experiment content is adapted for the DBMS Virtual Lab for educational purposes."
+  "references": [
+    {
+      "title": "Database System Concepts, 7th Edition",
+      "source": "Abraham Silberschatz, Henry F. Korth, S. Sudarshan"
+    },
+    {
+      "title": "Fundamentals of Database Systems, 7th Edition",
+      "source": "Ramez Elmasri, Shamkant B. Navathe"
+    }
+  ],
+  "acknowledgment": "Developed for the DBMS Virtual Laboratory."
 }

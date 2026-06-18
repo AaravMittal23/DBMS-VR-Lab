@@ -1,0 +1,52 @@
+{
+  "references": [
+    {
+      "title": "Database System Concepts",
+      "source": "Silberschatz, A., Korth, H. F., & Sudarshan, S.\n        McGraw-Hill Education, 7th Edition\n        Chapters on Entity–Relationship Model and Relational Database Design"
+    },
+    {
+      "title": "Database Management Systems",
+      "source": "Ramakrishnan, R., & Gehrke, J.\n        McGraw-Hill Education, 3rd Edition\n        Chapters on Conceptual Design and ER Modeling"
+    },
+    {
+      "title": "Fundamentals of Database Systems",
+      "source": "Elmasri, R., & Navathe, S. B.\n        Pearson, 7th Edition\n        Comprehensive coverage of ER modeling and relational mapping"
+    },
+    {
+      "title": "ER Diagram Tutorial",
+      "source": "Lucidchart - Entity Relationship Diagrams",
+      "url": "https://www.lucidchart.com/pages/er-diagrams"
+    },
+    {
+      "title": "Entity–Relationship Model",
+      "source": "GeeksforGeeks - ER Model",
+      "url": "https://www.geeksforgeeks.org/introduction-of-er-model/"
+    },
+    {
+      "title": "ER Diagram Symbols and Notation",
+      "source": "SmartDraw - ER Diagram Guide",
+      "url": "https://www.smartdraw.com/entity-relationship-diagram/"
+    },
+    {
+      "title": "Mapping ER Diagrams to Relational Schema",
+      "source": "TutorialsPoint - Database Design",
+      "url": "https://www.tutorialspoint.com/dbms/dbms_er_model_basic_concepts.htm"
+    },
+    {
+      "title": "Database Design: ER to Relational Mapping",
+      "source": "Study.com - Database Design Course",
+      "url": "https://study.com/academy/lesson/er-to-relational-mapping.html"
+    },
+    {
+      "title": "Entity Relationship Modeling",
+      "source": "Wikipedia - Entity–Relationship Model",
+      "url": "https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model"
+    },
+    {
+      "title": "Database Design Best Practices",
+      "source": "Vertabelo - Database Design Blog",
+      "url": "https://www.vertabelo.com/blog/"
+    }
+  ],
+  "acknowledgment": "This virtual laboratory experiment was developed as part of the Database Management Systems \n      curriculum. Special thanks to the academic community and educational platforms that provide \n      comprehensive resources on database design, ER modeling, and relational database concepts."
+}

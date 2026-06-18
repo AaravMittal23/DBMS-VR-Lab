@@ -1,0 +1,79 @@
+{
+  "introduction": "Database normalization is a systematic approach to organizing data in a database to eliminate redundancy \n      and reduce anomalies. It involves decomposing a relation into smaller, well-structured relations based on \n      functional dependencies. Normalization ensures data integrity, reduces storage space, and prevents update, \n      insertion, and deletion anomalies.",
+  "sections": [
+    {
+      "title": "First Normal Form (1NF)",
+      "content": "A relation is in 1NF if every attribute contains only atomic (indivisible) values. There should be no \n        repeating groups or multivalued attributes. Each cell must contain a single value.",
+      "code": "Example - Not in 1NF:\nStudent(student_id, name, courses)\ncourses: \"DBMS, OS, Networks\"\n\nIn 1NF:\nStudent(student_id, name)\nEnrollment(student_id, course)"
+    },
+    {
+      "title": "Second Normal Form (2NF)",
+      "content": "A relation is in 2NF if it is in 1NF and every non-key attribute is fully functionally dependent on \n        the primary key. No partial dependencies are allowed.",
+      "code": "Example - Not in 2NF:\nOrder(order_id, product_id, product_name, quantity)\nFD: order_id, product_id → quantity\n    product_id → product_name (partial dependency)\n\nIn 2NF:\nOrder(order_id, product_id, quantity)\nProduct(product_id, product_name)"
+    },
+    {
+      "title": "Third Normal Form (3NF)",
+      "content": "A relation is in 3NF if it is in 2NF and no non-key attribute is transitively dependent on the primary key. \n        All non-key attributes must depend directly on the primary key.",
+      "code": "Example - Not in 3NF:\nStudent(student_id, name, dept_id, dept_name, location)\nFD: student_id → dept_id → dept_name, location\n    (transitive dependency)\n\nIn 3NF:\nStudent(student_id, name, dept_id)\nDepartment(dept_id, dept_name, location)"
+    },
+    {
+      "title": "Boyce-Codd Normal Form (BCNF)",
+      "content": "A relation is in BCNF if it is in 3NF and every determinant is a candidate key. BCNF is stricter than 3NF \n        and eliminates all redundancy based on functional dependencies.",
+      "code": "Example - Not in BCNF:\nCourse(course_id, instructor, time, room)\nFD: course_id → instructor\n    instructor, time → room\n    (instructor is not a key)\n\nIn BCNF:\nCourse(course_id, instructor, time)\nRoom(instructor, time, room)"
+    }
+  ],
+  "functionalDependencies": {
+    "title": "Functional Dependencies",
+    "content": "A functional dependency (FD) is a constraint between two sets of attributes in a relation. If attribute set \n      X functionally determines attribute set Y (denoted as X → Y), then for any two tuples with the same values in X, \n      they must have the same values in Y.",
+    "code": "Example:\nIf student_id → name, email\nThen: If two tuples have the same student_id, \n      they must have the same name and email.",
+    "keyTerms": [
+      {
+        "term": "Determinant",
+        "description": "The left side of a functional dependency (X in X → Y)"
+      },
+      {
+        "term": "Dependent",
+        "description": "The right side of a functional dependency (Y in X → Y)"
+      },
+      {
+        "term": "Trivial FD",
+        "description": "Y is a subset of X (e.g., AB → A)"
+      },
+      {
+        "term": "Non-trivial FD",
+        "description": "Y is not a subset of X"
+      },
+      {
+        "term": "Full FD",
+        "description": "Y is functionally dependent on X but not on any proper subset of X"
+      },
+      {
+        "term": "Partial FD",
+        "description": "Y is functionally dependent on a proper subset of X"
+      }
+    ]
+  },
+  "anomalies": {
+    "title": "Database Anomalies",
+    "content": "Unnormalized databases suffer from three types of anomalies that can lead to data inconsistency:",
+    "types": [
+      {
+        "name": "Insertion Anomaly",
+        "description": "Cannot insert certain information without other information (e.g., cannot add a department without an employee)"
+      },
+      {
+        "name": "Deletion Anomaly",
+        "description": "Deleting one piece of information causes loss of other information (e.g., deleting last employee deletes department info)"
+      },
+      {
+        "name": "Update Anomaly",
+        "description": "Changing one value requires updating multiple rows (e.g., updating department name in multiple employee records)"
+      }
+    ]
+  },
+  "practicalExample": {
+    "title": "Practical Example",
+    "description": "Consider an unnormalized table: Student_Course(student_id, name, course_id, course_name, grade, instructor)",
+    "code": "Functional Dependencies:\nstudent_id → name\ncourse_id → course_name, instructor\nstudent_id, course_id → grade\n\nNormalized to 3NF:\nStudent(student_id, name)\nCourse(course_id, course_name, instructor)\nEnrollment(student_id, course_id, grade)"
+  }
+}

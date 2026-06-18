@@ -1,0 +1,21 @@
+{
+  "introduction": "Explore Views and Indexes.",
+  "steps": [
+    {
+      "title": "Step 1: Create a View",
+      "content": "Create a view that abstracts a complex JOIN query."
+    },
+    {
+      "title": "Step 2: Create an Index",
+      "content": "Add an index to a column frequently used in WHERE clauses."
+    },
+    {
+      "title": "Step 3: Analyze Performance",
+      "content": "Compare query execution times with and without the index."
+    }
+  ],
+  "expectedOutcomes": [
+    "Views created successfully.",
+    "Index performance differences observed."
+  ]
+}

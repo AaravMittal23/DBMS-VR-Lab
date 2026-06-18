@@ -1,19 +1,25 @@
 {
-  "introduction": "This experiment focuses on database normalization and functional dependencies. Normalization is a step-by-step process used to reduce redundancy and anomalies in relational schemas.",
-  "sections": [],
-  "functionalDependencies": {
-    "title": "Functional Dependencies",
-    "content": "A functional dependency X → Y in a relation R indicates that for each value of X there is exactly one associated value of Y.",
-    "code": "X -> Y",
-    "keyTerms": []
-  },
-  "havingClause": null,
-  "whereVsHaving": null,
-  "mappingRules": null,
-  "anomalies": {
-    "title": "Anomalies",
-    "content": "Unnormalized relations may suffer from insertion, update, and deletion anomalies.",
-    "types": []
-  },
-  "practicalExample": null
+  "introduction": "Data Manipulation Language (DML) statements are used for managing data within schema objects. Unlike DDL, DML operations manipulate the data itself, not the structure.",
+  "sections": [
+    {
+      "title": "INSERT Command",
+      "content": "Used to insert new rows of data into a table.",
+      "code": "INSERT INTO Students (ID, Name) VALUES (1, 'Alice');"
+    },
+    {
+      "title": "UPDATE Command",
+      "content": "Used to modify the existing records in a table. It is crucial to use the WHERE clause, otherwise all rows will be updated.",
+      "code": "UPDATE Students SET Name = 'Alice Smith' WHERE ID = 1;"
+    },
+    {
+      "title": "DELETE Command",
+      "content": "Used to delete existing records in a table. Like UPDATE, the WHERE clause is essential to avoid deleting all records.",
+      "code": "DELETE FROM Students WHERE ID = 1;"
+    },
+    {
+      "title": "SELECT Command",
+      "content": "Although sometimes categorized as DQL (Data Query Language), SELECT is often grouped with DML. It retrieves data from one or more tables.",
+      "code": "SELECT * FROM Students;"
+    }
+  ]
 }

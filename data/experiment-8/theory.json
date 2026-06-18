@@ -1,0 +1,15 @@
+{
+  "introduction": "Views provide a virtual table based on the result-set of a query, offering a layer of security and abstraction. Indexes are physical structures on disk that speed up data retrieval.",
+  "sections": [
+    {
+      "title": "Views in SQL",
+      "content": "A view contains rows and columns, just like a real table. The fields in a view are fields from one or more real tables in the database. You can add SQL functions, WHERE, and JOIN statements to a view.",
+      "code": "CREATE VIEW [Brazil Customers] AS\nSELECT CustomerName, ContactName FROM Customers WHERE Country = 'Brazil';"
+    },
+    {
+      "title": "Indexes",
+      "content": "Indexes are used to retrieve data from the database more quickly than otherwise. The users cannot see the indexes, they are just used to speed up searches/queries. Updating a table with indexes takes more time than updating a table without.",
+      "code": "CREATE INDEX idx_lastname ON Persons (LastName);"
+    }
+  ]
+}

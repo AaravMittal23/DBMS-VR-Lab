@@ -1,0 +1,40 @@
+{
+  "introduction": "Entity–Relationship (ER) modeling is a conceptual database design technique used to model the structure \n      and relationships of data in a database system. The ER model provides a graphical representation of entities, \n      their attributes, and the relationships between entities. It serves as a bridge between real-world requirements \n      and the implementation of a relational database.",
+  "sections": [
+    {
+      "title": "Entities",
+      "content": "An entity is a real-world object or concept that can be distinctly identified. Entities are represented \n        by rectangles in ER diagrams. Examples include Student, Course, Employee, Department, etc. Each entity \n        has a set of attributes that describe its properties.",
+      "code": "Examples:\n- Student (student_id, name, email)\n- Course (course_id, title, credits)\n- Employee (emp_id, name, salary)"
+    },
+    {
+      "title": "Attributes",
+      "content": "Attributes are properties or characteristics of entities. They are represented by ovals or ellipses \n        connected to their entity. Attributes can be simple (atomic), composite (made of sub-attributes), \n        single-valued, multi-valued, or derived (calculated from other attributes).",
+      "code": "Types:\n- Simple: age, salary\n- Composite: address (street, city)\n- Multi-valued: phone_numbers\n- Derived: age (from DOB)"
+    },
+    {
+      "title": "Relationships",
+      "content": "A relationship represents an association between two or more entities. Relationships are represented \n        by diamonds in ER diagrams. They can be one-to-one (1:1), one-to-many (1:N), or many-to-many (M:N).",
+      "code": "Examples:\n- Student ENROLLS Course (M:N)\n- Department HAS Employee (1:N)\n- Person OWNS Passport (1:1)"
+    },
+    {
+      "title": "Cardinality",
+      "content": "Cardinality specifies the number of instances of one entity that can be associated with instances \n        of another entity. It is represented by numbers (1, N, M) on relationship lines. Common cardinalities \n        include 1:1, 1:N, and M:N.",
+      "code": "Cardinality Types:\n- One-to-One (1:1)\n- One-to-Many (1:N)\n- Many-to-Many (M:N)"
+    },
+    {
+      "title": "Participation Constraints",
+      "content": "Participation constraints specify whether the existence of an entity depends on its relationship \n        with another entity. Total participation (double line) means every entity must participate, while \n        partial participation (single line) means some entities may not participate.",
+      "code": "Examples:\n- Every employee MUST belong to a department (total)\n- Not every student enrolls in a course (partial)"
+    },
+    {
+      "title": "Weak Entities",
+      "content": "A weak entity is an entity that cannot be uniquely identified by its attributes alone. It depends \n        on a strong (owner) entity and is represented by a double rectangle. The relationship between \n        weak and strong entities is called an identifying relationship.",
+      "code": "Example:\n- Dependant (weak) depends on \n  Employee (strong entity)\n- Primary key includes owner's key"
+    }
+  ],
+  "practicalExample": {
+    "title": "Practical Example",
+    "description": "Consider a university database with entities: Student, Course, and Department",
+    "code": "ER Diagram:\n- Student (student_id, name, email)\n- Course (course_id, title, credits)\n- Department (dept_id, dept_name)\n- Student ENROLLS Course (M:N)\n- Department OFFERS Course (1:N)\n\nRelational Schema:\nStudent(student_id, name, email, dept_id)\nCourse(course_id, title, credits, dept_id)\nDepartment(dept_id, dept_name)\nEnrollment(student_id, course_id, grade)"
+  }
+}

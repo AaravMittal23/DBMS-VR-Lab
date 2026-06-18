@@ -1,0 +1,24 @@
+{
+  "introduction": "Explore Transactions and ACID properties.",
+  "steps": [
+    {
+      "title": "Step 1: Start Transaction",
+      "content": "Begin a transaction using START TRANSACTION."
+    },
+    {
+      "title": "Step 2: Execute DML",
+      "content": "Perform updates simulating a bank transfer."
+    },
+    {
+      "title": "Step 3: Rollback",
+      "content": "Simulate an error and issue a ROLLBACK to see Atomicity in action."
+    },
+    {
+      "title": "Step 4: Commit",
+      "content": "Repeat the operations and issue a COMMIT to finalize them."
+    }
+  ],
+  "expectedOutcomes": [
+    "Understanding of how to bundle operations into an atomic transaction."
+  ]
+}

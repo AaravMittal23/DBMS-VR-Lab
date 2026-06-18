@@ -1,0 +1,22 @@
+{
+  "objective": "The aim of this experiment is to understand the design principles of Entity–Relationship (ER) diagrams \n      and learn how to map ER diagrams to relational database schemas. This experiment focuses on identifying \n      entities, attributes, relationships, and their cardinalities, and converting conceptual ER models into \n      normalized relational tables.",
+  "learningObjectives": [
+    "To understand the fundamental concepts of Entity–Relationship modeling",
+    "To identify and model entities, attributes, and relationships in a database system",
+    "To understand different types of attributes: simple, composite, single-valued, multi-valued, and derived attributes",
+    "To recognize and represent relationship types: one-to-one, one-to-many, and many-to-many",
+    "To understand cardinality and participation constraints in relationships",
+    "To learn the process of mapping ER diagrams to relational database schemas",
+    "To convert entities, attributes, and relationships into appropriate relational tables with primary and foreign keys",
+    "To handle weak entities, composite attributes, and multi-valued attributes during mapping"
+  ],
+  "expectedOutcomes": [
+    "Design ER diagrams for given problem domains using standard ER notation",
+    "Identify and represent entities, attributes, and relationships correctly",
+    "Apply cardinality and participation constraints appropriately",
+    "Map ER diagrams to relational schemas following standard mapping rules",
+    "Create relational tables with proper primary keys, foreign keys, and constraints",
+    "Handle complex scenarios including weak entities, composite attributes, and relationship attributes",
+    "Understand the relationship between conceptual design (ER model) and logical design (relational model)"
+  ]
+}

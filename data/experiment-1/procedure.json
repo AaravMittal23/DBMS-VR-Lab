@@ -1,9 +1,29 @@
 {
-  "introduction": "This procedure describes how to execute SQL queries using aggregate functions and grouping operations in a database management system.",
-  "steps": [],
+  "introduction": "Follow these steps to explore the architecture and set up your environment.",
+  "steps": [
+    {
+      "title": "Step 1: Explore Architecture Components",
+      "content": "Use the interactive simulation to click through the Internal, Conceptual, and External layers of the DBMS."
+    },
+    {
+      "title": "Step 2: Start the Database Server",
+      "content": "Open your terminal and start the database service.",
+      "code": "sudo service mysql start"
+    },
+    {
+      "title": "Step 3: Connect to the Server",
+      "content": "Authenticate using the root user to access the database engine.",
+      "code": "mysql -u root -p"
+    },
+    {
+      "title": "Step 4: Create a Sandbox Database",
+      "content": "Create a new database that will be used for all future experiments.",
+      "code": "CREATE DATABASE lab_sandbox;\nUSE lab_sandbox;"
+    }
+  ],
   "expectedOutcomes": [
-    "Gain hands-on experience writing SQL queries with aggregate functions",
-    "Learn to interpret query results that use GROUP BY and HAVING",
-    "Relate the practical steps to the theoretical concepts covered in this experiment"
+    "Interactive exploration of DBMS layers completed.",
+    "Database server successfully running and accepting connections.",
+    "Sandbox database created for future experiments."
   ]
 }

@@ -1,7 +1,7 @@
 {
   "id": 1,
-  "title": "Implementation of Aggregate Functions and Grouping Operations",
-  "shortTitle": "Aggregate Functions & Grouping",
-  "badge": "SQL Aggregation",
-  "description": "explore SQL aggregate functions such as COUNT, SUM, AVG, MIN, MAX and learn how to use GROUP BY and HAVING to generate summarized reports from relational data."
+  "title": "Study of DBMS Architecture and Database Environment Setup",
+  "shortTitle": "DBMS Architecture & Setup",
+  "badge": "Architecture",
+  "description": "study the basic architecture of a DBMS and set up the database environment for executing experiments."
 }

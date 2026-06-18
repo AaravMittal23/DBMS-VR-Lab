@@ -1,0 +1,17 @@
+{
+  "introduction": "In real-world databases, data is distributed across multiple tables. SQL Joins and Subqueries are fundamental mechanisms to retrieve and combine this data dynamically.",
+  "sections": [
+    {
+      "title": "SQL Joins",
+      "content": "A JOIN clause is used to combine rows from two or more tables, based on a related column between them. The primary types are INNER JOIN (returns records with matching values in both tables), LEFT JOIN (all records from the left table, and matched records from the right), RIGHT JOIN (all records from the right table, matched from left), and FULL JOIN (all records when there is a match in either table)."
+    },
+    {
+      "title": "Subqueries",
+      "content": "A subquery (or nested query) is a query within another SQL query. It is used to return data that will be used in the main query as a condition to further restrict the data to be retrieved."
+    },
+    {
+      "title": "EXISTS Operator",
+      "content": "The EXISTS operator is used to test for the existence of any record in a subquery. It returns TRUE if the subquery returns one or more records."
+    }
+  ]
+}

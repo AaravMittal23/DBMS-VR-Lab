@@ -1,0 +1,127 @@
+{
+  "introduction": "Follow these steps to design an ER diagram and map it to a relational schema.",
+  "steps": [
+    {
+      "title": "Identify the Problem Domain",
+      "content": "Choose a real-world scenario (e.g., University Management System, Library Management System, \n        Hospital Management System). Clearly define the scope and requirements of the system."
+    },
+    {
+      "title": "Identify Entities",
+      "content": "List all entities in the system. Entities are real-world objects or concepts that can be \n        distinctly identified. Examples: Student, Course, Department, Employee, Book, etc.",
+      "subpoints": [
+        "Write down all entities",
+        "Ensure each entity is distinct and meaningful"
+      ]
+    },
+    {
+      "title": "Identify Attributes for Each Entity",
+      "content": "For each entity, list all attributes that describe it. Classify attributes as:\n        \n        Example: Student entity with attributes: student_id (primary key), name, email, date_of_birth, address (composite).",
+      "subpoints": [
+        "Simple attributes (atomic values)",
+        "Composite attributes (can be divided into sub-attributes)",
+        "Single-valued or multi-valued attributes",
+        "Derived attributes (calculated from other attributes)"
+      ]
+    },
+    {
+      "title": "Identify Primary Keys",
+      "content": "For each entity, identify the primary key attribute(s) that uniquely identify each instance. \n        Primary keys are underlined in ER diagrams.",
+      "code": "Example:\nStudent: student_id (primary key)\nCourse: course_id (primary key)"
+    },
+    {
+      "title": "Identify Relationships",
+      "content": "Identify relationships between entities. Determine the type of relationship:",
+      "subpoints": [
+        "One-to-One (1:1): Each instance of Entity A relates to at most one instance of Entity B",
+        "One-to-Many (1:N): One instance of Entity A relates to many instances of Entity B",
+        "Many-to-Many (M:N): Many instances of Entity A relate to many instances of Entity B"
+      ],
+      "code": "Example:\nStudent ENROLLS Course (M:N)\nDepartment HAS Employee (1:N)"
+    },
+    {
+      "title": "Determine Cardinality and Participation",
+      "content": "For each relationship, specify:",
+      "subpoints": [
+        "Cardinality: The number of instances (1, N, M)",
+        "Participation: Total (double line) or Partial (single line)"
+      ],
+      "code": "Example:\nEvery employee MUST belong to a department (total participation)\nNot every student enrolls in a course (partial participation)"
+    },
+    {
+      "title": "Identify Weak Entities (if any)",
+      "content": "Identify entities that cannot be uniquely identified without a relationship to another entity. \n        Weak entities are represented by double rectangles and require an identifying relationship.",
+      "code": "Example:\nDependant (weak entity) depends on Employee (strong entity)"
+    },
+    {
+      "title": "Draw the ER Diagram",
+      "content": "Using standard ER notation, draw the complete ER diagram:",
+      "subpoints": [
+        "Rectangles for entities",
+        "Ovals for attributes",
+        "Diamonds for relationships",
+        "Double rectangles for weak entities",
+        "Underline primary keys",
+        "Indicate cardinality on relationship lines",
+        "Use double lines for total participation"
+      ]
+    },
+    {
+      "title": "Map Strong Entities to Relations",
+      "content": "For each strong entity, create a relation (table):",
+      "subpoints": [
+        "Entity name becomes table name",
+        "All attributes become columns",
+        "Primary key becomes the table's primary key",
+        "Composite attributes are flattened into separate columns"
+      ],
+      "code": "Example:\nEntity: Student(student_id, name, email, DOB)\nRelation: Student(student_id, name, email, date_of_birth)\n          Primary Key: student_id"
+    },
+    {
+      "title": "Map Weak Entities to Relations",
+      "content": "For each weak entity, create a relation including:",
+      "subpoints": [
+        "All attributes of the weak entity",
+        "Primary key of the owner entity as a foreign key",
+        "Combined primary key (owner's key + weak entity's partial key)"
+      ],
+      "code": "Example:\nWeak Entity: Dependant(dep_name, age, relationship)\nOwner Entity: Employee(emp_id, name)\nRelation: Dependant(emp_id, dep_name, age, relationship)\n          Primary Key: (emp_id, dep_name)\n          Foreign Key: emp_id references Employee"
+    },
+    {
+      "title": "Map 1:1 Relationships",
+      "content": "For one-to-one relationships, include the foreign key in either of the participating entities:",
+      "code": "Example:\nPerson(ssn, name) OWNS Passport(passport_no, country)\nOption 1: Person(ssn, name, passport_no)\nOption 2: Passport(passport_no, country, ssn)"
+    },
+    {
+      "title": "Map 1:N Relationships",
+      "content": "For one-to-many relationships, include the foreign key in the entity on the \"many\" side:",
+      "code": "Example:\nDepartment(dept_id, dept_name) HAS Employee(emp_id, name, salary)\nResult: Employee(emp_id, name, salary, dept_id)\n        Foreign Key: dept_id references Department"
+    },
+    {
+      "title": "Map M:N Relationships",
+      "content": "For many-to-many relationships, create a separate relation with foreign keys from both entities:",
+      "code": "Example:\nStudent(student_id, name) ENROLLS Course(course_id, title)\nResult: Enrollment(student_id, course_id, grade, semester)\n        Primary Key: (student_id, course_id)\n        Foreign Keys: student_id, course_id"
+    },
+    {
+      "title": "Handle Multi-valued Attributes",
+      "content": "For multi-valued attributes, create a separate relation:",
+      "code": "Example:\nEmployee(emp_id, name) with multi-valued attribute: phone_numbers\nResult: Employee(emp_id, name)\n        Employee_Phone(emp_id, phone_number)\n        Foreign Key: emp_id references Employee"
+    },
+    {
+      "title": "Verify the Relational Schema",
+      "content": "Review the mapped relational schema to ensure:",
+      "subpoints": [
+        "All entities are mapped to relations",
+        "All relationships are properly represented",
+        "Primary keys and foreign keys are correctly identified",
+        "No information is lost in the mapping process"
+      ]
+    }
+  ],
+  "expectedOutcomes": [
+    "Ability to identify entities, attributes, and relationships from a problem domain",
+    "Understanding of ER diagram notation and symbols",
+    "Knowledge of cardinality and participation constraints",
+    "Skill in mapping ER diagrams to normalized relational schemas",
+    "Understanding of how to handle weak entities, composite attributes, and multi-valued attributes"
+  ]
+}

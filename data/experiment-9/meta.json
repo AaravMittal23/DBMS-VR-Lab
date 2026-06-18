@@ -1,0 +1,7 @@
+{
+  "id": 9,
+  "title": "Implementation of Transaction Management and ACID Properties",
+  "shortTitle": "Transactions & ACID",
+  "badge": "Transactions",
+  "description": "understand and implement database transactions ensuring Atomicity, Consistency, Isolation, and Durability."
+}

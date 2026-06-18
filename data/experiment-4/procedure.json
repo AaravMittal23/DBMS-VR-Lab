@@ -1,0 +1,21 @@
+{
+  "introduction": "Follow these steps to explore joins and subqueries.",
+  "steps": [
+    {
+      "title": "Step 1: Write an Inner Join",
+      "content": "Write a query joining Employees and Departments on DepartmentID."
+    },
+    {
+      "title": "Step 2: Write a Left Join",
+      "content": "Modify the query to be a LEFT JOIN to see Employees without Departments."
+    },
+    {
+      "title": "Step 3: Write a Subquery",
+      "content": "Find the employee with the highest salary using a nested SELECT MAX(Salary)."
+    }
+  ],
+  "expectedOutcomes": [
+    "Successfully executed joins.",
+    "Successfully executed nested queries."
+  ]
+}

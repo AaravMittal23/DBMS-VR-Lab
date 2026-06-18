@@ -1,0 +1,155 @@
+{
+  "instructions": "Answer the following questions to test your knowledge before starting the experiment.",
+  "questions": [
+    {
+      "question": "What does ER diagram stand for?",
+      "options": [
+        "Entity-Relationship Diagram",
+        "Entity–Relationship Diagram",
+        "Entity-Relational Diagram",
+        "Entity-Reference Diagram"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "In an ER diagram, how are entities typically represented?",
+      "options": [
+        "Rectangles",
+        "Ovals",
+        "Diamonds",
+        "Circles"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How are relationships represented in an ER diagram?",
+      "options": [
+        "Rectangles",
+        "Ovals",
+        "Diamonds",
+        "Lines"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is a primary key in an ER diagram?",
+      "options": [
+        "An attribute that can be NULL",
+        "An attribute that uniquely identifies an entity",
+        "A relationship between entities",
+        "A composite attribute"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does cardinality specify in a relationship?",
+      "options": [
+        "The name of the relationship",
+        "The number of instances of one entity associated with another",
+        "The attributes of an entity",
+        "The primary key of an entity"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which of the following is NOT a type of cardinality?",
+      "options": [
+        "One-to-One (1:1)",
+        "One-to-Many (1:N)",
+        "Many-to-Many (M:N)",
+        "Many-to-One-to-Many (M:1:N)"
+      ],
+      "correctIndex": 3
+    },
+    {
+      "question": "What is a weak entity?",
+      "options": [
+        "An entity with no attributes",
+        "An entity that cannot be uniquely identified without a relationship to another entity",
+        "An entity with only one attribute",
+        "An entity that has no relationships"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What does total participation mean in an ER diagram?",
+      "options": [
+        "Some entities participate in the relationship",
+        "Every entity must participate in the relationship",
+        "No entities participate in the relationship",
+        "Only one entity participates in the relationship"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "How is total participation represented in an ER diagram?",
+      "options": [
+        "Single line",
+        "Double line",
+        "Dotted line",
+        "Thick line"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is a composite attribute?",
+      "options": [
+        "An attribute that can have multiple values",
+        "An attribute that can be divided into smaller sub-attributes",
+        "An attribute that is a primary key",
+        "An attribute that is derived from other attributes"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "When mapping a 1:N relationship to a relational schema, where is the foreign key placed?",
+      "options": [
+        "In the entity on the \"one\" side",
+        "In the entity on the \"many\" side",
+        "In both entities",
+        "In a separate relation"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "How is a many-to-many (M:N) relationship mapped to a relational schema?",
+      "options": [
+        "Foreign key in one of the entities",
+        "Foreign key in both entities",
+        "A separate relation with foreign keys from both entities",
+        "It cannot be mapped"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is a derived attribute?",
+      "options": [
+        "An attribute that is a primary key",
+        "An attribute that can have multiple values",
+        "An attribute whose value can be calculated from other attributes",
+        "An attribute that is composite"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "In an ER diagram, how are attributes typically represented?",
+      "options": [
+        "Rectangles",
+        "Ovals or ellipses",
+        "Diamonds",
+        "Lines"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "What is the purpose of mapping an ER diagram to a relational schema?",
+      "options": [
+        "To create a visual representation",
+        "To convert the conceptual design into a logical database design",
+        "To identify entities",
+        "To define relationships"
+      ],
+      "correctIndex": 1
+    }
+  ]
+}

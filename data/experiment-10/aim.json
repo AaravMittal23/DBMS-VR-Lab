@@ -1,0 +1,13 @@
+{
+  "objective": "To study Concurrency Control techniques and handle Deadlocks in a multi-user database environment.",
+  "learningObjectives": [
+    "Understand concurrency problems (Lost Update, Dirty Read, Unrepeatable Read)",
+    "Learn about Locking mechanisms (Shared vs Exclusive)",
+    "Understand Two-Phase Locking (2PL)",
+    "Detect and resolve Deadlocks"
+  ],
+  "expectedOutcomes": [
+    "Ability to identify potential concurrency conflicts",
+    "Understanding of how the database engine resolves deadlocks"
+  ]
+}

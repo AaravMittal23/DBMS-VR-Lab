@@ -1,0 +1,24 @@
+{
+  "introduction": "Explore Concurrency and Deadlocks.",
+  "steps": [
+    {
+      "title": "Step 1: Start Concurrent Transactions",
+      "content": "Start Transaction A and Transaction B."
+    },
+    {
+      "title": "Step 2: Acquire Locks",
+      "content": "Have Transaction A lock Row 1, and Transaction B lock Row 2."
+    },
+    {
+      "title": "Step 3: Create Circular Wait",
+      "content": "Have Transaction A request a lock on Row 2, and Transaction B request a lock on Row 1."
+    },
+    {
+      "title": "Step 4: Observe Deadlock Detection",
+      "content": "Watch the DBMS detect the deadlock and abort one transaction."
+    }
+  ],
+  "expectedOutcomes": [
+    "Understanding of how locks prevent concurrency anomalies but can lead to deadlocks."
+  ]
+}

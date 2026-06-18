@@ -1,4 +1,13 @@
 {
-  "references": [],
-  "acknowledgment": "This experiment content is adapted for the DBMS Virtual Lab for educational purposes."
+  "references": [
+    {
+      "title": "MySQL 8.0 Reference Manual",
+      "source": "Oracle Corporation"
+    },
+    {
+      "title": "SQL Fundamentals",
+      "source": "John J. Patrick"
+    }
+  ],
+  "acknowledgment": "Developed for the DBMS Virtual Laboratory."
 }

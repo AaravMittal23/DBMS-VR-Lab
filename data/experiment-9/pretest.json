@@ -1,0 +1,25 @@
+{
+  "instructions": "Test your knowledge of Transactions.",
+  "questions": [
+    {
+      "question": "Which ACID property guarantees that all operations in a transaction succeed or all fail?",
+      "options": [
+        "Atomicity",
+        "Consistency",
+        "Isolation",
+        "Durability"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command undoes the changes made in the current transaction?",
+      "options": [
+        "UNDO",
+        "REVERT",
+        "ROLLBACK",
+        "CANCEL"
+      ],
+      "correctIndex": 2
+    }
+  ]
+}

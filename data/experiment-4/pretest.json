@@ -1,0 +1,25 @@
+{
+  "instructions": "Test your knowledge of Joins and Subqueries.",
+  "questions": [
+    {
+      "question": "Which JOIN returns all records from the left table, and the matched records from the right table?",
+      "options": [
+        "INNER JOIN",
+        "RIGHT JOIN",
+        "LEFT JOIN",
+        "FULL OUTER JOIN"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "A subquery can be nested inside which of the following?",
+      "options": [
+        "SELECT statement",
+        "WHERE clause",
+        "FROM clause",
+        "All of the above"
+      ],
+      "correctIndex": 3
+    }
+  ]
+}

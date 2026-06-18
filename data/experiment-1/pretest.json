@@ -1,4 +1,35 @@
 {
-  "instructions": "Answer the following questions to assess your prior knowledge of SQL aggregate functions and grouping operations.",
-  "questions": []
+  "instructions": "Answer these questions to test your prior knowledge on DBMS architecture.",
+  "questions": [
+    {
+      "question": "Which schema level describes the physical storage structure of the database?",
+      "options": [
+        "External Level",
+        "Conceptual Level",
+        "Internal Level",
+        "Logical Level"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "What is the primary purpose of the Three-Schema architecture?",
+      "options": [
+        "Increase database speed",
+        "Achieve data independence",
+        "Reduce hardware cost",
+        "Improve UI design"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which component of a DBMS is responsible for compiling and executing SQL statements?",
+      "options": [
+        "Storage Manager",
+        "Buffer Manager",
+        "Query Processor",
+        "Transaction Manager"
+      ],
+      "correctIndex": 2
+    }
+  ]
 }

@@ -1,0 +1,13 @@
+{
+  "introduction": "A transaction is a logical unit of work that contains one or more SQL statements. A transaction is an atomic unit; the effects of all the SQL statements in a transaction can be either all committed or all rolled back.",
+  "sections": [
+    {
+      "title": "ACID Properties",
+      "content": "Atomicity ensures all-or-nothing execution. Consistency ensures the database transitions from one valid state to another. Isolation ensures concurrent execution leaves the database in the same state that would have been obtained if transactions were executed sequentially. Durability ensures that once a transaction has been committed, it will remain committed."
+    },
+    {
+      "title": "TCL Commands",
+      "content": "Transaction Control Language includes COMMIT (saves the work), ROLLBACK (undoes the work since last commit), and SAVEPOINT (sets a point to which you can later roll back)."
+    }
+  ]
+}

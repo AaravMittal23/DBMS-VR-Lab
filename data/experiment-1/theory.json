@@ -1,10 +1,17 @@
 {
-  "introduction": "This experiment covers SQL aggregate functions and grouping operations. Aggregate functions are used to perform calculations on sets of rows and return a single summary value, while GROUP BY and HAVING are used to organize and filter aggregated results.",
-  "sections": [],
-  "functionalDependencies": null,
-  "havingClause": null,
-  "whereVsHaving": null,
-  "mappingRules": null,
-  "anomalies": null,
-  "practicalExample": null
+  "introduction": "Database Management Systems (DBMS) are complex software applications designed to store, retrieve, and manage data efficiently. Understanding their underlying architecture is crucial for effective database design and administration.",
+  "sections": [
+    {
+      "title": "Three-Schema Architecture",
+      "content": "The three-schema architecture was proposed to achieve data independence. It separates the user applications and the physical database. The three levels are: 1. Internal Level (Physical schema) describing physical storage. 2. Conceptual Level (Logical schema) describing the structure of the whole database. 3. External Level (View schema) describing the part of the database a specific user group is interested in."
+    },
+    {
+      "title": "Data Independence",
+      "content": "Data independence is the ability to modify a schema definition in one level without affecting a schema definition in the next higher level. There are two types: Logical Data Independence and Physical Data Independence."
+    },
+    {
+      "title": "Client-Server Architecture",
+      "content": "Modern DBMS typically use a client-server architecture where the database server runs on a centralized machine, and client applications connect to it over a network to request data using protocols like TCP/IP."
+    }
+  ]
 }

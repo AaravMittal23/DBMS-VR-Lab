@@ -1,0 +1,25 @@
+{
+  "instructions": "Evaluate your understanding.",
+  "questions": [
+    {
+      "question": "Which of the following operations might be slower on a table with many indexes?",
+      "options": [
+        "SELECT",
+        "INSERT",
+        "JOIN",
+        "VIEW"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Can you always UPDATE a View?",
+      "options": [
+        "Yes, always",
+        "No, never",
+        "Yes, if the view contains simple SELECTs without aggregates or grouping",
+        "Yes, but only if you have admin privileges"
+      ],
+      "correctIndex": 2
+    }
+  ]
+}
