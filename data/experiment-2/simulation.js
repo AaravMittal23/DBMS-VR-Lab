@@ -95,7 +95,11 @@ const ddlExamples = [
 ];
 
 window.loadDDLExample = function(index) {
-  document.getElementById('ddl-input').value = ddlExamples[index];
+  if (window.sqlEditor) {
+    window.sqlEditor.setValue(ddlExamples[index]);
+  } else {
+    document.getElementById('ddl-input').value = ddlExamples[index];
+  }
 };
 
 window.executeDDL = function() {

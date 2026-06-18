@@ -110,7 +110,11 @@ const dmlExamples = [
 ];
 
 window.loadDMLExample = function(index) {
-  document.getElementById('dml-input').value = dmlExamples[index];
+  if (window.sqlEditor) {
+    window.sqlEditor.setValue(dmlExamples[index]);
+  } else {
+    document.getElementById('dml-input').value = dmlExamples[index];
+  }
 };
 
 window.renderDMLTable = function(highlightId = null) {

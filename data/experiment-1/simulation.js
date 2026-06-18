@@ -50,13 +50,15 @@ window.sim1_renderSimulation = function() {
           </div>
           
           <div style="display: flex; gap: 8px; margin-top: 16px;">
-            <input type="text" id="terminal-input" placeholder="Type a command (e.g., mysql -u root -p)" style="flex: 1; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-family: monospace;" onkeypress="if(event.key === 'Enter') executeTerminalCommand()">
-            <button onclick="executeTerminalCommand()" style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Run</button>
+            <div style="flex: 1;">
+              <textarea id="terminal-input" rows="1" placeholder="Type a command (e.g., mysql -u root -p)" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-family: monospace;"></textarea>
+            </div>
+            <button onclick="executeTerminalCommand()" style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; height: fit-content;">Run</button>
           </div>
           <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <button onclick="document.getElementById('terminal-input').value = 'mysql -u root -p'; executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">mysql -u root -p</button>
-            <button onclick="document.getElementById('terminal-input').value = 'CREATE DATABASE lab_sandbox;'; executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">CREATE DATABASE</button>
-            <button onclick="document.getElementById('terminal-input').value = 'SHOW DATABASES;'; executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">SHOW DATABASES</button>
+            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('mysql -u root -p'); } else { document.getElementById('terminal-input').value = 'mysql -u root -p'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">mysql -u root -p</button>
+            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('CREATE DATABASE lab_sandbox;'); } else { document.getElementById('terminal-input').value = 'CREATE DATABASE lab_sandbox;'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">CREATE DATABASE</button>
+            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('SHOW DATABASES;'); } else { document.getElementById('terminal-input').value = 'SHOW DATABASES;'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">SHOW DATABASES</button>
           </div>
         </div>
       </div>

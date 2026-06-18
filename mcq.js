@@ -4,6 +4,10 @@
 window.checkAnswer = function(button, isCorrect) {
   const questionBox = button.closest('.question');
   const result = questionBox.querySelector('.result');
+  
+  // Prevent answering again
+  if (questionBox.dataset.answered) return;
+  questionBox.dataset.answered = 'true';
 
   // Disable all buttons and highlight correct answer
   questionBox.querySelectorAll('button').forEach(btn => {
@@ -19,13 +23,58 @@ window.checkAnswer = function(button, isCorrect) {
     button.style.color = 'white';
     result.textContent = 'Correct Answer ✅';
     result.style.color = '#16a34a';
+    questionBox.dataset.correct = 'true';
   } else {
     button.style.backgroundColor = '#dc2626';
     button.style.color = 'white';
     result.textContent = 'Incorrect Answer ❌ The correct answer is highlighted in green.';
     result.style.color = '#dc2626';
+    questionBox.dataset.correct = 'false';
   }
+  
+  checkTestCompletion(questionBox);
 };
+
+function checkTestCompletion(questionBox) {
+  const expId = questionBox.dataset.expId;
+  const testType = questionBox.dataset.testType;
+  const total = parseInt(questionBox.dataset.total, 10);
+  
+  if (!expId || !testType) return;
+  
+  // Count how many are answered
+  const allQuestions = document.querySelectorAll('.question');
+  let answeredCount = 0;
+  let correctCount = 0;
+  
+  allQuestions.forEach(q => {
+    if (q.dataset.answered === 'true') {
+      answeredCount++;
+      if (q.dataset.correct === 'true') correctCount++;
+    }
+  });
+  
+  if (answeredCount === total) {
+    // Save to state
+    if (window.StateManager) {
+      window.StateManager.updateScore(expId, testType, correctCount, total);
+    }
+    
+    // Show summary card
+    const summaryCard = document.getElementById('mcq-summary');
+    const scoreSpan = document.getElementById('mcq-score');
+    if (summaryCard && scoreSpan) {
+      scoreSpan.textContent = correctCount;
+      summaryCard.style.display = 'block';
+      summaryCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    
+    // Re-render sidebar to show checkmark if needed
+    if (window.appInstance) {
+      document.getElementById('sidebar').innerHTML = window.appInstance.buildSidebar(expId, testType);
+    }
+  }
+}
 
 /**
  * Feedback form word counter.

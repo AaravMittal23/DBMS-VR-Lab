@@ -22,6 +22,27 @@
   --sidebar-width: 260px;
 }
 
+body.dark-theme {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+  --border: #334155;
+  --accent-light: #1e3a8a;
+  --yellow-light: #854d0e;
+}
+
+.theme-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.theme-btn:hover {
+  transform: scale(1.1);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -471,6 +492,7 @@ footer {
   
   .sidebar.open {
     transform: translateX(0);
+    box-shadow: 0 0 0 10000px rgba(0,0,0,0.5); /* quick backdrop hack */
   }
   
   .content-wrapper {

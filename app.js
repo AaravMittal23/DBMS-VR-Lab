@@ -28,11 +28,41 @@ let simScriptExpId = null;
 
 class App {
   constructor() {
+    window.appInstance = this;
     this.router = new Router(route => this.handleRoute(route));
     this.init();
   }
 
   async init() {
+    // Initialize Dark Mode
+    if (window.StateManager && window.StateManager.getTheme() === 'dark') {
+      document.body.classList.add('dark-theme');
+      document.getElementById('theme-toggle').textContent = '☀️';
+    }
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark-theme');
+      const isDark = document.body.classList.contains('dark-theme');
+      document.getElementById('theme-toggle').textContent = isDark ? '☀️' : '🌙';
+      if (window.StateManager) window.StateManager.setTheme(isDark ? 'dark' : 'light');
+      
+      if (window.sqlEditor) {
+        window.sqlEditor.setOption("theme", isDark ? "dracula" : "default");
+      }
+    });
+
+    // A11y: Close modals on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        for (let i = 1; i <= 10; i++) {
+          const guide = document.getElementById(`guideModal${i}`);
+          if (guide && guide.style.display !== 'none') guide.style.display = 'none';
+          
+          const quiz = document.getElementById(`quizModal${i}`);
+          if (quiz && quiz.style.display !== 'none') quiz.style.display = 'none';
+        }
+      }
+    });
+
     await this.handleRoute(this.router.current());
   }
 
@@ -49,6 +79,11 @@ class App {
       const guide = document.getElementById(`guideModal${i}`);
       if (guide) guide.style.display = 'none';
     }
+    
+    if (window.sqlEditor) {
+      window.sqlEditor.toTextArea();
+      window.sqlEditor = null;
+    }
 
     if (route.view === 'home') {
       this.renderHome();
@@ -63,6 +98,15 @@ class App {
 
   async renderHome() {
     const metas = await Promise.all([1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(id => this.fetchJSON(`data/experiment-${id}/meta.json`)));
+    
+    const completedCount = window.StateManager ? window.StateManager.getTotalCompleted() : 0;
+    const progressHtml = window.StateManager ? `
+      <div class="card" style="text-align: center; background: var(--accent-light); border: 1px solid var(--accent);">
+        <h2>Your Progress</h2>
+        <p style="font-size: 18px; margin: 8px 0;"><strong>${completedCount} / 10</strong> Experiments Completed</p>
+        ${completedCount === 10 ? `<button onclick="window.StateManager.exportResults()" style="background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 12px;">🏆 Export Results (CSV)</button>` : ''}
+      </div>
+    ` : '';
 
     document.getElementById('sidebar').innerHTML = this.buildSidebar(null, null);
     document.getElementById('header').innerHTML  = this.buildHeader('DBMS Virtual Laboratory', 'Welcome to the Database Management Systems Virtual Lab');
@@ -73,6 +117,7 @@ class App {
         <p>This virtual lab platform helps students understand and practice various concepts in database
         management systems through interactive simulations and hands-on experiments.</p>
       </div>
+      ${progressHtml}
       <div class="grid">
         ${metas.map(m => `
           <div class="card">
@@ -126,12 +171,29 @@ class App {
       window.scrollTo(0, 0);
       this.wireNav();
       
-      // Initialize quiz timer AFTER DOM is ready
+      // Initialize quiz timer and CodeMirror AFTER DOM is ready
       setTimeout(() => {
         const initFn = window[`initQuiz${expId}`];
         if (typeof initFn === 'function') {
           initFn();
           console.log(`✓ Quiz${expId} initialized successfully`);
+        }
+        
+        // Initialize CodeMirror if the editor exists
+        const sqlInput = document.getElementById('ddl-input') || document.getElementById('dml-input') || document.getElementById('terminal-input');
+        if (sqlInput && window.CodeMirror) {
+          const isDark = document.body.classList.contains('dark-theme');
+          window.sqlEditor = CodeMirror.fromTextArea(sqlInput, {
+            mode: 'text/x-sql',
+            theme: isDark ? 'dracula' : 'default',
+            lineNumbers: true,
+            viewportMargin: Infinity
+          });
+          
+          // Ensure CodeMirror updates the underlying textarea when executing commands
+          window.sqlEditor.on('change', function(cm) {
+            sqlInput.value = cm.getValue();
+          });
         }
       }, 100);
       return;
@@ -145,10 +207,10 @@ class App {
       html = Renderer.theory(data);
     } else if (page === 'pretest') {
       const data = await this.fetchJSON(`data/experiment-${expId}/pretest.json`);
-      html = Renderer.mcq(data, 'pretest');
+      html = Renderer.mcq(data, 'pretest', expId);
     } else if (page === 'posttest') {
       const data = await this.fetchJSON(`data/experiment-${expId}/posttest.json`);
-      html = Renderer.mcq(data, 'posttest');
+      html = Renderer.mcq(data, 'posttest', expId);
     } else if (page === 'procedure') {
       const data = await this.fetchJSON(`data/experiment-${expId}/procedure.json`);
       html = Renderer.procedure(data);
@@ -163,6 +225,17 @@ class App {
     document.title = `DBMS Virtual Lab | ${PAGE_TITLES[page] || page}`;
     window.scrollTo(0, 0);
     this.wireNav();
+
+    if (page === 'introduction') {
+      setTimeout(() => {
+        if (window.StateManager && !window.StateManager.hasSeenTour()) {
+          if (typeof window.startTour === 'function') {
+            window.startTour();
+            window.StateManager.markTourSeen();
+          }
+        }
+      }, 500);
+    }
   }
 
   /* ------------------------------------------------------------------ */
@@ -224,35 +297,56 @@ class App {
   /* HTML builders                                                        */
   /* ------------------------------------------------------------------ */
 
-  buildSidebar(expId, activePage) {
-    const homeLink = `<a href="#/" class="${!expId ? 'active' : ''}">🏠 Lab Home</a>`;
 
-    let allExperimentsList = '';
-    for (let i = 1; i <= 10; i++) {
-        const isCurrentExp = (i == expId);
-        allExperimentsList += `<div class="sidebar-exp-block" style="margin-bottom: 4px;">`;
-        allExperimentsList += `<a href="#/experiment/${i}/introduction" class="${isCurrentExp && activePage === 'introduction' ? 'active' : ''}" style="font-weight: ${isCurrentExp ? '600' : 'normal'};">🧪 Experiment ${i}</a>`;
-        
-        if (isCurrentExp) {
-            const expLinks = NAV_PAGES.filter(p => p !== 'introduction').map(p => `
-              <a href="#/experiment/${expId}/${p}" class="sub-nav ${p === activePage ? 'active' : ''}" style="padding-left: 40px; font-size: 13px; margin-top: 2px;">
-                ↳ ${PAGE_TITLES[p]}
-              </a>`).join('');
-            allExperimentsList += expLinks;
-        }
-        allExperimentsList += `</div>`;
-    }
+  buildSidebar(currentExpId, currentPage) {
+    const pages = [
+      { id: 'introduction', label: 'Introduction' },
+      { id: 'aim', label: 'Aim' },
+      { id: 'theory', label: 'Theory' },
+      { id: 'pretest', label: 'Pre-Test' },
+      { id: 'procedure', label: 'Procedure' },
+      { id: 'simulation', label: 'Simulation' },
+      { id: 'posttest', label: 'Post-Test' },
+      { id: 'references', label: 'References' },
+      { id: 'feedback', label: 'Feedback' }
+    ];
 
-    return `
+    let html = `
       <div class="sidebar-header">
         <h2>DBMS Virtual Lab</h2>
-        <p>${expId ? `Experiment ${expId}` : 'Navigation'}</p>
+        <p>Department of Computer Science</p>
       </div>
       <nav>
-        ${homeLink}
-        <div class="sidebar-divider" style="margin: 12px 0; border-top: 1px solid var(--border);"></div>
-        ${allExperimentsList}
-      </nav>`;
+        <a href="#/home" class="${!currentExpId ? 'active' : ''}">🏠 Home</a>
+    `;
+
+    for (let i = 1; i <= 10; i++) {
+      const isExpanded = String(currentExpId) === String(i);
+      const isCompleted = window.StateManager ? window.StateManager.isExperimentCompleted(i) : false;
+      const checkmark = isCompleted ? ' <span style="color: #16a34a;" title="Completed">✅</span>' : '';
+      
+      html += `
+        <div style="border-bottom: 1px solid var(--border);">
+          <a href="#/experiment/${i}/introduction" 
+             style="display: flex; justify-content: space-between; font-weight: ${isExpanded ? 'bold' : 'normal'}; background: ${isExpanded ? 'var(--yellow-light)' : 'transparent'};">
+            <span>Exp ${i}</span>
+            <span>${isExpanded ? '▼' : '▶'} ${checkmark}</span>
+          </a>
+      `;
+
+      if (isExpanded) {
+        html += `<div style="padding-left: 16px; background: #fdfdfd;">`;
+        pages.forEach(p => {
+          const activeClass = currentPage === p.id ? 'active' : '';
+          html += `<a href="#/experiment/${i}/${p.id}" class="${activeClass}" style="font-size: 13px; padding: 8px 16px;">${p.label}</a>`;
+        });
+        html += `</div>`;
+      }
+      html += `</div>`;
+    }
+
+    html += `</nav>`;
+    return html;
   }
 
   buildHeader(title, subtitle) {

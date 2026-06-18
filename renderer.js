@@ -90,21 +90,31 @@ const Renderer = {
       ${having}${whereVsHaving}${mappingRules}${anomalies}${example}`;
   },
 
-  mcq(data, type) {
+  mcq(data, type, expId) {
     const label = type === 'pretest' ? 'Pre-Test' : 'Post-Test';
+    const totalQuestions = data.questions.length;
     const questions = data.questions.map((q, i) => `
-      <div class="card question" data-question="${i}">
+      <div class="card question" data-question="${i}" data-exp-id="${expId}" data-test-type="${type}" data-total="${totalQuestions}">
         <p><strong>${i + 1}. ${q.question}</strong></p>
         ${q.options.map((opt, j) => `
           <button onclick="checkAnswer(this, ${j === q.correctIndex})">${String.fromCharCode(65+j)}) ${opt}</button>
         `).join('')}
         <p class="result"></p>
       </div>`).join('');
+    
+    const summaryCard = `
+      <div class="card" id="mcq-summary" style="display: none; text-align: center; margin-top: 24px;">
+        <h2>Test Completed!</h2>
+        <p style="font-size: 18px;">Your score: <strong id="mcq-score">0</strong> / ${totalQuestions}</p>
+        <button onclick="window.location.hash='#/experiment/${expId}/${type === 'pretest' ? 'procedure' : 'feedback'}'" class="sim-btn" style="background: var(--primary); color: white; margin-top: 16px;">Continue</button>
+      </div>
+    `;
 
     return `
       <span class="badge">${label}</span>
       <p style="margin-bottom:24px;color:var(--muted);">${data.instructions}</p>
-      ${questions}`;
+      ${questions}
+      ${summaryCard}`;
   },
 
   procedure(data) {

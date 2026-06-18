@@ -5,6 +5,13 @@
   <title>DBMS Virtual Lab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+  
+  <!-- Shepherd CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@11.0.1/dist/css/shepherd.css"/>
 </head>
 <body>
 
@@ -30,9 +37,12 @@
       <h1>DBMS Virtual Laboratory</h1>
       <p>Loading…</p>
     </div>
-    <div class="header-right">
-      <div class="institution">SRM Institute of Science and Technology</div>
-      <div class="department">Department of Computer Science</div>
+    <div class="header-right" style="display: flex; align-items: center; gap: 16px;">
+      <div style="text-align: right;">
+        <div class="institution">SRM Institute of Science and Technology</div>
+        <div class="department">Department of Computer Science</div>
+      </div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">🌙</button>
     </div>
   </header>
 
@@ -51,6 +61,15 @@
 </div>
 
 <!-- ── Scripts ── -->
+<!-- CodeMirror JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/sql/sql.min.js"></script>
+
+<!-- Shepherd JS -->
+<script src="https://cdn.jsdelivr.net/npm/shepherd.js@11.0.1/dist/js/shepherd.min.js"></script>
+
+<script src="js/state.js"></script>
+<script src="js/tour.js"></script>
 <script src="router.js"></script>
 <script src="renderer.js"></script>
 <script src="mcq.js"></script>
