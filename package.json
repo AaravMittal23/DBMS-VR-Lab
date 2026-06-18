@@ -1,0 +1,24 @@
+{
+  "name": "dbms_vr_lab_new",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AaravMittal23/DBMS-VR-Lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AaravMittal23/DBMS-VR-Lab/issues"
+  },
+  "homepage": "https://github.com/AaravMittal23/DBMS-VR-Lab#readme",
+  "dependencies": {
+    "jsdom": "^29.1.1"
+  }
+}

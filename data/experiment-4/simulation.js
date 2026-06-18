@@ -79,7 +79,7 @@ INNER JOIN Departments D ON E.DeptID = D.DeptID;"></textarea>
 
     <!-- Guide Modal -->
     <div id="guideModal4" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal4') closeGuide4()">
-      <div style="background: white; border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
           <h2 style="margin: 0;">📖 Joins & Subqueries Guide</h2>
           <button onclick="closeGuide4()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -98,7 +98,7 @@ INNER JOIN Departments D ON E.DeptID = D.DeptID;"></textarea>
     
     <!-- Quiz Modal -->
     <div id="quizModal4" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal4') closeQuiz4()">
-      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
           <button onclick="closeQuiz4()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -247,7 +247,7 @@ window.displayQuiz4 = function(question) {
   let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += `<button onclick="checkAnswer4(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
+    html += `<button onclick="checkAnswer4(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;

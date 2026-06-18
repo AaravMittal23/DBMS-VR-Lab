@@ -111,7 +111,7 @@ HAVING COUNT(*) > 2;</pre>
 
     <!-- Guide Modal -->
     <div id="guideModal5" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal5') closeGuide5()">
-      <div style="background: white; border-radius: 8px; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 600px; max-height: 80vh; overflow-y: auto; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
           <h2 style="margin: 0;">📖 SQL Aggregate Functions Guide</h2>
           <button onclick="closeGuide5()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -164,7 +164,7 @@ HAVING COUNT(*) > 2;</pre>
 
     <!-- Quiz Modal -->
     <div id="quizModal5" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal5') closeQuiz5()">
-      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
           <button onclick="closeQuiz5()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -242,7 +242,7 @@ function displayQuiz5(question) {
   
   question.options.forEach((option, index) => {
     const isCorrect = index === question.correct;
-    html += `<button onclick="checkAnswer5(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer; transition: all 0.2s;">${option}</button>`;
+    html += `<button onclick="checkAnswer5(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer; transition: all 0.2s;">${option}</button>`;
   });
   
   html += '</div>';

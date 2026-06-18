@@ -21,7 +21,7 @@ window.sim9_renderSimulation = function() {
             <button id="btn-start" onclick="transact('START')" style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; flex: 1; font-weight: bold;">START TRANSACTION</button>
           </div>
           
-          <div id="tx-controls" style="display: none; flex-direction: column; gap: 12px; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 16px;">
+          <div id="tx-controls" style="display: none; flex-direction: column; gap: 12px; background: var(--card); padding: 16px; border-radius: 8px; border: 1px solid var(--border); margin-bottom: 16px;">
             <p style="margin: 0; font-weight: bold; color: #0284c7;">Active Transaction ID: #TXN-8472</p>
             <p style="margin: 0; font-size: 13px; color: var(--muted);">Step 1: Deduct $500 from Alice (Acc 1)</p>
             <button id="btn-update1" onclick="transact('UPDATE1')" style="background: #e2e8f0; color: var(--text); border: 1px solid var(--border); padding: 8px; border-radius: 4px; cursor: pointer; text-align: left; font-family: monospace;">UPDATE Accounts SET Balance = Balance - 500 WHERE ID = 1;</button>
@@ -47,7 +47,7 @@ window.sim9_renderSimulation = function() {
           <div style="display: flex; justify-content: center; gap: 32px; margin-top: 24px;">
             
             <!-- Alice's Account -->
-            <div style="text-align: center; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 24px; width: 150px; position: relative;">
+            <div style="text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; width: 150px; position: relative;">
               <div style="font-size: 48px; margin-bottom: 8px;">👩</div>
               <h3 style="margin: 0 0 4px 0;">Alice (ID: 1)</h3>
               <p style="margin: 0; font-size: 24px; font-weight: bold; color: var(--primary);" id="bal-alice">$1000</p>
@@ -60,7 +60,7 @@ window.sim9_renderSimulation = function() {
             </div>
 
             <!-- Bob's Account -->
-            <div style="text-align: center; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 24px; width: 150px; position: relative;">
+            <div style="text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px; width: 150px; position: relative;">
               <div style="font-size: 48px; margin-bottom: 8px;">👨</div>
               <h3 style="margin: 0 0 4px 0;">Bob (ID: 2)</h3>
               <p style="margin: 0; font-size: 24px; font-weight: bold; color: var(--primary);" id="bal-bob">$500</p>
@@ -76,7 +76,7 @@ window.sim9_renderSimulation = function() {
 
     <!-- Guide Modal -->
     <div id="guideModal9" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal9') closeGuide9()">
-      <div style="background: white; border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
           <h2 style="margin: 0;">📖 Transactions Guide</h2>
           <button onclick="closeGuide9()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -94,7 +94,7 @@ window.sim9_renderSimulation = function() {
     
     <!-- Quiz Modal -->
     <div id="quizModal9" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal9') closeQuiz9()">
-      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
           <button onclick="closeQuiz9()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -240,7 +240,7 @@ window.displayQuiz9 = function(question) {
   let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += `<button onclick="checkAnswer9(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
+    html += `<button onclick="checkAnswer9(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;

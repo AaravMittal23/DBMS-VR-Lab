@@ -28,7 +28,7 @@ window.sim10_renderSimulation = function() {
                 <button onclick="window.sim10_lock('A', 'R2')" class="sim-btn" style="flex:1; background: #3b82f6; color: white;">Lock Resource 2</button>
               </div>
               <div style="margin-top: 8px;">
-                <button onclick="window.sim10_unlock('A')" class="sim-btn" style="width: 100%; background: white; color: #1d4ed8; border: 1px solid #3b82f6;">Release All & Commit</button>
+                <button onclick="window.sim10_unlock('A')" class="sim-btn" style="width: 100%; background: var(--card); color: #1d4ed8; border: 1px solid #3b82f6;">Release All & Commit</button>
               </div>
             </div>
 
@@ -40,7 +40,7 @@ window.sim10_renderSimulation = function() {
                 <button onclick="window.sim10_lock('B', 'R1')" class="sim-btn" style="flex:1; background: #ef4444; color: white;">Lock Resource 1</button>
               </div>
               <div style="margin-top: 8px;">
-                <button onclick="window.sim10_unlock('B')" class="sim-btn" style="width: 100%; background: white; color: #b91c1c; border: 1px solid #ef4444;">Release All & Commit</button>
+                <button onclick="window.sim10_unlock('B')" class="sim-btn" style="width: 100%; background: var(--card); color: #b91c1c; border: 1px solid #ef4444;">Release All & Commit</button>
               </div>
             </div>
 
@@ -55,13 +55,13 @@ window.sim10_renderSimulation = function() {
           <h2 style="margin-top: 0;">Resources State</h2>
           <div style="display: flex; gap: 16px; justify-content: center; padding: 20px 0;">
             <!-- Resource 1 -->
-            <div id="res-R1" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; transition: all 0.3s;">
+            <div id="res-R1" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--card); transition: all 0.3s;">
               <h3 style="margin: 0;">Resource 1</h3>
               <span id="lock-R1" style="font-size: 12px; margin-top: 4px; font-weight: bold; color: #64748b;">UNLOCKED</span>
             </div>
 
             <!-- Resource 2 -->
-            <div id="res-R2" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f8fafc; transition: all 0.3s;">
+            <div id="res-R2" style="width: 120px; height: 120px; border: 3px dashed #cbd5e1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--card); transition: all 0.3s;">
               <h3 style="margin: 0;">Resource 2</h3>
               <span id="lock-R2" style="font-size: 12px; margin-top: 4px; font-weight: bold; color: #64748b;">UNLOCKED</span>
             </div>
@@ -84,7 +84,7 @@ window.sim10_renderSimulation = function() {
 
     <!-- Modals -->
     <div id="guideModal10" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal10') closeGuide10()">
-      <div class="modal-content" style="background: white; border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div class="modal-content" style="background: var(--card); border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h2 style="margin: 0;">Deadlock Simulator Guide</h2>
           <button onclick="closeGuide10()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
@@ -104,7 +104,7 @@ window.sim10_renderSimulation = function() {
 
     <!-- Quiz Modal -->
     <div id="quizModal10" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal10') closeQuiz10()">
-      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+      <div style="background: var(--card); border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
           <button onclick="closeQuiz10()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
@@ -259,7 +259,7 @@ window.displayQuiz10 = function(question) {
   let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += `<button onclick="checkAnswer10(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
+    html += `<button onclick="checkAnswer10(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;

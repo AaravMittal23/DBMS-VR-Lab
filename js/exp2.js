@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     .entity-box {
-      background: white;
+      background: var(--card);
       border: 2px solid var(--primary);
       border-radius: 8px;
       min-width: 180px;

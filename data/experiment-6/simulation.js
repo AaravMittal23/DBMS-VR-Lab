@@ -37,8 +37,8 @@ window.sim6_renderSimulation = function() {
             { name:'Course',  attrs:['<u>course_id</u> (Primary Key)','title','credits','description'] },
             { name:'Department', attrs:['<u>dept_id</u> (Primary Key)','dept_name','location','budget'] }
           ].map(e => `
-            <div class="card" style="background:#f8fafc;border:2px solid var(--primary)">
-              <h3 style="color:var(--primary);text-align:center;padding:12px;background:white;border-radius:8px;margin-bottom:12px">${e.name}</h3>
+            <div class="card" style="background: var(--card);border:2px solid var(--primary)">
+              <h3 style="color:var(--primary);text-align:center;padding:12px;background: var(--card);border-radius:8px;margin-bottom:12px">${e.name}</h3>
               ${e.attrs.map(a => `<div style="margin-bottom:8px">${a}</div>`).join('')}
             </div>`).join('')}
         </div>
@@ -58,7 +58,7 @@ window.sim6_renderSimulation = function() {
       <div class="card">
         <h2>Step 2: Relationships</h2>
         <p style="color:var(--muted);margin-bottom:20px">Relationships connect entities. Cardinality (1:1, 1:N, M:N) is shown on the connecting lines.</p>
-        <div class="card" style="background:#f8fafc;padding:24px">
+        <div class="card" style="background: var(--card);padding:24px">
           ${[
             { left:'Student', rel:'ENROLLS', card:'M : N', right:'Course' },
             { left:'Department', rel:'OFFERS', card:'1 : N', right:'Course' },
@@ -130,7 +130,7 @@ window.sim6_renderSimulation = function() {
 
     <!-- Guide Modal -->
     <div id="guideModal6" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center" onclick="if(event.target.id==='guideModal6') closeGuide6()">
-      <div style="background:white;border-radius:8px;max-width:650px;max-height:80vh;overflow-y:auto;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
+      <div style="background: var(--card);border-radius:8px;max-width:650px;max-height:80vh;overflow-y:auto;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
           <h2 style="margin:0">📖 ER Diagram & Relational Mapping Guide</h2>
           <button onclick="closeGuide6()" style="background:none;border:none;font-size:24px;cursor:pointer;padding:0;width:32px;height:32px">✕</button>
@@ -189,7 +189,7 @@ window.sim6_renderSimulation = function() {
 
     <!-- Quiz Modal -->
     <div id="quizModal6" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1001;align-items:center;justify-content:center" onclick="if(event.target.id==='quizModal6') closeQuiz6()">
-      <div style="background:white;border-radius:8px;max-width:500px;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
+      <div style="background: var(--card);border-radius:8px;max-width:500px;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
           <h2 style="margin:0;color:var(--primary)">❓ Quick Quiz</h2>
           <button onclick="closeQuiz6()" style="background:none;border:none;font-size:24px;cursor:pointer;padding:0;width:32px;height:32px">✕</button>
@@ -273,7 +273,7 @@ function displayQuiz6(question) {
   
   question.options.forEach((option, index) => {
     const isCorrect = index === question.correct;
-    html += `<button onclick="checkAnswer6(${index},${question.correct},'${question.explanation}')" style="display:block;width:100%;padding:12px;margin:10px 0;border:2px solid var(--border);background:white;border-radius:6px;text-align:left;cursor:pointer;transition:all 0.2s">${option}</button>`;
+    html += `<button onclick="checkAnswer6(${index},${question.correct},'${question.explanation}')" style="display:block;width:100%;padding:12px;margin:10px 0;border:2px solid var(--border);background: var(--card);border-radius:6px;text-align:left;cursor:pointer;transition:all 0.2s">${option}</button>`;
   });
   
   html += '</div>';

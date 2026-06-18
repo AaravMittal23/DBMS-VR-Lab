@@ -30,7 +30,7 @@ window.sim7_renderSimulation = function() {
     <div id="sim7_step0" class="simulation-step">
       <div class="card">
         <h2>Original Unnormalized Relation</h2>
-        <div class="card" style="background:#fff5f5;border-left:4px solid #dc2626">
+        <div class="card" style="background: var(--card);5f5;border-left:4px solid #dc2626">
           <h3>Student_Course Relation (Unnormalized)</h3>
           <div class="simulation-result">
             <table class="simulation-table">
@@ -46,7 +46,7 @@ window.sim7_renderSimulation = function() {
         </div>
         <div class="card" style="margin-top:20px">
           <h3>Functional Dependencies Identified:</h3>
-          <div style="background:#f8fafc;padding:16px;border-radius:8px;font-family:monospace">
+          <div style="background: var(--card);padding:16px;border-radius:8px;font-family:monospace">
             <div>student_id → student_name, dept_id</div>
             <div>dept_id → dept_name</div>
             <div>course_id → course_name, instructor</div>
@@ -72,7 +72,7 @@ window.sim7_renderSimulation = function() {
       <div class="card">
         <h2>Step 1: First Normal Form (1NF)</h2>
         <p style="color:var(--muted);margin-bottom:20px">All attributes already contain atomic values. The relation is in 1NF. Primary Key: (student_id, course_id)</p>
-        <div class="card" style="background:#fff5f5;border-left:4px solid #f59e0b">
+        <div class="card" style="background: var(--card);5f5;border-left:4px solid #f59e0b">
           <div class="simulation-result">
             <table class="simulation-table">
               <thead><tr><th>student_id PK</th><th>student_name</th><th>dept_id</th><th>dept_name</th><th>course_id PK</th><th>course_name</th><th>instructor</th><th>grade</th></tr></thead>
@@ -162,7 +162,7 @@ window.sim7_renderSimulation = function() {
 
     <!-- Guide Modal -->
     <div id="guideModal7" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center" onclick="if(event.target.id==='guideModal7') closeGuide7()">
-      <div style="background:white;border-radius:8px;max-width:650px;max-height:80vh;overflow-y:auto;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
+      <div style="background: var(--card);border-radius:8px;max-width:650px;max-height:80vh;overflow-y:auto;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
           <h2 style="margin:0">📖 Database Normalization Guide</h2>
           <button onclick="closeGuide7()" style="background:none;border:none;font-size:24px;cursor:pointer;padding:0;width:32px;height:32px">✕</button>
@@ -223,7 +223,7 @@ window.sim7_renderSimulation = function() {
 
     <!-- Quiz Modal -->
     <div id="quizModal7" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1001;align-items:center;justify-content:center" onclick="if(event.target.id==='quizModal7') closeQuiz7()">
-      <div style="background:white;border-radius:8px;max-width:500px;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
+      <div style="background: var(--card);border-radius:8px;max-width:500px;padding:32px;box-shadow:0 20px 25px rgba(0,0,0,0.15)">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
           <h2 style="margin:0;color:var(--primary)">❓ Quick Quiz</h2>
           <button onclick="closeQuiz7()" style="background:none;border:none;font-size:24px;cursor:pointer;padding:0;width:32px;height:32px">✕</button>
@@ -307,7 +307,7 @@ function displayQuiz7(question) {
   
   question.options.forEach((option, index) => {
     const isCorrect = index === question.correct;
-    html += `<button onclick="checkAnswer7(${index},${question.correct},'${question.explanation}')" style="display:block;width:100%;padding:12px;margin:10px 0;border:2px solid var(--border);background:white;border-radius:6px;text-align:left;cursor:pointer;transition:all 0.2s">${option}</button>`;
+    html += `<button onclick="checkAnswer7(${index},${question.correct},'${question.explanation}')" style="display:block;width:100%;padding:12px;margin:10px 0;border:2px solid var(--border);background: var(--card);border-radius:6px;text-align:left;cursor:pointer;transition:all 0.2s">${option}</button>`;
   });
   
   html += '</div>';

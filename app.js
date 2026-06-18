@@ -349,7 +349,7 @@ class App {
       `;
 
       if (isExpanded) {
-        html += `<div style="padding-left: 16px; background: #fdfdfd;">`;
+        html += `<div style="padding-left: 16px; background: var(--card); border-bottom: 1px solid var(--border);">`;
         pages.forEach(p => {
           const activeClass = currentPage === p.id ? 'active' : '';
           html += `<a href="#/experiment/${i}/${p.id}" class="${activeClass}" style="font-size: 13px; padding: 8px 16px;">${p.label}</a>`;
