@@ -85,9 +85,77 @@ const Renderer = {
         <h2>Introduction</h2>
         <p>${data.introduction}</p>
       </div>
+      
+      ${String(expId) === '4' ? this.joinVisualizer() : ''}
+
       ${fdSection}
       <div class="grid">${sections}</div>
       ${having}${whereVsHaving}${mappingRules}${anomalies}${example}`;
+  },
+
+  joinVisualizer() {
+    return `
+      <div class="card" style="margin-top: 24px; text-align: center; background: var(--bg); border: 2px solid var(--border);">
+        <h2 style="margin-bottom: 16px;">Interactive Join Visualizer</h2>
+        <p style="color: var(--muted); margin-bottom: 24px;">Click the buttons below to see how different SQL Joins combine data from two tables.</p>
+        
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 32px; flex-wrap: wrap;">
+          <button onclick="window.animateJoin('inner')" class="sim-btn" style="background: var(--imperial-blue); color: white;">INNER JOIN</button>
+          <button onclick="window.animateJoin('left')" class="sim-btn" style="background: var(--french-blue); color: white;">LEFT JOIN</button>
+          <button onclick="window.animateJoin('right')" class="sim-btn" style="background: var(--teal); color: white;">RIGHT JOIN</button>
+          <button onclick="window.animateJoin('full')" class="sim-btn" style="background: var(--accent); color: white;">FULL OUTER JOIN</button>
+        </div>
+
+        <div style="position: relative; width: 300px; height: 200px; margin: 0 auto;">
+          <!-- Table A Circle -->
+          <div id="circle-a" style="position: absolute; left: 0; top: 0; width: 180px; height: 180px; border-radius: 50%; border: 3px solid #3b82f6; background: rgba(59, 130, 246, 0.1); display: flex; align-items: center; justify-content: flex-start; padding-left: 20px; transition: all 0.5s ease;">
+            <strong style="color: #3b82f6; font-size: 18px;">Table A</strong>
+          </div>
+          
+          <!-- Table B Circle -->
+          <div id="circle-b" style="position: absolute; right: 0; top: 0; width: 180px; height: 180px; border-radius: 50%; border: 3px solid #f59e0b; background: rgba(245, 158, 11, 0.1); display: flex; align-items: center; justify-content: flex-end; padding-right: 20px; transition: all 0.5s ease;">
+            <strong style="color: #f59e0b; font-size: 18px;">Table B</strong>
+          </div>
+          
+          <!-- Intersection (Hidden initially) -->
+          <div id="circle-intersection" style="position: absolute; left: 80px; top: 0; width: 140px; height: 180px; border-radius: 50%; background: transparent; transition: all 0.5s ease; clip-path: ellipse(40px 90px at 70px 90px);"></div>
+        </div>
+        
+        <p id="join-desc" style="margin-top: 24px; font-weight: bold; min-height: 40px;"></p>
+        
+        <script>
+          window.animateJoin = function(type) {
+            const a = document.getElementById('circle-a');
+            const b = document.getElementById('circle-b');
+            const inter = document.getElementById('circle-intersection');
+            const desc = document.getElementById('join-desc');
+            
+            // Reset colors
+            a.style.background = 'rgba(59, 130, 246, 0.1)';
+            b.style.background = 'rgba(245, 158, 11, 0.1)';
+            inter.style.background = 'transparent';
+
+            if (type === 'inner') {
+              inter.style.background = '#10b981';
+              desc.innerHTML = "<strong>INNER JOIN:</strong> Only returns the overlapping records (matches in both tables).";
+            } else if (type === 'left') {
+              a.style.background = 'rgba(59, 130, 246, 0.6)';
+              inter.style.background = 'rgba(59, 130, 246, 0.6)';
+              desc.innerHTML = "<strong>LEFT JOIN:</strong> Returns ALL records from Table A, plus matched records from Table B.";
+            } else if (type === 'right') {
+              b.style.background = 'rgba(245, 158, 11, 0.6)';
+              inter.style.background = 'rgba(245, 158, 11, 0.6)';
+              desc.innerHTML = "<strong>RIGHT JOIN:</strong> Returns ALL records from Table B, plus matched records from Table A.";
+            } else if (type === 'full') {
+              a.style.background = 'rgba(59, 130, 246, 0.6)';
+              b.style.background = 'rgba(245, 158, 11, 0.6)';
+              inter.style.background = '#10b981';
+              desc.innerHTML = "<strong>FULL OUTER JOIN:</strong> Returns ALL records from both tables, matching where possible.";
+            }
+          };
+        </script>
+      </div>
+    `;
   },
 
   mcq(data, type, expId) {
@@ -118,25 +186,111 @@ const Renderer = {
   },
 
   procedure(data) {
-    const steps = data.steps.map((s, i) => `
-      <li>
-        <strong>${s.title}</strong><br>
-        ${s.content}
-        ${s.subpoints ? `<ul style="margin-top:8px">${s.subpoints.map(p => `<li>${p}</li>`).join('')}</ul>` : ''}
-        ${s.code ? `<pre>${escHtml(s.code)}</pre>` : ''}
-      </li>`).join('');
-
-    return `
+    // Generate an interactive carousel instead of a static list
+    const numSteps = data.steps.length;
+    
+    let html = `
       <span class="badge">Procedure</span>
-      <div class="card">
-        <h2>Step-by-Step Procedure</h2>
+      <div class="card" style="position: relative; overflow: hidden; min-height: 400px; padding-bottom: 80px;">
+        <h2>Interactive Procedure Walkthrough</h2>
         <p style="color:var(--muted);margin-bottom:24px">${data.introduction}</p>
-        <ol>${steps}</ol>
+        
+        <div id="procedure-carousel" style="display: flex; transition: transform 0.3s ease;">
+    `;
+    
+    data.steps.forEach((s, i) => {
+      html += `
+          <div class="procedure-step" style="min-width: 100%; box-sizing: border-box; padding: 0 20px;">
+            <h3 style="color: var(--primary); margin-bottom: 12px; font-size: 20px;"><span style="display:inline-block; background: var(--bg); color: var(--text); border-radius: 50%; width: 32px; height: 32px; text-align: center; line-height: 32px; margin-right: 8px;">${i+1}</span>${s.title}</h3>
+            <p style="font-size: 16px; line-height: 1.6; margin-bottom: 16px;">${s.content}</p>
+            ${s.subpoints ? `<ul style="margin-top:8px; line-height: 1.5; padding-left: 20px; font-size: 15px;">${s.subpoints.map(p => `<li style="margin-bottom:6px;">${p}</li>`).join('')}</ul>` : ''}
+            ${s.code ? `<pre style="font-size: 15px; margin-top: 16px;">${escHtml(s.code)}</pre>` : ''}
+          </div>
+      `;
+    });
+    
+    html += `
+        </div>
+        
+        <!-- Controls -->
+        <div style="position: absolute; bottom: 24px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: center;">
+          <button id="proc-prev-btn" onclick="window.procedureManager.prev()" style="padding: 10px 20px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; font-weight: bold; opacity: 0.5; pointer-events: none;">&larr; Previous</button>
+          
+          <div style="display: flex; gap: 6px;">
+            ${data.steps.map((_, i) => `<div class="proc-dot" id="proc-dot-${i}" style="width: 10px; height: 10px; border-radius: 50%; background: ${i === 0 ? 'var(--primary)' : 'var(--border)'}; transition: 0.2s;"></div>`).join('')}
+          </div>
+          
+          <button id="proc-next-btn" onclick="window.procedureManager.next()" style="padding: 10px 20px; border-radius: 6px; border: none; background: var(--primary); color: white; cursor: pointer; font-weight: bold;">Next Step &rarr;</button>
+        </div>
       </div>
-      <div class="card">
-        <h2>Expected Outcomes</h2>
-        <ul>${data.expectedOutcomes.map(o => `<li>${o}</li>`).join('')}</ul>
-      </div>`;
+      
+      <div class="card" id="expected-outcomes-card" style="display: none; animation: fadeIn 0.5s;">
+        <h2 style="color: #10b981;">🎉 Expected Outcomes Reached</h2>
+        <ul style="line-height: 1.6; font-size: 15px; margin-top: 16px;">${data.expectedOutcomes.map(o => `<li style="margin-bottom: 8px;">${o}</li>`).join('')}</ul>
+      </div>
+      
+      <script>
+        // Inline manager for the procedure logic
+        window.procedureManager = {
+          currentStep: 0,
+          totalSteps: ${numSteps},
+          
+          updateUI() {
+            const carousel = document.getElementById('procedure-carousel');
+            const prevBtn = document.getElementById('proc-prev-btn');
+            const nextBtn = document.getElementById('proc-next-btn');
+            const outcomesCard = document.getElementById('expected-outcomes-card');
+            
+            // Move carousel
+            carousel.style.transform = 'translateX(-' + (this.currentStep * 100) + '%)';
+            
+            // Update dots
+            for (let i = 0; i < this.totalSteps; i++) {
+              document.getElementById('proc-dot-' + i).style.background = (i === this.currentStep) ? 'var(--primary)' : 'var(--border)';
+            }
+            
+            // Prev button state
+            if (this.currentStep === 0) {
+              prevBtn.style.opacity = '0.5';
+              prevBtn.style.pointerEvents = 'none';
+            } else {
+              prevBtn.style.opacity = '1';
+              prevBtn.style.pointerEvents = 'auto';
+            }
+            
+            // Next button state
+            if (this.currentStep === this.totalSteps - 1) {
+              nextBtn.innerHTML = 'Finish';
+              outcomesCard.style.display = 'block';
+            } else {
+              nextBtn.innerHTML = 'Next Step &rarr;';
+              outcomesCard.style.display = 'none';
+            }
+          },
+          
+          next() {
+            if (this.currentStep < this.totalSteps - 1) {
+              this.currentStep++;
+              this.updateUI();
+            } else {
+              // Proceed to simulation
+              const hash = window.location.hash;
+              const nextHash = hash.replace('procedure', 'simulation');
+              window.location.hash = nextHash;
+            }
+          },
+          
+          prev() {
+            if (this.currentStep > 0) {
+              this.currentStep--;
+              this.updateUI();
+            }
+          }
+        };
+      </script>
+    `;
+    
+    return html;
   },
 
   references(data) {

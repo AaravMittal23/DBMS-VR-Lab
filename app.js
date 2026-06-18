@@ -92,6 +92,10 @@ class App {
 
     if (route.view === 'home') {
       this.renderHome();
+    } else if (route.view === 'sandbox') {
+      this.renderSandbox();
+    } else if (route.view === 'er-builder') {
+      this.renderERBuilder();
     } else {
       await this.renderExperimentPage(route.expId, route.page);
     }
@@ -151,6 +155,140 @@ class App {
 
     document.title = 'DBMS Virtual Lab | Home';
     this.wireNav();
+  }
+
+  renderSandbox() {
+    document.getElementById('sidebar').innerHTML = this.buildSidebar(null, 'sandbox');
+    document.getElementById('header').innerHTML  = this.buildHeader('Personal Project Sandbox', 'A completely freeform SQLite environment');
+    
+    document.getElementById('main').innerHTML = `
+      <span class="badge" style="background: var(--imperial-blue); color: white;">Personal Project Sandbox</span>
+      
+      <div style="display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+        
+        <div class="card" style="flex: 2; min-width: 400px; padding: 0;">
+          <div style="background: var(--bg-color); padding: 12px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+            <strong style="color: var(--text);">SQL Editor</strong>
+            <div>
+              <button onclick="window.sandboxRun()" style="background: var(--primary); color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 8px;">▶ Run Query</button>
+              <button onclick="window.sandboxClear()" style="background: transparent; color: var(--text); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px; cursor: pointer;">Clear Output</button>
+            </div>
+          </div>
+          <div style="height: 250px; border-bottom: 1px solid var(--border);">
+            <textarea id="sandbox-input"></textarea>
+          </div>
+          <div style="padding: 16px; background: #1e1e1e; min-height: 200px; color: #a3a3a3; font-family: monospace; overflow-y: auto;" id="sandbox-output">
+            $ Ready. Type your SQL query above and click Run.
+          </div>
+        </div>
+
+        <div class="card" style="flex: 1; min-width: 300px; height: fit-content;">
+          <h3 style="margin-top: 0;">Project Schema</h3>
+          <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">Tables and columns in your sandbox will appear here.</p>
+          <div id="sandbox-schema-viewer" style="max-height: 400px; overflow-y: auto;">
+            <em style="color: var(--muted);">No tables created yet.</em>
+          </div>
+          
+          <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 16px;">
+            <h4 style="margin-top:0;">Data Management</h4>
+            <button onclick="window.sandboxExport()" style="width: 100%; margin-bottom: 8px; padding: 8px; border-radius: 4px; border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer;">💾 Export Database (.sqlite)</button>
+            <p style="font-size: 11px; color: var(--muted);">Note: Import functionality coming soon.</p>
+          </div>
+        </div>
+
+      </div>
+    `;
+
+    // Initialize CodeMirror for the Sandbox
+    setTimeout(() => {
+      window.sandboxEditor = CodeMirror.fromTextArea(document.getElementById('sandbox-input'), {
+        mode: "text/x-mysql",
+        theme: document.body.classList.contains('dark-theme') ? "dracula" : "default",
+        lineNumbers: true,
+        matchBrackets: true,
+        autoCloseBrackets: true
+      });
+      
+      // Setup window functions for the sandbox
+      window.sandboxRun = function() {
+        const input = window.sandboxEditor.getValue().trim();
+        const output = document.getElementById('sandbox-output');
+        if (!input) return;
+        
+        const timestamp = new Date().toLocaleTimeString();
+        output.innerHTML = \`<div style="margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 8px;">
+          <div style="color: #60a5fa; margin-bottom: 4px;">[\${timestamp}] \${input}</div>
+          \${window.DB.executeQuery(input)}
+        </div>\` + output.innerHTML;
+        
+        window.sandboxRenderSchema();
+      };
+      
+      window.sandboxClear = function() {
+        document.getElementById('sandbox-output').innerHTML = '$ Ready.';
+      };
+
+      window.sandboxExport = function() {
+        if (!window.DB || !window.DB.isReady) return;
+        const data = window.DB.db.export();
+        const blob = new Blob([data], { type: "application/x-sqlite3" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "my_project.sqlite";
+        a.click();
+      };
+
+      window.sandboxRenderSchema = function() {
+        const viewer = document.getElementById('sandbox-schema-viewer');
+        const schema = window.DB ? window.DB.getSchema() : {};
+        
+        if (Object.keys(schema).length === 0) {
+          viewer.innerHTML = '<em style="color: var(--muted);">No tables created yet.</em>';
+          return;
+        }
+        
+        let html = '';
+        for (const [tableName, tableData] of Object.entries(schema)) {
+          html += \`<div style="border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; font-size: 14px;">
+            <div style="background: var(--bg-color); padding: 8px 12px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary);">
+              🗄️ \${tableName}
+            </div>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tbody>\`;
+          tableData.columns.forEach(col => {
+            html += \`<tr>
+              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--text);">\${col.name}</td>
+              <td style="padding: 6px 12px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">\${col.type}</td>
+            </tr>\`;
+          });
+          html += \`</tbody></table></div>\`;
+        }
+        viewer.innerHTML = html;
+      };
+      
+      // Render initial schema if any
+      window.sandboxRenderSchema();
+      
+    }, 100);
+
+    this.wireNav();
+    window.scrollTo(0, 0);
+  }
+
+  renderERBuilder() {
+    document.getElementById('sidebar').innerHTML = this.buildSidebar(null, 'er-builder');
+    document.getElementById('header').innerHTML  = this.buildHeader('ER Diagram Builder', 'Design your database visually and generate SQL');
+    
+    document.getElementById('main').innerHTML = `
+      <span class="badge" style="background: var(--imperial-blue); color: white;">ER Builder</span>
+      <div class="card" style="margin-top: 24px; text-align: center; padding: 60px;">
+        <h2>📊 ER Diagram Builder</h2>
+        <p style="color: var(--muted); font-size: 18px; margin-top: 16px;">This feature is currently under active development!</p>
+        <p style="color: var(--muted);">Check back soon for the ability to drag-and-drop tables and auto-generate CREATE statements.</p>
+      </div>
+    `;
+    this.wireNav();
+    window.scrollTo(0, 0);
   }
 
   /* ------------------------------------------------------------------ */
@@ -331,7 +469,13 @@ class App {
         <p>Department of Computer Science</p>
       </div>
       <nav>
-        <a href="#/home" class="${!currentExpId ? 'active' : ''}">🏠 Home</a>
+        <a href="#/home" class="${!currentExpId && currentPage !== 'sandbox' && currentPage !== 'er-builder' ? 'active' : ''}">🏠 Home</a>
+        
+        <div style="margin: 16px 0 8px 16px; font-size: 11px; font-weight: bold; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Creative Tools</div>
+        <a href="#/sandbox" class="${currentPage === 'sandbox' ? 'active' : ''}">🛠️ Personal Project Sandbox</a>
+        <a href="#/er-builder" class="${currentPage === 'er-builder' ? 'active' : ''}">📊 ER Diagram Builder</a>
+        
+        <div style="margin: 16px 0 8px 16px; font-size: 11px; font-weight: bold; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Experiments</div>
     `;
 
     for (let i = 1; i <= 10; i++) {

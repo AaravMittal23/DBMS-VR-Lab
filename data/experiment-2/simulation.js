@@ -103,7 +103,7 @@ window.loadDDLExample = function(index) {
 };
 
 window.executeDDL = function() {
-  const input = document.getElementById('ddl-input').value.trim();
+  const input = window.sqlEditor ? window.sqlEditor.getValue().trim() : document.getElementById('ddl-input').value.trim();
   const out = document.getElementById('ddl-output');
   out.style.display = 'block';
   
@@ -112,97 +112,36 @@ window.executeDDL = function() {
     out.textContent = 'Error: Empty command.';
     return;
   }
-
-  const uInput = input.toUpperCase().replace(/\n/g, ' ');
   
-  try {
-    if (uInput.startsWith('CREATE TABLE')) {
-      const match = input.match(/CREATE TABLE\s+(\w+)\s*\(([\s\S]+)\)/i);
-      if (match) {
-        const tableName = match[1];
-        if (dbSchema[tableName]) throw new Error("Table '" + tableName + "' already exists.");
-        
-        const colsRaw = match[2].split(',').map(s => s.trim());
-        const columns = colsRaw.map(c => {
-          const parts = c.split(/\s+/);
-          return { name: parts[0], type: parts.slice(1).join(' ') };
-        });
-        
-        dbSchema[tableName] = { columns: columns };
-        out.style.background = '#dcfce7'; out.style.color = '#16a34a';
-        out.textContent = 'Query OK, 0 rows affected. Table created.';
-      } else {
-        throw new Error("Syntax Error in CREATE TABLE statement.");
-      }
-    } 
-    else if (uInput.startsWith('ALTER TABLE')) {
-      const match = input.match(/ALTER TABLE\s+(\w+)\s+ADD\s+(\w+)\s+([\w()]+)/i);
-      if (match) {
-        const tableName = match[1];
-        if (!dbSchema[tableName]) throw new Error("Table '" + tableName + "' doesn't exist.");
-        dbSchema[tableName].columns.push({ name: match[2], type: match[3] });
-        out.style.background = '#dcfce7'; out.style.color = '#16a34a';
-        out.textContent = 'Query OK, 0 rows affected. Column added.';
-      } else {
-        throw new Error("Syntax Error in ALTER TABLE statement.");
-      }
-    }
-    else if (uInput.startsWith('TRUNCATE TABLE')) {
-      const match = input.match(/TRUNCATE TABLE\s+(\w+)/i);
-      if (match) {
-        const tableName = match[1];
-        if (!dbSchema[tableName]) throw new Error("Table '" + tableName + "' doesn't exist.");
-        out.style.background = '#dcfce7'; out.style.color = '#16a34a';
-        out.textContent = 'Query OK, 0 rows affected. Data truncated (Structure intact).';
-      } else {
-        throw new Error("Syntax Error in TRUNCATE TABLE statement.");
-      }
-    }
-    else if (uInput.startsWith('DROP TABLE')) {
-      const match = input.match(/DROP TABLE\s+(\w+)/i);
-      if (match) {
-        const tableName = match[1];
-        if (!dbSchema[tableName]) throw new Error("Table '" + tableName + "' doesn't exist.");
-        delete dbSchema[tableName];
-        out.style.background = '#dcfce7'; out.style.color = '#16a34a';
-        out.textContent = 'Query OK, 0 rows affected. Table dropped.';
-      } else {
-        throw new Error("Syntax Error in DROP TABLE statement.");
-      }
-    }
-    else {
-      throw new Error("Command not supported in this DDL simulator.");
-    }
-    
-    renderSchema();
-    
-  } catch (err) {
-    out.style.background = '#fee2e2'; out.style.color = '#ef4444';
-    out.textContent = 'ERROR: ' + err.message;
-  }
+  const resultHtml = window.DB.executeQuery(input);
+  out.style.background = 'transparent';
+  out.style.color = 'inherit';
+  out.innerHTML = resultHtml;
+  
+  renderSchema();
 };
 
 window.renderSchema = function() {
   const viewer = document.getElementById('schema-viewer');
-  if (Object.keys(dbSchema).length === 0) {
+  const schema = window.DB ? window.DB.getSchema() : {};
+  
+  if (Object.keys(schema).length === 0) {
     viewer.innerHTML = '<p style="color: var(--muted); text-align: center; padding: 40px 0;">No tables exist in the database. Run a CREATE TABLE command.</p>';
     return;
   }
   
   let html = '';
-  for (const [tableName, tableData] of Object.entries(dbSchema)) {
-    html += `<div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+  for (const [tableName, tableData] of Object.entries(schema)) {
+    html += `<div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 16px;">
       <div style="background: var(--bg-color); padding: 12px 16px; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary);">
         🗄️ ${tableName}
       </div>
       <table style="width: 100%; border-collapse: collapse;">
         <tbody>`;
     tableData.columns.forEach(col => {
-      let badge = '';
-      if (col.type.toUpperCase().includes('PRIMARY KEY')) badge = '<span style="background:#fef08a; color:#a16207; font-size:10px; padding:2px 6px; border-radius:10px; margin-left:8px;">PK</span>';
       html += `<tr>
-        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); width: 40%;"><strong>${col.name}</strong>${badge}</td>
-        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">${col.type.replace('PRIMARY KEY', '').trim()}</td>
+        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); color: var(--text);">${col.name}</td>
+        <td style="padding: 8px 16px; border-bottom: 1px solid var(--border); color: var(--muted); font-family: monospace;">${col.type}</td>
       </tr>`;
     });
     html += `</tbody></table></div>`;

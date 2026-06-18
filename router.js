@@ -12,6 +12,13 @@ class Router {
   parse() {
     const hash = window.location.hash.replace('#', '') || '/';
     const parts = hash.split('/').filter(Boolean);
+    
+    if (parts[0] === 'sandbox') {
+      return { view: 'sandbox' };
+    }
+    if (parts[0] === 'er-builder') {
+      return { view: 'er-builder' };
+    }
     // Expected: ['experiment', '1', 'theory']
     if (parts[0] === 'experiment' && parts[1] && parts[2]) {
       return { view: 'experiment', expId: parts[1], page: parts[2] };

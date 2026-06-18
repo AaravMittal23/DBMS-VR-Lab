@@ -125,7 +125,7 @@ window.selectLayer = function(layer) {
 window.executeTerminalCommand = function() {
   const input = document.getElementById('terminal-input');
   const output = document.getElementById('terminal-output');
-  const cmd = input.value.trim();
+  const cmd = window.sqlEditor ? window.sqlEditor.getValue().trim() : input.value.trim();
   if (!cmd) return;
   
   const line = document.createElement('p');
@@ -134,42 +134,20 @@ window.executeTerminalCommand = function() {
   line.textContent = '$ ' + cmd;
   output.appendChild(line);
   
-  const res = document.createElement('p');
+  const res = document.createElement('div');
   res.style.margin = '0 0 12px 0';
   res.style.color = '#94a3b8';
   
   if (cmd.startsWith('mysql -u')) {
     isConnected = true;
     res.innerHTML = 'Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; or \\g.<br>Server version: 8.0.32 MySQL Community Server<br><br>mysql>';
+    window.DB.resetDatabase();
   } else if (!isConnected) {
-    res.textContent = "ERROR 1007 (HY000): Can't create database '" + dbName + "'; database exists";
+    res.style.color = '#ef4444';
+    res.textContent = "ERROR 2002 (HY000): Can't connect to local MySQL server through socket (Not connected)";
   } else {
-    if (cmd.toUpperCase().startsWith('CREATE DATABASE')) {
-      const dbName = cmd.split(' ')[2]?.replace(';', '');
-      if (dbName) {
-        if (!databases.includes(dbName)) {
-          databases.push(dbName);
-          res.textContent = "ERROR 1007 (HY000): Can't create database '" + dbName + "'; database exists";
-        } else {
-          res.style.color = '#ef4444';
-          res.textContent = "ERROR 1007 (HY000): Can't create database '" + dbName + "'; database exists";
-        }
-      } else {
-        res.style.color = '#ef4444';
-        res.textContent = "ERROR 1007 (HY000): Can't create database '" + dbName + "'; database exists";
-      }
-    } else if (cmd.toUpperCase().startsWith('SHOW DATABASES')) {
-      let tbl = '<table style="border-collapse: collapse; margin-top: 8px;"><tr><th style="border: 1px solid #475569; padding: 4px 12px; text-align: left; color: white;">Database</th></tr>';
-      databases.forEach(db => {
-        tbl += '<tr><td style="border: 1px solid #475569; padding: 4px 12px; color: #10b981;">' + db + '</td></tr>';
-      });
-      tbl += '</table><p style="margin-top:4px;">' + databases.length + ' rows in set (0.00 sec)</p>';
-      res.innerHTML = tbl;
-    } else {
-      res.style.color = '#ef4444';
-      res.textContent = "ERROR 1007 (HY000): Can't create database '" + dbName + "'; database exists";
-    }
-    res.innerHTML += '<br><br>mysql>';
+    // Treat as SQL
+    res.innerHTML = window.DB.executeQuery(cmd) + '<br><br>mysql>';
   }
   
   output.appendChild(res);
