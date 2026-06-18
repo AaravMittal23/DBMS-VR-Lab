@@ -43,7 +43,7 @@ INNER JOIN Departments D ON E.DeptID = D.DeptID;"></textarea>
 
       <div class="simulation-right" style="flex: 1; display: flex; flex-direction: column; gap: 16px;">
         <div style="display: flex; gap: 16px;">
-          <div class="card" style="flex: 1; padding: 16px;">
+          <div class="card" style="flex: 1; padding: 16px; overflow-x: auto;">
             <h3 style="margin-top: 0; font-size: 14px; color: var(--primary);">Employees Table</h3>
             <table class="simulation-table" style="font-size: 12px;">
               <thead><tr><th>EmpID</th><th>Name</th><th>DeptID</th><th>Salary</th></tr></thead>
@@ -55,7 +55,7 @@ INNER JOIN Departments D ON E.DeptID = D.DeptID;"></textarea>
               </tbody>
             </table>
           </div>
-          <div class="card" style="flex: 1; padding: 16px;">
+          <div class="card" style="flex: 1; padding: 16px; overflow-x: auto;">
             <h3 style="margin-top: 0; font-size: 14px; color: var(--primary);">Departments Table</h3>
             <table class="simulation-table" style="font-size: 12px;">
               <thead><tr><th>DeptID</th><th>DeptName</th></tr></thead>
