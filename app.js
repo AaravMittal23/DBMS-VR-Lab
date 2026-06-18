@@ -371,8 +371,7 @@ class App {
       </div>
       <div class="header-right" style="display: flex; align-items: center; gap: 16px;">
         <div style="text-align: right;">
-          <div class="institution">SRM Institute of Science and Technology</div>
-          <div class="department">Department of Computer Science</div>
+          <img src="images/srm-logo.png" alt="SRM Institute of Science and Technology" style="height: 50px; width: auto; background: rgba(255, 255, 255, 0.9); padding: 4px; border-radius: 8px;">
         </div>
         <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">${document.body.classList.contains('dark-theme') ? '☀️' : '🌙'}</button>
       </div>`;

@@ -25,9 +25,19 @@
 body.dark-theme {
   --bg: #0f172a;
   --card: #1e293b;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
   --border: #334155;
+  
+  /* Lighten brand colors to be readable on dark backgrounds */
+  --imperial-blue: #60a5fa;
+  --french-blue: #3b82f6;
+  --steel-azure: #93c5fd;
+  
+  --primary: var(--imperial-blue);
+  --secondary: var(--french-blue);
+  --accent: var(--steel-azure);
+  
   --accent-light: #1e3a8a;
   --yellow-light: #854d0e;
 }
@@ -554,4 +564,13 @@ footer {
 }
 .CodeMirror-scroll {
   min-height: 50px;
+}
+
+/* Fix contrast for buttons in dark mode */
+body.dark-theme .simulation-controls button,
+body.dark-theme button {
+  color: #0f172a;
+}
+body.dark-theme .theme-btn {
+  color: var(--text);
 }
