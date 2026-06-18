@@ -397,10 +397,10 @@ class App {
             return;
           }
           
-          let sql = '-- Generated from ER Builder\\n\\n';
+          let sql = '-- Generated from ER Builder\n\n';
           entities.forEach(ent => {
             const tableName = ent.querySelector('.er-table-name').value;
-            sql += \`CREATE TABLE \${tableName} (\\n\`;
+            sql += `CREATE TABLE ${tableName} (\n`;
             
             const attrs = ent.querySelectorAll('.er-attributes > div');
             const colDefs = [];
@@ -408,11 +408,11 @@ class App {
               const name = attr.querySelector('.er-attr-name').value;
               const type = attr.querySelector('.er-attr-type').value;
               if (name) {
-                colDefs.push(\`    \${name} \${type}\`);
+                colDefs.push(`    ${name} ${type}`);
               }
             });
             
-            sql += colDefs.join(',\\n') + '\\n);\\n\\n';
+            sql += colDefs.join(',\n') + '\n);\n\n';
           });
           
           document.getElementById('er-sql-output').textContent = sql;
