@@ -540,3 +540,18 @@ footer {
   display: none;
 }
 
+
+/* CodeMirror Overrides */
+.CodeMirror {
+  height: auto !important;
+  min-height: 50px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-color);
+  color: var(--text);
+}
+.CodeMirror-scroll {
+  min-height: 50px;
+}

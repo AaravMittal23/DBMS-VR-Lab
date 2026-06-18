@@ -39,14 +39,19 @@ class App {
       document.body.classList.add('dark-theme');
       document.getElementById('theme-toggle').textContent = '☀️';
     }
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      const isDark = document.body.classList.contains('dark-theme');
-      document.getElementById('theme-toggle').textContent = isDark ? '☀️' : '🌙';
-      if (window.StateManager) window.StateManager.setTheme(isDark ? 'dark' : 'light');
-      
-      if (window.sqlEditor) {
-        window.sqlEditor.setOption("theme", isDark ? "dracula" : "default");
+    // Theme toggle delegation
+    document.body.addEventListener('click', (e) => {
+      const toggleBtn = e.target.closest('#theme-toggle');
+      if (toggleBtn) {
+        document.body.classList.toggle('dark-theme');
+        const isDark = document.body.classList.contains('dark-theme');
+        
+        document.querySelectorAll('#theme-toggle').forEach(btn => btn.textContent = isDark ? '☀️' : '🌙');
+        if (window.StateManager) window.StateManager.setTheme(isDark ? 'dark' : 'light');
+        
+        if (window.sqlEditor) {
+          window.sqlEditor.setOption("theme", isDark ? "dracula" : "default");
+        }
       }
     });
 
@@ -181,19 +186,28 @@ class App {
         
         // Initialize CodeMirror if the editor exists
         const sqlInput = document.getElementById('ddl-input') || document.getElementById('dml-input') || document.getElementById('terminal-input');
-        if (sqlInput && window.CodeMirror) {
-          const isDark = document.body.classList.contains('dark-theme');
-          window.sqlEditor = CodeMirror.fromTextArea(sqlInput, {
-            mode: 'text/x-sql',
-            theme: isDark ? 'dracula' : 'default',
-            lineNumbers: true,
-            viewportMargin: Infinity
-          });
-          
-          // Ensure CodeMirror updates the underlying textarea when executing commands
-          window.sqlEditor.on('change', function(cm) {
-            sqlInput.value = cm.getValue();
-          });
+        if (sqlInput) {
+          if (window.CodeMirror) {
+            console.log('CodeMirror found, initializing on', sqlInput.id);
+            const isDark = document.body.classList.contains('dark-theme');
+            try {
+              window.sqlEditor = CodeMirror.fromTextArea(sqlInput, {
+                mode: 'text/x-sql',
+                theme: isDark ? 'dracula' : 'default',
+                lineNumbers: true,
+                viewportMargin: Infinity
+              });
+              
+              // Ensure CodeMirror updates the underlying textarea when executing commands
+              window.sqlEditor.on('change', function(cm) {
+                sqlInput.value = cm.getValue();
+              });
+            } catch (err) {
+              console.error('CodeMirror init failed:', err);
+            }
+          } else {
+            console.error('CodeMirror script not loaded!');
+          }
         }
       }, 100);
       return;
@@ -355,9 +369,13 @@ class App {
         <h1>${title}</h1>
         <p>${subtitle}</p>
       </div>
-      <div class="header-right">
-        <img src="images/srm-logo.png" alt="SRM Institute of Science and Technology" style="height: 60px; width: auto;">
-      </img>`;
+      <div class="header-right" style="display: flex; align-items: center; gap: 16px;">
+        <div style="text-align: right;">
+          <div class="institution">SRM Institute of Science and Technology</div>
+          <div class="department">Department of Computer Science</div>
+        </div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">${document.body.classList.contains('dark-theme') ? '☀️' : '🌙'}</button>
+      </div>`;
   }
 
   wireNav() {
