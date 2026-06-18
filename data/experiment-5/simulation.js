@@ -163,7 +163,7 @@ HAVING COUNT(*) > 2;</pre>
     </div>
 
     <!-- Quiz Modal -->
-    <div id="quizModal1" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal1') closeQuiz5()">
+    <div id="quizModal5" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal5') closeQuiz5()">
       <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
           <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
@@ -242,15 +242,15 @@ function displayQuiz5(question) {
   
   question.options.forEach((option, index) => {
     const isCorrect = index === question.correct;
-    html += `<button onclick="checkAnswer1(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer; transition: all 0.2s;">${option}</button>`;
+    html += `<button onclick="checkAnswer5(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer; transition: all 0.2s;">${option}</button>`;
   });
   
   html += '</div>';
   content.innerHTML = html;
-  document.getElementById('quizModal1').style.display = 'flex';
+  document.getElementById('quizModal5').style.display = 'flex';
 }
 
-function checkAnswer1(selected, correct, explanation) {
+function checkAnswer5(selected, correct, explanation) {
   const content = document.getElementById('quiz5Content');
   const isCorrect = selected === correct;
   const resultColor = isCorrect ? '#10b981' : '#dc2626';
@@ -266,7 +266,7 @@ function checkAnswer1(selected, correct, explanation) {
 }
 
 function closeQuiz5() {
-  const modal = document.getElementById('quizModal1');
+  const modal = document.getElementById('quizModal5');
   if (modal) modal.style.display = 'none';
 }
 

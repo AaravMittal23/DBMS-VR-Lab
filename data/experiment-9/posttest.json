@@ -20,6 +20,76 @@
         "It is locked indefinitely"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What is the difference between a Procedure and a Function?",
+      "options": [
+        "A Function must return a value, a Procedure may not",
+        "A Procedure must return a value, a Function may not",
+        "Functions cannot take parameters",
+        "There is no difference"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "When can a Trigger be executed?",
+      "options": [
+        "BEFORE or AFTER an INSERT, UPDATE, or DELETE",
+        "Only BEFORE an INSERT",
+        "Only AFTER a DELETE",
+        "Only manually"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does a FOR EACH ROW trigger do?",
+      "options": [
+        "Executes once for every row affected by the statement",
+        "Executes once per statement",
+        "Executes on all rows in the table",
+        "Executes only if the row is deleted"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which exception is raised when a SELECT INTO statement returns no rows?",
+      "options": [
+        "NO_DATA_FOUND",
+        "TOO_MANY_ROWS",
+        "ZERO_DIVIDE",
+        "INVALID_CURSOR"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What are the steps to use an explicit cursor?",
+      "options": [
+        "DECLARE, OPEN, FETCH, CLOSE",
+        "OPEN, FETCH, END",
+        "START, RUN, CLOSE",
+        "CREATE, SELECT, DROP"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is an IN OUT parameter in a procedure?",
+      "options": [
+        "Passes a value in and can return a modified value",
+        "Only passes a value in",
+        "Only returns a value out",
+        "Used for indexing"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which statement terminates a loop in PL/SQL?",
+      "options": [
+        "EXIT",
+        "STOP",
+        "BREAK",
+        "HALT"
+      ],
+      "correctIndex": 0
     }
   ]
 }

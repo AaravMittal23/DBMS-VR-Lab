@@ -54,10 +54,10 @@
     {
       "question": "What is a transitive dependency?",
       "options": [
-        "A → B and B → C, so A → C",
+        "A \u2192 B and B \u2192 C, so A \u2192 C",
         "A non-key attribute depends on another non-key attribute, which depends on the primary key",
         "A partial dependency on a composite key",
-        "A dependency where X → Y and Y → X"
+        "A dependency where X \u2192 Y and Y \u2192 X"
       ],
       "correctIndex": 1
     },
@@ -112,7 +112,7 @@
       "correctIndex": 0
     },
     {
-      "question": "In the relation R(A, B, C) with functional dependencies A → B and B → C, what normal form is it in?",
+      "question": "In the relation R(A, B, C) with functional dependencies A \u2192 B and B \u2192 C, what normal form is it in?",
       "options": [
         "1NF",
         "2NF",
@@ -150,6 +150,76 @@
         "To add more tables"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What is the goal of Normalization?",
+      "options": [
+        "To reduce data redundancy and anomalies",
+        "To increase database size",
+        "To duplicate data",
+        "To slow down queries"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which normal form deals with atomic values?",
+      "options": [
+        "1NF",
+        "2NF",
+        "3NF",
+        "BCNF"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a functional dependency?",
+      "options": [
+        "A relationship where one attribute uniquely determines another",
+        "A relationship between tables",
+        "A foreign key constraint",
+        "A multivalued attribute"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What anomaly occurs when you can't insert data without another piece of data?",
+      "options": [
+        "Insertion Anomaly",
+        "Deletion Anomaly",
+        "Update Anomaly",
+        "Modification Anomaly"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is 2NF based on?",
+      "options": [
+        "Full functional dependency",
+        "Partial dependency",
+        "Transitive dependency",
+        "Multivalued dependency"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which normal form removes transitive dependencies?",
+      "options": [
+        "3NF",
+        "1NF",
+        "2NF",
+        "BCNF"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "If a relation is in BCNF, is it in 3NF?",
+      "options": [
+        "Yes",
+        "No",
+        "Sometimes",
+        "Only if it has one candidate key"
+      ],
+      "correctIndex": 0
     }
   ]
 }

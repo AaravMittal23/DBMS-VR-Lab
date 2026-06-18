@@ -2,7 +2,7 @@
   "instructions": "Answer the following questions to evaluate your understanding after completing the experiment.",
   "questions": [
     {
-      "question": "In a relation R(A, B, C) with FDs: A → B and B → C, what normal form is it in after normalizing to 3NF?",
+      "question": "In a relation R(A, B, C) with FDs: A \u2192 B and B \u2192 C, what normal form is it in after normalizing to 3NF?",
       "options": [
         "3NF (decomposed into R1(A, B) and R2(B, C))",
         "2NF only",
@@ -22,7 +22,7 @@
       "correctIndex": 1
     },
     {
-      "question": "In the relation Order(order_id, product_id, product_name, quantity), if order_id, product_id is the primary key and product_id → product_name, what normal form is it in?",
+      "question": "In the relation Order(order_id, product_id, product_name, quantity), if order_id, product_id is the primary key and product_id \u2192 product_name, what normal form is it in?",
       "options": [
         "1NF",
         "1NF but not 2NF (due to partial dependency)",
@@ -55,7 +55,7 @@
       "question": "What is a trivial functional dependency?",
       "options": [
         "A dependency where Y is not a subset of X",
-        "A dependency where Y is a subset of X (e.g., AB → A)",
+        "A dependency where Y is a subset of X (e.g., AB \u2192 A)",
         "A dependency that cannot be removed",
         "A partial dependency"
       ],
@@ -72,7 +72,7 @@
       "correctIndex": 1
     },
     {
-      "question": "In the relation Student(student_id, name, dept_id, dept_name), if student_id → dept_id and dept_id → dept_name, what normal form is it in?",
+      "question": "In the relation Student(student_id, name, dept_id, dept_name), if student_id \u2192 dept_id and dept_id \u2192 dept_name, what normal form is it in?",
       "options": [
         "1NF",
         "2NF",
@@ -92,7 +92,7 @@
       "correctIndex": 1
     },
     {
-      "question": "In a relation R(A, B, C, D) with FDs: A → B, B → C, and A, D → C, what is a candidate key?",
+      "question": "In a relation R(A, B, C, D) with FDs: A \u2192 B, B \u2192 C, and A, D \u2192 C, what is a candidate key?",
       "options": [
         "A",
         "A, D (since A, D determines all attributes)",
@@ -150,6 +150,76 @@
         "Only for small databases"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What is a partial dependency?",
+      "options": [
+        "An attribute depends on part of a composite primary key",
+        "An attribute depends on a non-key attribute",
+        "An attribute depends on the whole key",
+        "An attribute depends on another table"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What defines Boyce-Codd Normal Form (BCNF)?",
+      "options": [
+        "For every non-trivial dependency X -> Y, X must be a superkey",
+        "No partial dependencies",
+        "No transitive dependencies",
+        "All values are atomic"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a transitive dependency?",
+      "options": [
+        "A non-prime attribute depends on another non-prime attribute",
+        "A prime attribute depends on a non-prime attribute",
+        "A non-prime attribute depends on part of a key",
+        "A prime attribute depends on a key"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "If A -> B and B -> C, then A -> C is an example of what?",
+      "options": [
+        "Armstrong's Transitivity rule",
+        "Reflexivity rule",
+        "Augmentation rule",
+        "Partial dependency"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Why might a database designer intentionally denormalize a schema?",
+      "options": [
+        "To improve read performance by reducing joins",
+        "To save disk space",
+        "To increase redundancy",
+        "To enforce data integrity"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which normal form deals with multivalued dependencies?",
+      "options": [
+        "4NF",
+        "3NF",
+        "2NF",
+        "BCNF"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a candidate key?",
+      "options": [
+        "A minimal superkey",
+        "Any unique attribute",
+        "A foreign key",
+        "A composite key only"
+      ],
+      "correctIndex": 0
     }
   ]
 }

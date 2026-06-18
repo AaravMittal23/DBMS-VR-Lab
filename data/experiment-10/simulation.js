@@ -83,8 +83,8 @@ window.sim10_renderSimulation = function() {
     </div>
 
     <!-- Modals -->
-    <div id="guide10-modal" class="modal-overlay" style="display: none;">
-      <div class="modal-content" style="max-width: 600px;">
+    <div id="guideModal10" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;" onclick="if(event.target.id==='guideModal10') closeGuide10()">
+      <div class="modal-content" style="background: white; border-radius: 8px; max-width: 600px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
           <h2 style="margin: 0;">Deadlock Simulator Guide</h2>
           <button onclick="closeGuide10()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
@@ -99,6 +99,17 @@ window.sim10_renderSimulation = function() {
           </ol>
           <p>This creates a circular dependency, leading to a <strong>Deadlock</strong>!</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Quiz Modal -->
+    <div id="quizModal10" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1001; align-items: center; justify-content: center;" onclick="if(event.target.id==='quizModal10') closeQuiz10()">
+      <div style="background: white; border-radius: 8px; max-width: 500px; padding: 32px; box-shadow: 0 20px 25px rgba(0,0,0,0.15);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="margin: 0; color: var(--primary);">❓ Quick Quiz</h2>
+          <button onclick="closeQuiz10()" style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px;">✕</button>
+        </div>
+        <div id="quiz10Content" style="color: var(--text);"></div>
       </div>
     </div>
   `;
@@ -221,19 +232,58 @@ window.sim10_reset = function() {
   window.sim10_updateUI();
 };
 
-window.openGuide10 = function() { document.getElementById('guide10-modal').style.display = 'flex'; };
-window.closeGuide10 = function() { document.getElementById('guide10-modal').style.display = 'none'; };
+window.openGuide10 = function() { document.getElementById('guideModal10').style.display = 'flex'; };
+window.closeGuide10 = function() { document.getElementById('guideModal10').style.display = 'none'; };
 
 // Auto-quiz system
+const quiz10Questions = [
+  { question: "Which property ensures that a transaction is never left in a partially complete state?", options: ["Atomicity", "Consistency", "Isolation", "Durability"], correct: 0, explanation: "Atomicity ensures 'all or nothing' execution." },
+  { question: "What causes a deadlock?", options: ["High CPU usage", "A circular wait for resources", "Missing indexes", "Too many users"], correct: 1, explanation: "A deadlock occurs when two or more transactions form a circular dependency while waiting for locks." }
+];
+
+let quiz10Timer = null;
+window.startQuiz10Timer = function() {
+  const randomDelay = Math.random() * 8000 + 15000;
+  quiz10Timer = setTimeout(() => {
+    if (Math.random() > 0.4) {
+      const q = quiz10Questions[Math.floor(Math.random() * quiz10Questions.length)];
+      displayQuiz10(q);
+    }
+    window.startQuiz10Timer();
+  }, randomDelay);
+};
+
+window.displayQuiz10 = function(question) {
+  const content = document.getElementById('quiz10Content');
+  if (!content) return;
+  let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
+  html += '<div style="margin: 20px 0;">';
+  question.options.forEach((option, index) => {
+    html += `<button onclick="checkAnswer10(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: white; border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
+  });
+  html += '</div>';
+  content.innerHTML = html;
+  document.getElementById('quizModal10').style.display = 'flex';
+};
+
+window.checkAnswer10 = function(selected, correct, explanation) {
+  const content = document.getElementById('quiz10Content');
+  const isCorrect = selected === correct;
+  const resultColor = isCorrect ? '#10b981' : '#dc2626';
+  const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
+  let html = `<div style="background: ${resultColor}20; border-left: 4px solid ${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">`;
+  html += `<p style="color: ${resultColor}; font-weight: 600; margin: 0 0 8px 0;">${resultMessage}</p>`;
+  html += `<p style="margin: 0; color: var(--text);">${explanation}</p></div>`;
+  html += '<button onclick="closeQuiz10()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
+  content.innerHTML = html;
+};
+
+window.closeQuiz10 = function() {
+  const modal = document.getElementById('quizModal10');
+  if (modal) modal.style.display = 'none';
+};
+
 window.initQuiz10 = function() {
-  if (window.quizTimer) clearTimeout(window.quizTimer);
-  window.quizTimer = setTimeout(() => {
-    const q10 = {
-      q: "Which property ensures that a transaction is never left in a partially complete state?",
-      opts: ["Atomicity", "Consistency", "Isolation", "Durability"],
-      ans: 0,
-      exp: "Atomicity ensures 'all or nothing' execution."
-    };
-    if (window.showPopQuiz) window.showPopQuiz(q10);
-  }, Math.random() * 20000 + 15000);
+  if (window.quiz10Timer) clearTimeout(window.quiz10Timer);
+  window.startQuiz10Timer();
 };

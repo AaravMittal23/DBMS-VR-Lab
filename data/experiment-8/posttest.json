@@ -20,6 +20,76 @@
         "Yes, but only if you have admin privileges"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What is a materialized view?",
+      "options": [
+        "A view that physically stores data and is updated periodically",
+        "A view that only exists in memory",
+        "A view with an index",
+        "A view that cannot be dropped"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a clustered index?",
+      "options": [
+        "An index that determines the physical order of data rows",
+        "An index on multiple columns",
+        "An index that uses a hash table",
+        "A non-unique index"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How many clustered indexes can a table have?",
+      "options": [
+        "One",
+        "Many",
+        "None",
+        "Depends on the DBMS"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a potential downside of having too many indexes?",
+      "options": [
+        "Slower INSERT, UPDATE, and DELETE operations",
+        "Slower SELECT operations",
+        "Higher risk of data corruption",
+        "Loss of foreign key constraints"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which statement about Views is true?",
+      "options": [
+        "Views can simplify complex queries",
+        "Views always improve performance",
+        "Views cannot contain JOINs",
+        "Views cannot have WHERE clauses"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a non-clustered index?",
+      "options": [
+        "An index with a separate structure from the data rows",
+        "An index that sorts the actual data",
+        "An index on a view",
+        "An index that cannot be dropped"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which keyword prevents updating data through a view if it violates the view's condition?",
+      "options": [
+        "WITH CHECK OPTION",
+        "NO UPDATE",
+        "READ ONLY",
+        "RESTRICT"
+      ],
+      "correctIndex": 0
     }
   ]
 }

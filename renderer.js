@@ -184,6 +184,19 @@ const Renderer = {
         students understand and practice <strong>${meta.title}</strong>.
         Through this interactive platform, you will ${meta.description}</p>
       </div>
+      <div class="card">
+        <h2>How to Use This Virtual Lab</h2>
+        <ol>
+          <li><strong>Start with the Aim:</strong> Understand the objectives of the experiment</li>
+          <li><strong>Read the Theory:</strong> Learn the fundamental concepts and syntax</li>
+          <li><strong>Take the Pre-Test:</strong> Assess your prior knowledge</li>
+          <li><strong>Follow the Procedure:</strong> Step through the experiment systematically</li>
+          <li><strong>Try the Simulation:</strong> Practice with interactive examples</li>
+          <li><strong>Take the Post-Test:</strong> Evaluate your understanding</li>
+          <li><strong>Check References:</strong> Explore additional resources</li>
+          <li><strong>Provide Feedback:</strong> Share your thoughts and suggestions</li>
+        </ol>
+      </div>
       <div class="grid">
         <div class="card">
           <h3>📋 Aim</h3>
@@ -205,19 +218,6 @@ const Renderer = {
           <p>Step-by-step procedure to perform the experiment.</p>
           <a href="#/experiment/${meta.id}/procedure" style="display:inline-block;margin-top:12px;color:var(--secondary);font-weight:600;text-decoration:none">View Procedure →</a>
         </div>
-      </div>
-      <div class="card">
-        <h2>How to Use This Virtual Lab</h2>
-        <ol>
-          <li><strong>Start with the Aim:</strong> Understand the objectives of the experiment</li>
-          <li><strong>Read the Theory:</strong> Learn the fundamental concepts and syntax</li>
-          <li><strong>Take the Pre-Test:</strong> Assess your prior knowledge</li>
-          <li><strong>Follow the Procedure:</strong> Step through the experiment systematically</li>
-          <li><strong>Try the Simulation:</strong> Practice with interactive examples</li>
-          <li><strong>Take the Post-Test:</strong> Evaluate your understanding</li>
-          <li><strong>Check References:</strong> Explore additional resources</li>
-          <li><strong>Provide Feedback:</strong> Share your thoughts and suggestions</li>
-        </ol>
       </div>`;
   }
 };

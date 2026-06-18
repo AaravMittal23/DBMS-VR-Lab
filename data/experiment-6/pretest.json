@@ -5,7 +5,7 @@
       "question": "What does ER diagram stand for?",
       "options": [
         "Entity-Relationship Diagram",
-        "Entity–Relationship Diagram",
+        "Entity\u2013Relationship Diagram",
         "Entity-Relational Diagram",
         "Entity-Reference Diagram"
       ],
@@ -150,6 +150,76 @@
         "To define relationships"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What does ER stand for?",
+      "options": [
+        "Entity-Relationship",
+        "Entity-Resource",
+        "Electronic-Record",
+        "Entity-Record"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In an ER diagram, what does a rectangle represent?",
+      "options": [
+        "Entity",
+        "Attribute",
+        "Relationship",
+        "Key"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What shape represents an attribute?",
+      "options": [
+        "Oval/Ellipse",
+        "Rectangle",
+        "Diamond",
+        "Triangle"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What shape represents a relationship?",
+      "options": [
+        "Diamond",
+        "Rectangle",
+        "Oval",
+        "Line"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a primary key?",
+      "options": [
+        "A unique identifier for an entity",
+        "A foreign key",
+        "A multivalued attribute",
+        "A weak entity"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does a double rectangle represent?",
+      "options": [
+        "Weak Entity",
+        "Strong Entity",
+        "Multivalued Attribute",
+        "Derived Attribute"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does a dashed oval represent?",
+      "options": [
+        "Derived Attribute",
+        "Key Attribute",
+        "Composite Attribute",
+        "Multivalued Attribute"
+      ],
+      "correctIndex": 0
     }
   ]
 }

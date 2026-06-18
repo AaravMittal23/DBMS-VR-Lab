@@ -42,13 +42,13 @@ class App {
 
   async handleRoute(route) {
     // Clean up any running quiz timers from previous simulations
-    if (window.quiz5Timer) clearTimeout(window.quiz5Timer);
-    if (window.quiz6Timer) clearTimeout(window.quiz6Timer);
-    if (window.quiz7Timer) clearTimeout(window.quiz7Timer);
-    // Close any open quiz modals
-    if (document.getElementById('quizModal5')) document.getElementById('quizModal5').style.display = 'none';
-    if (document.getElementById('quizModal6')) document.getElementById('quizModal6').style.display = 'none';
-    if (document.getElementById('quizModal7')) document.getElementById('quizModal7').style.display = 'none';
+    for (let i = 1; i <= 10; i++) {
+      if (window[`quiz${i}Timer`]) clearTimeout(window[`quiz${i}Timer`]);
+      const modal = document.getElementById(`quizModal${i}`);
+      if (modal) modal.style.display = 'none';
+      const guide = document.getElementById(`guideModal${i}`);
+      if (guide) guide.style.display = 'none';
+    }
 
     if (route.view === 'home') {
       this.renderHome();
@@ -227,29 +227,31 @@ class App {
   buildSidebar(expId, activePage) {
     const homeLink = `<a href="#/" class="${!expId ? 'active' : ''}">🏠 Lab Home</a>`;
 
-    if (!expId) {
-      return `
-        <div class="sidebar-header">
-          <h2>DBMS Virtual Lab</h2>
-          <p>Navigation</p>
-        </div>
-        <nav>${homeLink}</nav>`;
+    let allExperimentsList = '';
+    for (let i = 1; i <= 10; i++) {
+        const isCurrentExp = (i == expId);
+        allExperimentsList += `<div class="sidebar-exp-block" style="margin-bottom: 4px;">`;
+        allExperimentsList += `<a href="#/experiment/${i}/introduction" class="${isCurrentExp && activePage === 'introduction' ? 'active' : ''}" style="font-weight: ${isCurrentExp ? '600' : 'normal'};">🧪 Experiment ${i}</a>`;
+        
+        if (isCurrentExp) {
+            const expLinks = NAV_PAGES.filter(p => p !== 'introduction').map(p => `
+              <a href="#/experiment/${expId}/${p}" class="sub-nav ${p === activePage ? 'active' : ''}" style="padding-left: 40px; font-size: 13px; margin-top: 2px;">
+                ↳ ${PAGE_TITLES[p]}
+              </a>`).join('');
+            allExperimentsList += expLinks;
+        }
+        allExperimentsList += `</div>`;
     }
-
-    const expLinks = NAV_PAGES.map(p => `
-      <a href="#/experiment/${expId}/${p}" class="${p === activePage ? 'active' : ''}">
-        ${PAGE_TITLES[p]}
-      </a>`).join('');
 
     return `
       <div class="sidebar-header">
         <h2>DBMS Virtual Lab</h2>
-        <p>Experiment ${expId}</p>
+        <p>${expId ? `Experiment ${expId}` : 'Navigation'}</p>
       </div>
       <nav>
         ${homeLink}
-        <div class="sidebar-divider"></div>
-        ${expLinks}
+        <div class="sidebar-divider" style="margin: 12px 0; border-top: 1px solid var(--border);"></div>
+        ${allExperimentsList}
       </nav>`;
   }
 

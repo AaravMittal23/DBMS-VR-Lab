@@ -20,6 +20,76 @@
         "CANCEL"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What is PL/SQL?",
+      "options": [
+        "Procedural Language extension for SQL",
+        "Physical Language for SQL",
+        "Primary Language for SQL",
+        "Public Language for SQL"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Trigger?",
+      "options": [
+        "A procedure that executes automatically on an event",
+        "A manually executed function",
+        "An index type",
+        "A security constraint"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which block structure is used in PL/SQL?",
+      "options": [
+        "DECLARE - BEGIN - EXCEPTION - END",
+        "START - RUN - STOP",
+        "OPEN - FETCH - CLOSE",
+        "TRY - CATCH - FINALLY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Stored Procedure?",
+      "options": [
+        "Precompiled SQL code stored in the database",
+        "A temporary table",
+        "An automated trigger",
+        "A complex view"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Does a function have to return a value?",
+      "options": [
+        "Yes, always",
+        "No, it is optional",
+        "Only if specified",
+        "Only if it has parameters"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which variable type holds a single row of data?",
+      "options": [
+        "%ROWTYPE",
+        "%TYPE",
+        "RECORD",
+        "CURSOR"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Cursor in PL/SQL?",
+      "options": [
+        "A pointer to a memory area for processing rows",
+        "A database table",
+        "An index",
+        "A trigger event"
+      ],
+      "correctIndex": 0
     }
   ]
 }

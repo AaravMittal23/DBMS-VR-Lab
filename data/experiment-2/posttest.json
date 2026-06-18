@@ -20,6 +20,76 @@
         "MODIFY COLUMN"
       ],
       "correctIndex": 0
+    },
+    {
+      "question": "Which DDL command cannot be rolled back in most DBMS?",
+      "options": [
+        "TRUNCATE",
+        "DELETE",
+        "UPDATE",
+        "INSERT"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can we drop a specific column from a table?",
+      "options": [
+        "Yes, using ALTER TABLE ... DROP COLUMN",
+        "No, we must drop the entire table",
+        "Yes, using DROP COLUMN",
+        "Yes, using DELETE COLUMN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What happens when a table is dropped?",
+      "options": [
+        "Data, structure, and indexes are removed",
+        "Only data is removed",
+        "Only structure is removed",
+        "Table is moved to recycle bin"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How do you rename a table?",
+      "options": [
+        "ALTER TABLE ... RENAME TO",
+        "RENAME TABLE ... TO",
+        "Both are possible depending on DBMS",
+        "CHANGE TABLE ... TO"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which constraint ensures all values in a column are different?",
+      "options": [
+        "UNIQUE",
+        "NOT NULL",
+        "CHECK",
+        "DEFAULT"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the difference between DROP and TRUNCATE?",
+      "options": [
+        "DROP removes structure, TRUNCATE keeps structure",
+        "DROP keeps structure, TRUNCATE removes structure",
+        "Both do the same thing",
+        "TRUNCATE can be rolled back, DROP cannot"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which DDL command adds a constraint to a table?",
+      "options": [
+        "ALTER TABLE",
+        "CREATE CONSTRAINT",
+        "ADD CONSTRAINT",
+        "MODIFY TABLE"
+      ],
+      "correctIndex": 0
     }
   ]
 }

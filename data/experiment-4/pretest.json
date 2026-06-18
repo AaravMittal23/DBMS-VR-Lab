@@ -20,6 +20,76 @@
         "All of the above"
       ],
       "correctIndex": 3
+    },
+    {
+      "question": "What is a JOIN?",
+      "options": [
+        "Combines rows from two or more tables",
+        "Filters rows from a single table",
+        "Creates a new table",
+        "Deletes data from tables"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which join returns all rows from both tables?",
+      "options": [
+        "FULL OUTER JOIN",
+        "INNER JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which join returns matching rows from both tables?",
+      "options": [
+        "INNER JOIN",
+        "OUTER JOIN",
+        "LEFT JOIN",
+        "CROSS JOIN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a subquery?",
+      "options": [
+        "A query inside another query",
+        "A query that runs very fast",
+        "A query with multiple tables",
+        "A query with aggregates"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which join returns all rows from the left table?",
+      "options": [
+        "LEFT JOIN",
+        "RIGHT JOIN",
+        "INNER JOIN",
+        "FULL JOIN"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What keyword is typically used to connect tables in an INNER JOIN?",
+      "options": [
+        "ON",
+        "WHERE",
+        "WITH",
+        "USING"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which of these is not a valid SQL join?",
+      "options": [
+        "BOTTOM JOIN",
+        "INNER JOIN",
+        "LEFT JOIN",
+        "RIGHT JOIN"
+      ],
+      "correctIndex": 0
     }
   ]
 }

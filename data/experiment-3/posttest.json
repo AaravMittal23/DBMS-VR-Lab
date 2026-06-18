@@ -20,6 +20,76 @@
         "GET * FROM Orders;"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What happens if WHERE is omitted in an UPDATE statement?",
+      "options": [
+        "All rows are updated",
+        "An error occurs",
+        "No rows are updated",
+        "The first row is updated"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which keyword prevents duplicate records in SELECT?",
+      "options": [
+        "DISTINCT",
+        "UNIQUE",
+        "DIFFERENT",
+        "SINGLE"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How do you delete all rows using DML?",
+      "options": [
+        "DELETE FROM table_name;",
+        "DROP table_name;",
+        "TRUNCATE table_name;",
+        "REMOVE FROM table_name;"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which operator is used for pattern matching?",
+      "options": [
+        "LIKE",
+        "MATCH",
+        "SIMILAR TO",
+        "EQUALS"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the default sort order in ORDER BY?",
+      "options": [
+        "ASC",
+        "DESC",
+        "Random",
+        "Insertion order"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which statement is true about DML?",
+      "options": [
+        "It can be rolled back",
+        "It changes table structure",
+        "It creates new databases",
+        "It includes CREATE command"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How do you select all columns from a table?",
+      "options": [
+        "SELECT * FROM table;",
+        "SELECT ALL FROM table;",
+        "SELECT columns FROM table;",
+        "SELECT % FROM table;"
+      ],
+      "correctIndex": 0
     }
   ]
 }

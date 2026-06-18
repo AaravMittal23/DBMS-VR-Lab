@@ -150,6 +150,76 @@
         "SELECT department, SUM(salary) FROM employees HAVING COUNT(*) > 10 GROUP BY department;"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What is the difference between WHERE and HAVING?",
+      "options": [
+        "WHERE filters rows, HAVING filters groups",
+        "HAVING filters rows, WHERE filters groups",
+        "They are identical",
+        "HAVING cannot be used with GROUP BY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What happens if COUNT(column) is used instead of COUNT(*)?",
+      "options": [
+        "NULL values in the column are ignored",
+        "It counts distinct values",
+        "It produces an error",
+        "There is no difference"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which clause must appear before HAVING?",
+      "options": [
+        "GROUP BY",
+        "ORDER BY",
+        "WHERE",
+        "LIMIT"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can multiple aggregate functions be used in a single query?",
+      "options": [
+        "Yes",
+        "No",
+        "Only if grouping by multiple columns",
+        "Only COUNT and SUM"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How do you count distinct values in a column?",
+      "options": [
+        "COUNT(DISTINCT column)",
+        "DISTINCT COUNT(column)",
+        "COUNT UNIQUE(column)",
+        "UNIQUE COUNT(column)"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "If you select a non-aggregated column and use SUM(), what must you do?",
+      "options": [
+        "Include the column in GROUP BY",
+        "Include the column in ORDER BY",
+        "Use HAVING",
+        "It's not allowed"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which of these is NOT an aggregate function?",
+      "options": [
+        "LEN()",
+        "MIN()",
+        "MAX()",
+        "SUM()"
+      ],
+      "correctIndex": 0
     }
   ]
 }

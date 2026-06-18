@@ -20,6 +20,76 @@
         "The table structure is deleted"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What does DML stand for?",
+      "options": [
+        "Data Manipulation Language",
+        "Data Management Language",
+        "Data Modification Language",
+        "Data Markup Language"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command adds new rows to a table?",
+      "options": [
+        "INSERT",
+        "ADD",
+        "UPDATE",
+        "CREATE"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command modifies existing data?",
+      "options": [
+        "UPDATE",
+        "ALTER",
+        "CHANGE",
+        "MODIFY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What command removes rows from a table?",
+      "options": [
+        "DELETE",
+        "DROP",
+        "REMOVE",
+        "TRUNCATE"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which clause is used to filter records?",
+      "options": [
+        "WHERE",
+        "FILTER",
+        "HAVING",
+        "GROUP BY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What keyword is used to sort results?",
+      "options": [
+        "ORDER BY",
+        "SORT BY",
+        "ARRANGE BY",
+        "GROUP BY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command retrieves data from a database?",
+      "options": [
+        "SELECT",
+        "FETCH",
+        "GET",
+        "EXTRACT"
+      ],
+      "correctIndex": 0
     }
   ]
 }

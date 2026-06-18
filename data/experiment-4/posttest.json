@@ -20,6 +20,76 @@
         "HAS"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What does a CROSS JOIN produce?",
+      "options": [
+        "Cartesian product",
+        "Only matching rows",
+        "All rows with NULLs",
+        "An empty result set"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a correlated subquery?",
+      "options": [
+        "A subquery that references the outer query",
+        "A subquery that runs independently",
+        "A subquery in the FROM clause",
+        "A subquery that returns a single value"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which operator cannot be used with a multi-row subquery?",
+      "options": [
+        "=",
+        "IN",
+        "ANY",
+        "ALL"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Self Join?",
+      "options": [
+        "A table joined with itself",
+        "A join with no condition",
+        "A join returning unique rows",
+        "A join on primary keys only"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the difference between IN and EXISTS?",
+      "options": [
+        "IN compares values, EXISTS checks for row existence",
+        "IN is faster than EXISTS",
+        "EXISTS only works with single rows",
+        "There is no difference"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "If a LEFT JOIN finds no match in the right table, what happens?",
+      "options": [
+        "Result row contains NULLs for right table columns",
+        "The row is omitted",
+        "An error occurs",
+        "Result row contains zeros"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which join is equivalent to a comma-separated list of tables without WHERE?",
+      "options": [
+        "CROSS JOIN",
+        "INNER JOIN",
+        "LEFT JOIN",
+        "NATURAL JOIN"
+      ],
+      "correctIndex": 0
     }
   ]
 }

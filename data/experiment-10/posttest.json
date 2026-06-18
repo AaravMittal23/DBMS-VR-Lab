@@ -20,6 +20,76 @@
         "Dirty Read"
       ],
       "correctIndex": 3
+    },
+    {
+      "question": "What does the Atomicity property ensure?",
+      "options": [
+        "All operations execute or none do",
+        "Data is always correct",
+        "Transactions don't interfere",
+        "Data is saved permanently"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the Two-Phase Locking (2PL) protocol?",
+      "options": [
+        "A protocol ensuring serializability using Growing and Shrinking phases",
+        "A protocol with two locks per table",
+        "A protocol that prevents all deadlocks",
+        "A protocol that locks two rows at a time"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Dirty Read?",
+      "options": [
+        "Reading uncommitted data from another transaction",
+        "Reading data from a deleted table",
+        "Reading data with a virus",
+        "Reading outdated data after commit"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which Isolation Level prevents Dirty Reads, Non-repeatable Reads, and Phantoms?",
+      "options": [
+        "Serializable",
+        "Read Uncommitted",
+        "Read Committed",
+        "Repeatable Read"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a savepoint?",
+      "options": [
+        "A point in a transaction you can rollback to",
+        "A backup of the database",
+        "A commit point",
+        "A physical storage location"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "How does Wait-Die scheme handle deadlocks?",
+      "options": [
+        "Older transaction waits, younger dies",
+        "Younger transaction waits, older dies",
+        "Both wait",
+        "Both die"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What happens during a system crash if a transaction was committed but not written to disk?",
+      "options": [
+        "Durability property ensures it is recovered from the log",
+        "It is lost forever",
+        "The user must re-enter it",
+        "Atomicity aborts it"
+      ],
+      "correctIndex": 0
     }
   ]
 }

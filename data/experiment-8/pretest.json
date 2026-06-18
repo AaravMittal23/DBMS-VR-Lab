@@ -20,6 +20,76 @@
         "To store backup data"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What is a View in SQL?",
+      "options": [
+        "A virtual table based on a query",
+        "A physical table",
+        "An index",
+        "A stored procedure"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the primary purpose of an Index?",
+      "options": [
+        "To speed up data retrieval",
+        "To save disk space",
+        "To enforce foreign keys",
+        "To encrypt data"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Does a view store data physically?",
+      "options": [
+        "No, except for materialized views",
+        "Yes, always",
+        "Only if it has an index",
+        "Only if created with STORE keyword"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command creates a View?",
+      "options": [
+        "CREATE VIEW",
+        "MAKE VIEW",
+        "BUILD VIEW",
+        "GENERATE VIEW"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which data structure is commonly used for database indexes?",
+      "options": [
+        "B-Tree",
+        "Linked List",
+        "Stack",
+        "Queue"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can you insert data through a view?",
+      "options": [
+        "Yes, under certain conditions",
+        "No, never",
+        "Always",
+        "Only if it is a materialized view"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command removes an index?",
+      "options": [
+        "DROP INDEX",
+        "DELETE INDEX",
+        "REMOVE INDEX",
+        "TRUNCATE INDEX"
+      ],
+      "correctIndex": 0
     }
   ]
 }

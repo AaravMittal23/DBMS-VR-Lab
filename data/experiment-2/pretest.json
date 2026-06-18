@@ -20,6 +20,76 @@
         "TRUNCATE is a DML command"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What does DDL stand for?",
+      "options": [
+        "Data Definition Language",
+        "Data Manipulation Language",
+        "Data Design Language",
+        "Data Description Language"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command is used to create a table?",
+      "options": [
+        "CREATE",
+        "MAKE",
+        "BUILD",
+        "GENERATE"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What command removes a table structure and its data?",
+      "options": [
+        "DROP",
+        "DELETE",
+        "TRUNCATE",
+        "REMOVE"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which statement modifies an existing table structure?",
+      "options": [
+        "ALTER",
+        "UPDATE",
+        "CHANGE",
+        "MODIFY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the default constraint if none is specified?",
+      "options": [
+        "NULL",
+        "NOT NULL",
+        "UNIQUE",
+        "PRIMARY KEY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command empties a table without removing its structure?",
+      "options": [
+        "TRUNCATE",
+        "DELETE",
+        "DROP",
+        "CLEAR"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which keyword is used to add a column in ALTER TABLE?",
+      "options": [
+        "ADD",
+        "INSERT",
+        "APPEND",
+        "NEW"
+      ],
+      "correctIndex": 0
     }
   ]
 }

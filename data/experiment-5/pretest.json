@@ -150,6 +150,76 @@
         "SELECT, FROM, GROUP BY, WHERE, HAVING"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "What function returns the total number of rows?",
+      "options": [
+        "COUNT()",
+        "SUM()",
+        "TOTAL()",
+        "ROWS()"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which function finds the highest value?",
+      "options": [
+        "MAX()",
+        "HIGHEST()",
+        "TOP()",
+        "PEAK()"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which function calculates the arithmetic mean?",
+      "options": [
+        "AVG()",
+        "MEAN()",
+        "AVERAGE()",
+        "MID()"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What clause groups rows sharing a property?",
+      "options": [
+        "GROUP BY",
+        "ORDER BY",
+        "PARTITION BY",
+        "CLUSTER BY"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What clause filters aggregated results?",
+      "options": [
+        "HAVING",
+        "WHERE",
+        "FILTER",
+        "LIMIT"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which function adds up numerical values?",
+      "options": [
+        "SUM()",
+        "ADD()",
+        "PLUS()",
+        "TOTAL()"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Can aggregate functions be used in the WHERE clause?",
+      "options": [
+        "No",
+        "Yes",
+        "Only with subqueries",
+        "Only COUNT()"
+      ],
+      "correctIndex": 0
     }
   ]
 }

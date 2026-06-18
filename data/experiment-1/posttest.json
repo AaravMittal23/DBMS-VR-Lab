@@ -20,6 +20,76 @@
         "In the Display Monitor"
       ],
       "correctIndex": 1
+    },
+    {
+      "question": "Which component of DBMS handles concurrent execution of transactions?",
+      "options": [
+        "Transaction Manager",
+        "Query Processor",
+        "Storage Manager",
+        "Buffer Manager"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which mapping changes when logical schema is altered?",
+      "options": [
+        "External/Conceptual mapping",
+        "Conceptual/Internal mapping",
+        "Internal mapping",
+        "Physical mapping"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What does DML Compiler do?",
+      "options": [
+        "Translates DML statements",
+        "Compiles DDL",
+        "Optimizes query execution",
+        "Stores data"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "In 3-tier architecture, what is the middle tier?",
+      "options": [
+        "Application Server",
+        "Database Server",
+        "Client Server",
+        "Web Browser"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which level hides the details of data types and structures?",
+      "options": [
+        "View Level",
+        "Logical Level",
+        "Physical Level",
+        "Conceptual Level"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the primary function of the Storage Manager?",
+      "options": [
+        "Interface between low-level data and application",
+        "Parse queries",
+        "Execute transactions",
+        "Handle user requests"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which of the following describes the overall design of the database?",
+      "options": [
+        "Database Schema",
+        "Database Instance",
+        "Database State",
+        "Database Architecture"
+      ],
+      "correctIndex": 0
     }
   ]
 }

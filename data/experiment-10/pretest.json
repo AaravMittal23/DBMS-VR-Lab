@@ -20,6 +20,76 @@
         "Infinite Loop"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What is a Transaction in DBMS?",
+      "options": [
+        "A logical unit of work",
+        "A single SQL statement",
+        "A database connection",
+        "A table creation process"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What do the ACID properties stand for?",
+      "options": [
+        "Atomicity, Consistency, Isolation, Durability",
+        "Accuracy, Concurrency, Isolation, Durability",
+        "Atomicity, Concurrency, Integrity, Durability",
+        "Accuracy, Consistency, Integrity, Dependency"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command saves all transaction changes?",
+      "options": [
+        "COMMIT",
+        "SAVE",
+        "STORE",
+        "ROLLBACK"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which command undoes transaction changes?",
+      "options": [
+        "ROLLBACK",
+        "UNDO",
+        "REVERT",
+        "DROP"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is Concurrency Control?",
+      "options": [
+        "Managing simultaneous execution of transactions",
+        "Controlling database size",
+        "Managing user accounts",
+        "Controlling network access"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is a Deadlock?",
+      "options": [
+        "Transactions waiting indefinitely for each other",
+        "A server crash",
+        "A deleted table",
+        "A locked user account"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which lock allows reading but not writing?",
+      "options": [
+        "Shared Lock",
+        "Exclusive Lock",
+        "Write Lock",
+        "No Lock"
+      ],
+      "correctIndex": 0
     }
   ]
 }

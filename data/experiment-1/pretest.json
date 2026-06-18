@@ -30,6 +30,76 @@
         "Transaction Manager"
       ],
       "correctIndex": 2
+    },
+    {
+      "question": "What does DBMS stand for?",
+      "options": [
+        "Data Base Management System",
+        "Data Basic Management System",
+        "Data Base Manipulation System",
+        "Data Base Management Structure"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which level of abstraction describes how data is actually stored?",
+      "options": [
+        "Physical Level",
+        "Logical Level",
+        "View Level",
+        "External Level"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Who acts as an interface between the database and the end user?",
+      "options": [
+        "Database Administrator",
+        "System Analyst",
+        "Application Programmer",
+        "Database System"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is data independence?",
+      "options": [
+        "Ability to modify schema without affecting upper levels",
+        "Ability to store data independently",
+        "Ability to run DB on any OS",
+        "Ability to create multiple DBs"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which of the following is not a characteristic of DBMS?",
+      "options": [
+        "Data Redundancy",
+        "Data Security",
+        "Data Integrity",
+        "Concurrent Access"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "What is the role of the Database Administrator (DBA)?",
+      "options": [
+        "Manage DB structure and security",
+        "Write application code",
+        "Design UI",
+        "Sell database software"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Which architecture is most commonly used for web applications?",
+      "options": [
+        "3-tier architecture",
+        "1-tier architecture",
+        "2-tier architecture",
+        "None of the above"
+      ],
+      "correctIndex": 0
     }
   ]
 }
