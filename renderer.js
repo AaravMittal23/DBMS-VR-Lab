@@ -411,9 +411,6 @@ const Renderer = {
   procedure(data) {
     // Generate an interactive carousel instead of a static list
     const numSteps = data.steps.length;
-    
-    // Pass steps data to global for validation
-    window.currentProcedureSteps = data.steps;
 
     let html = `
       <span class="badge">Procedure</span>
@@ -427,14 +424,12 @@ const Renderer = {
     data.steps.forEach((s, i) => {
       let interactiveHtml = '';
       if (s.interactiveTask) {
+        // Change from input validation to a "Spoon-fed" Key Concept highlight
         interactiveHtml = `
-          <div class="interactive-task" style="margin-top: 20px; padding: 16px; background: var(--bg-color); border: 1px solid var(--border); border-radius: 8px;">
-            <p style="font-weight: 600; margin-bottom: 8px;">Checkpoint: ${s.interactiveTask.prompt}</p>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="proc-input-${i}" style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid var(--border); background: var(--card); color: var(--text);" placeholder="Type your answer here..." onkeypress="if(event.key==='Enter') window.procedureManager.checkAnswer(${i})">
-              <button onclick="window.procedureManager.checkAnswer(${i})" class="sim-btn" style="background: var(--primary); color: white;">Verify</button>
-            </div>
-            <p id="proc-feedback-${i}" style="margin-top: 8px; font-weight: 600; min-height: 20px;"></p>
+          <div class="interactive-task" style="margin-top: 20px; padding: 16px; background: var(--bg-color); border-left: 4px solid var(--primary); border-radius: 4px;">
+            <p style="font-weight: 600; margin-bottom: 8px; color: var(--primary);">💡 Key Concept</p>
+            <p style="margin: 0; color: var(--text);">${s.interactiveTask.prompt}</p>
+            ${s.interactiveTask.expected ? `<pre style="margin-top: 12px; background: #1e293b; color: #10b981; padding: 12px; border-radius: 4px;">${s.interactiveTask.expected[0]}</pre>` : ''}
           </div>
         `;
       }
@@ -475,38 +470,7 @@ const Renderer = {
         window.procedureManager = {
           currentStep: 0,
           totalSteps: ${numSteps},
-          completedSteps: {},
           
-          checkAnswer(stepIndex) {
-            const stepData = window.currentProcedureSteps[stepIndex];
-            if (!stepData || !stepData.interactiveTask) return;
-            
-            const inputEl = document.getElementById('proc-input-' + stepIndex);
-            const feedbackEl = document.getElementById('proc-feedback-' + stepIndex);
-            const val = inputEl.value.trim().toLowerCase();
-            
-            const isCorrect = stepData.interactiveTask.expected.some(e => {
-              const expectedStr = e.toLowerCase();
-              return expectedStr === val || expectedStr + ';' === val || expectedStr === val + ';';
-            });
-            
-            if (isCorrect) {
-              feedbackEl.style.color = '#10b981';
-              feedbackEl.textContent = stepData.interactiveTask.successMsg;
-              inputEl.style.borderColor = '#10b981';
-              inputEl.style.backgroundColor = document.body.classList.contains('dark-theme') ? '#064e3b' : '#dcfce7';
-              inputEl.style.color = document.body.classList.contains('dark-theme') ? '#fff' : '#000';
-              this.completedSteps[stepIndex] = true;
-              this.updateUI(); // to enable next button
-            } else {
-              feedbackEl.style.color = '#ef4444';
-              feedbackEl.textContent = "Incorrect, please try again.";
-              inputEl.style.borderColor = '#ef4444';
-              inputEl.style.backgroundColor = document.body.classList.contains('dark-theme') ? '#7f1d1d' : '#fee2e2';
-              inputEl.style.color = document.body.classList.contains('dark-theme') ? '#fff' : '#000';
-            }
-          },
-
           updateUI() {
             const carousel = document.getElementById('procedure-carousel');
             const prevBtn = document.getElementById('proc-prev-btn');
@@ -531,23 +495,14 @@ const Renderer = {
             }
             
             // Next button state
-            const currentStepData = window.currentProcedureSteps[this.currentStep];
-            const requiresInteractive = currentStepData && currentStepData.interactiveTask && !this.completedSteps[this.currentStep];
-
-            if (requiresInteractive) {
-              nextBtn.style.opacity = '0.5';
-              nextBtn.style.pointerEvents = 'none';
-              nextBtn.innerHTML = 'Complete Checkpoint First';
+            nextBtn.style.opacity = '1';
+            nextBtn.style.pointerEvents = 'auto';
+            if (this.currentStep === this.totalSteps - 1) {
+              nextBtn.innerHTML = 'Finish';
+              outcomesCard.style.display = 'block';
             } else {
-              nextBtn.style.opacity = '1';
-              nextBtn.style.pointerEvents = 'auto';
-              if (this.currentStep === this.totalSteps - 1) {
-                nextBtn.innerHTML = 'Finish';
-                outcomesCard.style.display = 'block';
-              } else {
-                nextBtn.innerHTML = 'Next Step &rarr;';
-                outcomesCard.style.display = 'none';
-              }
+              nextBtn.innerHTML = 'Next Step &rarr;';
+              outcomesCard.style.display = 'none';
             }
           },
           

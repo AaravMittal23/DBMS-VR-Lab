@@ -213,12 +213,12 @@ window.executeTerminalCommand = function() {
 
   if (hint) {
     res.style.color = '#f59e0b'; // warning color
-    res.innerHTML = \`⚠️ \${hint}\`;
+    res.innerHTML = `⚠️ ${hint}`;
   } 
   else if (cmdLower.startsWith('mysql -u root -p')) {
     window.simState.connected = true;
     window.simState.tasks[0] = true;
-    res.innerHTML = 'Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; or \\\\g.<br>Server version: 8.0.32 MySQL Community Server';
+    res.innerHTML = 'Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; or \\g.<br>Server version: 8.0.32 MySQL Community Server';
     if(window.DB) window.DB.resetDatabase();
   } 
   else if (!window.simState.connected) {
@@ -276,10 +276,10 @@ window.startQuiz1Timer = function() {
 window.displayQuiz1 = function(question) {
   const content = document.getElementById('quiz1Content');
   if (!content) return;
-  let html = \`<p style="margin-top: 0; font-size: 16px; font-weight: 500;">\${question.question}</p>\`;
+  let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += \`<button onclick="checkAnswer1(\${index}, \${question.correct}, '\${question.explanation.replace(/'/g, "\\\\'")}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">\${option}</button>\`;
+    html += `<button onclick="checkAnswer1(${index}, ${question.correct}, '${question.explanation.replace(/'/g, "\\'")}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
   });
   html += '</div>';
   content.innerHTML = html;
@@ -291,9 +291,9 @@ window.checkAnswer1 = function(selected, correct, explanation) {
   const isCorrect = selected === correct;
   const resultColor = isCorrect ? '#10b981' : '#dc2626';
   const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
-  let html = \`<div style="background: \${resultColor}20; border-left: 4px solid \${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">\`;
-  html += \`<p style="color: \${resultColor}; font-weight: 600; margin: 0 0 8px 0;">\${resultMessage}</p>\`;
-  html += \`<p style="margin: 0; color: var(--text);">\${explanation}</p></div>\`;
+  let html = `<div style="background: ${resultColor}20; border-left: 4px solid ${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">`;
+  html += `<p style="color: ${resultColor}; font-weight: 600; margin: 0 0 8px 0;">${resultMessage}</p>`;
+  html += `<p style="margin: 0; color: var(--text);">${explanation}</p></div>`;
   html += '<button onclick="closeQuiz1()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
   content.innerHTML = html;
 };
