@@ -1,24 +1,44 @@
 {
-  "introduction": "Follow these steps to explore the architecture and set up your environment.",
+  "introduction": "Follow these steps to explore the architecture and set up your environment. You will be asked to complete small tasks to verify your understanding before moving to the next step.",
   "steps": [
     {
       "title": "Step 1: Explore Architecture Components",
-      "content": "Use the interactive simulation to click through the Internal, Conceptual, and External layers of the DBMS."
+      "content": "The DBMS architecture is typically divided into three layers: External (views), Conceptual (logical), and Internal (physical storage). Understanding these layers helps separate user interfaces from physical storage details.",
+      "interactiveTask": {
+        "prompt": "Which layer is responsible for logical data independence? (Hint: Conceptual)",
+        "expected": ["Conceptual", "Conceptual Level", "Conceptual Schema"],
+        "successMsg": "Correct! The Conceptual Schema provides logical data independence."
+      }
     },
     {
       "title": "Step 2: Start the Database Server",
-      "content": "Open your terminal and start the database service.",
-      "code": "sudo service mysql start"
+      "content": "Before connecting to the database, you must ensure the background service is running. This is typically done via the terminal.",
+      "code": "sudo service mysql start",
+      "interactiveTask": {
+        "prompt": "Type the command to start the MySQL service:",
+        "expected": ["sudo service mysql start", "service mysql start"],
+        "successMsg": "Great! The database server would now be running."
+      }
     },
     {
       "title": "Step 3: Connect to the Server",
-      "content": "Authenticate using the root user to access the database engine.",
-      "code": "mysql -u root -p"
+      "content": "Once the server is running, you can connect to it using the mysql client. You need to specify the user (e.g., root) and prompt for a password.",
+      "code": "mysql -u root -p",
+      "interactiveTask": {
+        "prompt": "Type the command to connect to mysql as the 'root' user, asking for a password:",
+        "expected": ["mysql -u root -p"],
+        "successMsg": "Excellent! You are now connected to the MySQL monitor."
+      }
     },
     {
       "title": "Step 4: Create a Sandbox Database",
-      "content": "Create a new database that will be used for all future experiments.",
-      "code": "CREATE DATABASE lab_sandbox;\nUSE lab_sandbox;"
+      "content": "A database server can host multiple databases. Let's create a sandbox database for our experiments.",
+      "code": "CREATE DATABASE lab_sandbox;\nUSE lab_sandbox;",
+      "interactiveTask": {
+        "prompt": "Type the SQL command to create a database named 'lab_sandbox' (don't forget the semicolon):",
+        "expected": ["CREATE DATABASE lab_sandbox;"],
+        "successMsg": "Perfect! Your sandbox is ready."
+      }
     }
   ],
   "expectedOutcomes": [

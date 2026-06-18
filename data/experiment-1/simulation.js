@@ -41,9 +41,27 @@ window.sim1_renderSimulation = function() {
       </div>
 
       <div class="simulation-right" style="flex: 1;">
+        
+        <div class="card" style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: var(--primary);">Goal Tasks</h3>
+            <button onclick="resetSimulation()" class="sim-btn" style="background: var(--muted); color: white; padding: 4px 8px; font-size: 12px;">Reset</button>
+          </div>
+          <p style="font-size: 14px; color: var(--muted); margin-bottom: 12px;">Complete these tasks in the terminal below.</p>
+          <ul id="sim-task-list" style="list-style: none; padding: 0; margin: 0;">
+            <li id="task-1" style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"><span class="task-icon">⏳</span> 1. Connect to MySQL engine</li>
+            <li id="task-2" style="margin-bottom: 8px; display: flex; align-items: center; gap: 8px; color: var(--muted);"><span class="task-icon">⏳</span> 2. Create database 'lab_sandbox'</li>
+            <li id="task-3" style="margin-bottom: 0px; display: flex; align-items: center; gap: 8px; color: var(--muted);"><span class="task-icon">⏳</span> 3. List all databases to verify</li>
+          </ul>
+        </div>
+
         <div class="card sticky-result">
-          <h2>Database Environment Setup</h2>
-          <p style="color: var(--muted); margin-bottom: 16px;">Simulate connecting to the database engine via the terminal.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 style="margin: 0;">Terminal Sandbox</h2>
+            <div id="visual-state" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; display: none;">
+              💾 Databases: <span id="db-count">4</span>
+            </div>
+          </div>
           
           <div style="background: #1e293b; color: #10b981; font-family: monospace; padding: 16px; border-radius: 8px; min-height: 250px; overflow-y: auto;" id="terminal-output">
             <p style="margin: 0; color: #94a3b8;">$ Waiting for user input...</p>
@@ -51,14 +69,14 @@ window.sim1_renderSimulation = function() {
           
           <div style="display: flex; gap: 8px; margin-top: 16px;">
             <div style="flex: 1;">
-              <textarea id="terminal-input" rows="1" placeholder="Type a command (e.g., mysql -u root -p)" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-family: monospace;"></textarea>
+              <textarea id="terminal-input" rows="1" placeholder="Type a command (e.g., mysql -u root -p)" style="width: 100%; padding: 8px; border: 1px solid var(--border); border-radius: 4px; font-family: monospace;" onkeypress="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); executeTerminalCommand(); }"></textarea>
             </div>
             <button onclick="executeTerminalCommand()" style="background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; height: fit-content;">Run</button>
           </div>
           <div style="display: flex; gap: 8px; margin-top: 8px;">
-            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('mysql -u root -p'); } else { document.getElementById('terminal-input').value = 'mysql -u root -p'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">mysql -u root -p</button>
-            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('CREATE DATABASE lab_sandbox;'); } else { document.getElementById('terminal-input').value = 'CREATE DATABASE lab_sandbox;'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">CREATE DATABASE</button>
-            <button onclick="if(window.sqlEditor) { window.sqlEditor.setValue('SHOW DATABASES;'); } else { document.getElementById('terminal-input').value = 'SHOW DATABASES;'; } executeTerminalCommand();" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">SHOW DATABASES</button>
+            <button onclick="insertCommand('mysql -u root -p')" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">mysql -u root -p</button>
+            <button onclick="insertCommand('CREATE DATABASE lab_sandbox;')" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">CREATE DATABASE</button>
+            <button onclick="insertCommand('SHOW DATABASES;')" style="background: var(--bg-color); border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer;">SHOW DATABASES</button>
           </div>
         </div>
       </div>
@@ -78,7 +96,7 @@ window.sim1_renderSimulation = function() {
             <li><strong>Conceptual Level:</strong> The logical structure of all tables and relationships in the database.</li>
             <li><strong>Internal Level:</strong> How data is physically stored on disk (B-Trees, Hash files).</li>
           </ul>
-          <p>In the terminal simulator, try connecting to the database using <code>mysql -u root -p</code>, then execute standard SQL commands like <code>CREATE DATABASE</code> and <code>SHOW DATABASES</code> to set up your environment.</p>
+          <p>In the terminal simulator, complete the tasks listed to set up your environment.</p>
         </div>
       </div>
     </div>
@@ -96,8 +114,27 @@ window.sim1_renderSimulation = function() {
   `;
 };
 
-let isConnected = false;
-let databases = ['information_schema', 'mysql', 'performance_schema', 'sys'];
+window.simState = {
+  connected: false,
+  tasks: [false, false, false]
+};
+
+window.insertCommand = function(cmd) {
+  if(window.sqlEditor) {
+    window.sqlEditor.setValue(cmd);
+  } else {
+    document.getElementById('terminal-input').value = cmd;
+  }
+};
+
+window.resetSimulation = function() {
+  window.simState.connected = false;
+  window.simState.tasks = [false, false, false];
+  document.getElementById('terminal-output').innerHTML = '<p style="margin: 0; color: #94a3b8;">$ Waiting for user input...</p>';
+  document.getElementById('visual-state').style.display = 'none';
+  if(window.DB) window.DB.resetDatabase();
+  updateTaskUI();
+};
 
 window.selectLayer = function(layer) {
   const desc = document.getElementById('layer-description');
@@ -122,6 +159,30 @@ window.selectLayer = function(layer) {
   desc.style.borderLeftColor = selected.style.borderColor;
 };
 
+function updateTaskUI() {
+  for(let i = 0; i < 3; i++) {
+    const taskLi = document.getElementById('task-' + (i+1));
+    if (!taskLi) continue;
+    const icon = taskLi.querySelector('.task-icon');
+    if (window.simState.tasks[i]) {
+      icon.textContent = '✅';
+      taskLi.style.color = 'var(--text)';
+      taskLi.style.textDecoration = 'line-through';
+    } else {
+      icon.textContent = '⏳';
+      // Highlight current task
+      if (i === 0 || window.simState.tasks[i-1]) {
+        taskLi.style.color = 'var(--text)';
+        taskLi.style.fontWeight = 'bold';
+      } else {
+        taskLi.style.color = 'var(--muted)';
+        taskLi.style.fontWeight = 'normal';
+      }
+      taskLi.style.textDecoration = 'none';
+    }
+  }
+}
+
 window.executeTerminalCommand = function() {
   const input = document.getElementById('terminal-input');
   const output = document.getElementById('terminal-output');
@@ -131,28 +192,64 @@ window.executeTerminalCommand = function() {
   const line = document.createElement('p');
   line.style.margin = '4px 0';
   line.style.color = 'white';
-  line.textContent = '$ ' + cmd;
+  line.textContent = (window.simState.connected ? 'mysql> ' : '$ ') + cmd;
   output.appendChild(line);
   
   const res = document.createElement('div');
   res.style.margin = '0 0 12px 0';
   res.style.color = '#94a3b8';
+
+  const cmdLower = cmd.toLowerCase();
   
-  if (cmd.startsWith('mysql -u')) {
-    isConnected = true;
-    res.innerHTML = 'Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; or \\g.<br>Server version: 8.0.32 MySQL Community Server<br><br>mysql>';
-    window.DB.resetDatabase();
-  } else if (!isConnected) {
+  // Intelligent hint system
+  let hint = '';
+  if (cmdLower === 'mysql' || cmdLower === 'mysql -u root') {
+    hint = "Hint: To connect, use 'mysql -u root -p' to prompt for a password.";
+  } else if (cmdLower.includes('create database') && !cmdLower.endsWith(';')) {
+    hint = "Hint: SQL statements must end with a semicolon (;).";
+  } else if (cmdLower.includes('show database') && !cmdLower.includes('databases')) {
+    hint = "Hint: The command is plural: SHOW DATABASES;";
+  }
+
+  if (hint) {
+    res.style.color = '#f59e0b'; // warning color
+    res.innerHTML = \`⚠️ \${hint}\`;
+  } 
+  else if (cmdLower.startsWith('mysql -u root -p')) {
+    window.simState.connected = true;
+    window.simState.tasks[0] = true;
+    res.innerHTML = 'Enter password: <br>Welcome to the MySQL monitor.  Commands end with ; or \\\\g.<br>Server version: 8.0.32 MySQL Community Server';
+    if(window.DB) window.DB.resetDatabase();
+  } 
+  else if (!window.simState.connected) {
     res.style.color = '#ef4444';
     res.textContent = "ERROR 2002 (HY000): Can't connect to local MySQL server through socket (Not connected)";
-  } else {
-    // Treat as SQL
-    res.innerHTML = window.DB.executeQuery(cmd) + '<br><br>mysql>';
+  } 
+  else {
+    // Pass to SQL engine
+    const queryResult = window.DB ? window.DB.executeQuery(cmd) : 'Query executed (simulation mode).';
+    res.innerHTML = queryResult;
+    
+    // Check tasks
+    if (cmdLower.includes('create database lab_sandbox;')) {
+      if (!queryResult.includes('ERROR')) {
+        window.simState.tasks[1] = true;
+        document.getElementById('visual-state').style.display = 'block';
+        document.getElementById('db-count').textContent = '5';
+      }
+    } else if (cmdLower.includes('show databases;')) {
+      if (window.simState.tasks[1]) {
+        window.simState.tasks[2] = true;
+      }
+    }
   }
   
   output.appendChild(res);
   input.value = '';
+  if(window.sqlEditor) window.sqlEditor.setValue('');
   output.scrollTop = output.scrollHeight;
+  
+  updateTaskUI();
 };
 
 // Guide and Quiz logic for Exp 1
@@ -160,7 +257,7 @@ window.openGuide1 = function() { document.getElementById('guideModal1').style.di
 window.closeGuide1 = function() { document.getElementById('guideModal1').style.display = 'none'; };
 
 const quiz1Questions = [
-  { question: "Which schema provides Logical Data Independence?", options: ["External Schema", "Conceptual Schema", "Internal Schema", "All of the above"], correct: 0, explanation: "The External Schema provides logical data independence by separating user views from the conceptual structure." },
+  { question: "Which schema provides Logical Data Independence?", options: ["External Schema", "Conceptual Schema", "Internal Schema", "All of the above"], correct: 1, explanation: "The Conceptual Schema provides logical data independence by separating user views from the physical structure." },
   { question: "Which command lists all existing databases?", options: ["LIST DATABASES;", "SHOW DATABASES;", "DISPLAY DATABASES;", "GET DATABASES;"], correct: 1, explanation: "SHOW DATABASES; is the standard SQL command to list databases." }
 ];
 
@@ -179,10 +276,10 @@ window.startQuiz1Timer = function() {
 window.displayQuiz1 = function(question) {
   const content = document.getElementById('quiz1Content');
   if (!content) return;
-  let html = `<p style="margin-top: 0; font-size: 16px; font-weight: 500;">${question.question}</p>`;
+  let html = \`<p style="margin-top: 0; font-size: 16px; font-weight: 500;">\${question.question}</p>\`;
   html += '<div style="margin: 20px 0;">';
   question.options.forEach((option, index) => {
-    html += `<button onclick="checkAnswer1(${index}, ${question.correct}, '${question.explanation}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">${option}</button>`;
+    html += \`<button onclick="checkAnswer1(\${index}, \${question.correct}, '\${question.explanation.replace(/'/g, "\\\\'")}')" style="display: block; width: 100%; padding: 12px; margin: 10px 0; border: 2px solid var(--border); background: var(--card); border-radius: 6px; text-align: left; cursor: pointer;">\${option}</button>\`;
   });
   html += '</div>';
   content.innerHTML = html;
@@ -194,9 +291,9 @@ window.checkAnswer1 = function(selected, correct, explanation) {
   const isCorrect = selected === correct;
   const resultColor = isCorrect ? '#10b981' : '#dc2626';
   const resultMessage = isCorrect ? '✓ Correct!' : '✗ Incorrect';
-  let html = `<div style="background: ${resultColor}20; border-left: 4px solid ${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">`;
-  html += `<p style="color: ${resultColor}; font-weight: 600; margin: 0 0 8px 0;">${resultMessage}</p>`;
-  html += `<p style="margin: 0; color: var(--text);">${explanation}</p></div>`;
+  let html = \`<div style="background: \${resultColor}20; border-left: 4px solid \${resultColor}; padding: 16px; border-radius: 6px; margin-bottom: 16px;">\`;
+  html += \`<p style="color: \${resultColor}; font-weight: 600; margin: 0 0 8px 0;">\${resultMessage}</p>\`;
+  html += \`<p style="margin: 0; color: var(--text);">\${explanation}</p></div>\`;
   html += '<button onclick="closeQuiz1()" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 16px;">Got it!</button>';
   content.innerHTML = html;
 };
@@ -209,10 +306,6 @@ window.closeQuiz1 = function() {
 window.initQuiz1 = function() {
   if (window.quiz1Timer) clearTimeout(window.quiz1Timer);
   window.startQuiz1Timer();
+  window.simState = { connected: false, tasks: [false, false, false] };
+  updateTaskUI();
 };
-
-document.addEventListener('DOMContentLoaded', function() {
-  if (document.getElementById('terminal-input')) {
-    window.startQuiz1Timer();
-  }
-});
