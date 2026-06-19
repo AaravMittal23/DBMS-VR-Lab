@@ -16,9 +16,6 @@ class Router {
     if (parts[0] === 'sandbox') {
       return { view: 'sandbox' };
     }
-    if (parts[0] === 'er-builder') {
-      return { view: 'er-builder' };
-    }
     if (parts[0] === 'team-details') {
       return { view: 'team-details' };
     }

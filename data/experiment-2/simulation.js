@@ -150,7 +150,8 @@ window.renderSchema = function() {
 };
 
 window.resetDDL = function() {
-  dbSchema = {};
+  if (window.DB) window.DB.resetDatabase();
+  if (window.sqlEditor) window.sqlEditor.setValue('');
   document.getElementById('ddl-input').value = '';
   document.getElementById('ddl-output').style.display = 'none';
   renderSchema();

@@ -94,8 +94,6 @@ class App {
       this.renderHome();
     } else if (route.view === 'sandbox') {
       this.renderSandbox();
-    } else if (route.view === 'er-builder') {
-      this.renderERBuilder();
     } else if (route.view === 'team-details') {
       this.renderTeamDetails();
     } else {
@@ -273,183 +271,6 @@ class App {
       
     }, 100);
 
-    this.wireNav();
-    window.scrollTo(0, 0);
-  }
-
-  renderERBuilder() {
-    document.getElementById('sidebar').innerHTML = this.buildSidebar(null, 'er-builder');
-    document.getElementById('header').innerHTML  = this.buildHeader('ER Diagram Builder', 'Design your database visually and generate SQL');
-    
-    document.getElementById('main').innerHTML = `
-      <span class="badge" style="background: var(--imperial-blue); color: white;">ER Builder</span>
-      
-      <div style="display: flex; gap: 16px; margin-top: 24px;">
-        <!-- Toolbox -->
-        <div class="card" style="width: 250px; flex-shrink: 0;">
-          <h3 style="margin-bottom: 16px;">Toolbox</h3>
-          <button onclick="window.erBuilder.addEntity()" class="sim-btn" style="width: 100%; margin-bottom: 12px; background: var(--imperial-blue); color: white;">+ Add Entity</button>
-          <button onclick="window.erBuilder.clearCanvas()" class="sim-btn" style="width: 100%; margin-bottom: 12px; background: var(--muted); color: white;">Clear Canvas</button>
-          <hr style="border: none; border-top: 1px solid var(--border); margin: 16px 0;">
-          <button onclick="window.erBuilder.generateSQL()" class="sim-btn" style="width: 100%; background: var(--primary); color: white; font-size: 16px; padding: 12px;">⚡ Generate SQL</button>
-        </div>
-        
-        <!-- Canvas -->
-        <div class="card" id="er-canvas" style="flex-grow: 1; min-height: 600px; position: relative; background: var(--bg-color); background-image: radial-gradient(var(--border) 1px, transparent 1px); background-size: 20px 20px; overflow: hidden;">
-          <!-- Entities will be appended here -->
-        </div>
-      </div>
-      
-      <!-- SQL Output Modal -->
-      <div id="er-sql-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
-        <div class="card" style="width: 600px; max-width: 90%; position: relative;">
-          <h2>Generated SQL</h2>
-          <p style="color: var(--muted); margin-bottom: 16px;">Copy this code or run it in the Sandbox!</p>
-          <pre id="er-sql-output" style="max-height: 400px; overflow-y: auto; background: #1e1e1e; color: #d4d4d4; padding: 16px; border-radius: 8px;"></pre>
-          <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 16px;">
-            <button onclick="document.getElementById('er-sql-modal').style.display='none'" class="sim-btn" style="background: var(--muted); color: white;">Close</button>
-            <button onclick="window.erBuilder.copySQL()" class="sim-btn" style="background: var(--primary); color: white;">Copy to Clipboard</button>
-          </div>
-        </div>
-      </div>
-    `;
-
-    if (!window.erBuilderInit) {
-      window.erBuilderInit = true;
-      window.erBuilder = {
-        entityCount: 0,
-        isDragging: false,
-        currentDrag: null,
-        offset: { x: 0, y: 0 },
-        
-        addEntity() {
-          this.entityCount++;
-          const id = 'entity-' + this.entityCount;
-          const el = document.createElement('div');
-          el.id = id;
-          el.className = 'er-entity card';
-          el.style.position = 'absolute';
-          el.style.left = '50px';
-          el.style.top = '50px';
-          el.style.width = '200px';
-          el.style.padding = '0';
-          el.style.cursor = 'move';
-          el.style.border = '2px solid var(--imperial-blue)';
-          el.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-          
-          el.innerHTML = `
-            <div style="background: var(--imperial-blue); color: white; padding: 8px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;">
-              <input type="text" value="Table_${this.entityCount}" class="er-table-name" style="background: transparent; border: none; color: white; font-weight: bold; outline: none; width: 140px;">
-              <button onclick="this.closest('.er-entity').remove()" style="background: none; border: none; color: white; cursor: pointer; font-size: 16px;">&times;</button>
-            </div>
-            <div class="er-attributes" style="padding: 8px; background: var(--card);">
-              <div style="display: flex; gap: 4px; margin-bottom: 4px;">
-                <input type="text" value="id" class="er-attr-name" style="width: 80px; padding: 4px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px;">
-                <select class="er-attr-type" style="width: 80px; padding: 4px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px;">
-                  <option value="INT PRIMARY KEY">INT PK</option>
-                  <option value="VARCHAR(255)">VARCHAR</option>
-                  <option value="INT">INT</option>
-                </select>
-              </div>
-            </div>
-            <button onclick="window.erBuilder.addAttribute('${id}')" style="width: 100%; border: none; border-top: 1px solid var(--border); background: var(--bg-color); padding: 6px; cursor: pointer; color: var(--muted); font-size: 12px;">+ Add Attribute</button>
-          `;
-          
-          el.addEventListener('mousedown', (e) => {
-            if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'BUTTON') return;
-            this.isDragging = true;
-            this.currentDrag = el;
-            this.offset.x = e.clientX - el.offsetLeft;
-            this.offset.y = e.clientY - el.offsetTop;
-            el.style.zIndex = 1000;
-          });
-          
-          document.getElementById('er-canvas').appendChild(el);
-        },
-        
-        addAttribute(entityId) {
-          const attrContainer = document.querySelector('#' + entityId + ' .er-attributes');
-          const div = document.createElement('div');
-          div.style.display = 'flex';
-          div.style.gap = '4px';
-          div.style.marginBottom = '4px';
-          div.innerHTML = `
-            <input type="text" placeholder="name" class="er-attr-name" style="width: 80px; padding: 4px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px;">
-            <select class="er-attr-type" style="width: 80px; padding: 4px; border: 1px solid var(--border); border-radius: 4px; font-size: 12px;">
-              <option value="VARCHAR(255)">VARCHAR</option>
-              <option value="INT">INT</option>
-              <option value="DATE">DATE</option>
-            </select>
-            <button onclick="this.parentElement.remove()" style="background: none; border: none; color: var(--muted); cursor: pointer;">&times;</button>
-          `;
-          attrContainer.appendChild(div);
-        },
-        
-        clearCanvas() {
-          if(confirm('Are you sure you want to clear the canvas?')) {
-            document.getElementById('er-canvas').innerHTML = '';
-            this.entityCount = 0;
-          }
-        },
-        
-        generateSQL() {
-          const entities = document.querySelectorAll('.er-entity');
-          if (entities.length === 0) {
-            alert('Please add at least one entity to the canvas!');
-            return;
-          }
-          
-          let sql = '-- Generated from ER Builder\n\n';
-          entities.forEach(ent => {
-            const tableName = ent.querySelector('.er-table-name').value;
-            sql += `CREATE TABLE ${tableName} (\n`;
-            
-            const attrs = ent.querySelectorAll('.er-attributes > div');
-            const colDefs = [];
-            attrs.forEach(attr => {
-              const name = attr.querySelector('.er-attr-name').value;
-              const type = attr.querySelector('.er-attr-type').value;
-              if (name) {
-                colDefs.push(`    ${name} ${type}`);
-              }
-            });
-            
-            sql += colDefs.join(',\n') + '\n);\n\n';
-          });
-          
-          document.getElementById('er-sql-output').textContent = sql;
-          document.getElementById('er-sql-modal').style.display = 'flex';
-        },
-        
-        copySQL() {
-          const sql = document.getElementById('er-sql-output').textContent;
-          navigator.clipboard.writeText(sql);
-          alert('Copied to clipboard!');
-        }
-      };
-      
-      document.addEventListener('mousemove', (e) => {
-        if (window.erBuilder && window.erBuilder.isDragging && window.erBuilder.currentDrag) {
-          const el = window.erBuilder.currentDrag;
-          
-          let newX = e.clientX - window.erBuilder.offset.x;
-          let newY = e.clientY - window.erBuilder.offset.y;
-          
-          el.style.left = newX + 'px';
-          el.style.top = newY + 'px';
-        }
-      });
-      
-      document.addEventListener('mouseup', () => {
-        if (window.erBuilder) {
-          window.erBuilder.isDragging = false;
-          if (window.erBuilder.currentDrag) {
-            window.erBuilder.currentDrag.style.zIndex = '';
-            window.erBuilder.currentDrag = null;
-          }
-        }
-      });
-    }
     this.wireNav();
     window.scrollTo(0, 0);
   }
@@ -711,12 +532,11 @@ class App {
         <p>Department of Computer Science</p>
       </div>
       <nav>
-        <a href="#/home" class="${!currentExpId && currentPage !== 'sandbox' && currentPage !== 'er-builder' && currentPage !== 'team-details' ? 'active' : ''}">🏠 Home</a>
+        <a href="#/home" class="${!currentExpId && currentPage !== 'sandbox' && currentPage !== 'team-details' ? 'active' : ''}">🏠 Home</a>
         <a href="#/team-details" class="${currentPage === 'team-details' ? 'active' : ''}">👥 Team Details</a>
         
         <div style="margin: 16px 0 8px 16px; font-size: 11px; font-weight: bold; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Creative Tools</div>
         <a href="#/sandbox" class="${currentPage === 'sandbox' ? 'active' : ''}">🛠️ Personal Project Sandbox</a>
-        <a href="#/er-builder" class="${currentPage === 'er-builder' ? 'active' : ''}">📊 ER Diagram Builder</a>
         
         <div style="margin: 16px 0 8px 16px; font-size: 11px; font-weight: bold; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Experiments</div>
     `;
