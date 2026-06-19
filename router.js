@@ -19,6 +19,9 @@ class Router {
     if (parts[0] === 'er-builder') {
       return { view: 'er-builder' };
     }
+    if (parts[0] === 'team-details') {
+      return { view: 'team-details' };
+    }
     // Expected: ['experiment', '1', 'theory']
     if (parts[0] === 'experiment' && parts[1] && parts[2]) {
       return { view: 'experiment', expId: parts[1], page: parts[2] };

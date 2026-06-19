@@ -96,6 +96,8 @@ class App {
       this.renderSandbox();
     } else if (route.view === 'er-builder') {
       this.renderERBuilder();
+    } else if (route.view === 'team-details') {
+      this.renderTeamDetails();
     } else {
       await this.renderExperimentPage(route.expId, route.page);
     }
@@ -453,6 +455,60 @@ class App {
   }
 
   /* ------------------------------------------------------------------ */
+  /* Team Details                                                         */
+  /* ------------------------------------------------------------------ */
+
+  renderTeamDetails() {
+    document.getElementById('sidebar').innerHTML = this.buildSidebar(null, 'team-details');
+    document.getElementById('header').innerHTML  = this.buildHeader('Team Details', 'Meet the Developers & Contributors');
+    
+    document.getElementById('main').innerHTML = `
+      <span class="badge" style="background: var(--primary); color: white;">Team Details</span>
+      
+      <div style="margin-top: 24px;">
+        <h2 style="color: var(--primary); margin-bottom: 24px;">Principal Investigator</h2>
+        <div class="card" style="display: flex; align-items: center; gap: 16px; margin-bottom: 32px; border-left: 4px solid var(--primary);">
+          <div style="flex: 1;">
+            <h3 style="margin: 0; color: var(--text);">Dr. XYZ</h3>
+            <p style="margin: 4px 0 0 0; color: var(--muted);">Professor & Head of Department, Computer Science</p>
+            <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
+          </div>
+        </div>
+
+        <h2 style="color: var(--primary); margin-bottom: 24px;">Lead Developers</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+          <div class="card" style="text-align: center;">
+            <div style="width: 80px; height: 80px; background: var(--bg-color); border-radius: 50%; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 2px solid var(--border);">👨‍💻</div>
+            <h3 style="margin: 0;">Aarav Mittal</h3>
+            <p style="margin: 4px 0 0 0; color: var(--muted); font-size: 14px;">Full-Stack Developer</p>
+            <p style="margin: 8px 0 0 0; font-size: 13px;">Designed and implemented the core interactive architecture and virtual lab simulations.</p>
+          </div>
+          
+          <div class="card" style="text-align: center;">
+            <div style="width: 80px; height: 80px; background: var(--bg-color); border-radius: 50%; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 2px solid var(--border);">👨‍💻</div>
+            <h3 style="margin: 0;">Developer 2</h3>
+            <p style="margin: 4px 0 0 0; color: var(--muted); font-size: 14px;">Simulation Engineer</p>
+            <p style="margin: 8px 0 0 0; font-size: 13px;">Worked on the SQL simulation engine and ER builder integrations.</p>
+          </div>
+        </div>
+        
+        <h2 style="color: var(--primary); margin-top: 32px; margin-bottom: 24px;">Contributors & Subject Matter Experts</h2>
+        <div class="card">
+          <ul style="line-height: 1.8; margin: 0; padding-left: 20px;">
+            <li><strong>Faculty Name 1</strong> - Content Validation and Quality Assurance</li>
+            <li><strong>Faculty Name 2</strong> - Pedagogy and Curriculum Design</li>
+            <li><strong>Student Volunteer 1</strong> - Testing and Feedback</li>
+          </ul>
+        </div>
+      </div>
+    `;
+
+    document.title = 'DBMS Virtual Lab | Team Details';
+    this.wireNav();
+    window.scrollTo(0, 0);
+  }
+
+  /* ------------------------------------------------------------------ */
   /* Experiment page                                                      */
   /* ------------------------------------------------------------------ */
 
@@ -655,7 +711,8 @@ class App {
         <p>Department of Computer Science</p>
       </div>
       <nav>
-        <a href="#/home" class="${!currentExpId && currentPage !== 'sandbox' && currentPage !== 'er-builder' ? 'active' : ''}">🏠 Home</a>
+        <a href="#/home" class="${!currentExpId && currentPage !== 'sandbox' && currentPage !== 'er-builder' && currentPage !== 'team-details' ? 'active' : ''}">🏠 Home</a>
+        <a href="#/team-details" class="${currentPage === 'team-details' ? 'active' : ''}">👥 Team Details</a>
         
         <div style="margin: 16px 0 8px 16px; font-size: 11px; font-weight: bold; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Creative Tools</div>
         <a href="#/sandbox" class="${currentPage === 'sandbox' ? 'active' : ''}">🛠️ Personal Project Sandbox</a>
