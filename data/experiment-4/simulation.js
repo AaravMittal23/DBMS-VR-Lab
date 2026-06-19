@@ -131,6 +131,7 @@ const joinExamples = [
 
 window.loadJoinExample = function(index) {
   document.getElementById('join-input').value = joinExamples[index];
+  if (window.sqlEditor) window.sqlEditor.setValue(joinExamples[index]);
 };
 
 window.executeJoin = function() {

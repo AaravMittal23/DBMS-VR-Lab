@@ -226,6 +226,7 @@ window.executeDML = function() {
 
 window.resetDML = function() {
   dmlData = JSON.parse(JSON.stringify(initialDmlData));
+  if (window.sqlEditor) window.sqlEditor.setValue('');
   document.getElementById('dml-input').value = '';
   document.getElementById('dml-output').style.display = 'none';
   document.getElementById('select-result').style.display = 'none';

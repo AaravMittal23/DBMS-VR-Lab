@@ -106,6 +106,7 @@ const viExamples = [
 
 window.loadVIExample = function(index) {
   document.getElementById('vi-input').value = viExamples[index];
+  if (window.sqlEditor) window.sqlEditor.setValue(viExamples[index]);
 };
 
 window.executeVI = function() {

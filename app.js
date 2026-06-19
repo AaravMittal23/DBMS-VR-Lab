@@ -361,7 +361,7 @@ class App {
         }
         
         // Initialize CodeMirror if the editor exists
-        const sqlInput = document.getElementById('ddl-input') || document.getElementById('dml-input') || document.getElementById('terminal-input');
+        const sqlInput = document.getElementById('ddl-input') || document.getElementById('dml-input') || document.getElementById('terminal-input') || document.getElementById('join-input') || document.getElementById('customQuery') || document.getElementById('vi-input');
         if (sqlInput) {
           if (window.CodeMirror) {
             console.log('CodeMirror found, initializing on', sqlInput.id);

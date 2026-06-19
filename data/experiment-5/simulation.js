@@ -499,6 +499,7 @@ function resetQuery() {
   const select = document.getElementById('queryType');
   const resultArea = document.getElementById('resultArea');
   if (textarea) textarea.value = '';
+  if (window.sqlEditor) window.sqlEditor.setValue('');
   if (select) select.value = 'count';
   if (resultArea) {
     resultArea.innerHTML = '<p style="color: var(--muted); text-align: center; padding: 20px;">Select a query type or write a custom query and click "Execute Query" to see results.</p>';
@@ -509,6 +510,7 @@ function runExample(query) {
   const textarea = document.getElementById('customQuery');
   if (!textarea) return;
   textarea.value = query;
+  if (window.sqlEditor) window.sqlEditor.setValue(query);
   executeQuery();
 }
 

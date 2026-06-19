@@ -133,6 +133,7 @@ window.resetSimulation = function() {
   document.getElementById('terminal-output').innerHTML = '<p style="margin: 0; color: #94a3b8;">$ Waiting for user input...</p>';
   document.getElementById('visual-state').style.display = 'none';
   if(window.DB) window.DB.resetDatabase();
+  if(window.sqlEditor) window.sqlEditor.setValue('');
   updateTaskUI();
 };
 
