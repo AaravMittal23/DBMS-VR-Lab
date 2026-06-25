@@ -291,23 +291,38 @@ class App {
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 32px;">
           <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
             <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. Alice Smith</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Professor, Computer Science</p>
+              <h3 style="margin: 0; color: var(--text);">Dr. M.S. Abirami</h3>
+              <p style="margin: 4px 0 0 0; color: var(--muted);">Professor / CINTEL</p>
               <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
+              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 98410 75462</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:abiramim@srmist.edu.in">abiramim@srmist.edu.in</a></p>
             </div>
           </div>
           <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
             <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. Bob Johnson</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Associate Professor, Computer Science</p>
+              <h3 style="margin: 0; color: var(--text);">Dr. S. Amudha</h3>
+              <p style="margin: 4px 0 0 0; color: var(--muted);">Associate Professor / CINTEL</p>
               <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
+              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 9791994531</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:amudhas@srmist.edu.in">amudhas@srmist.edu.in</a></p>
             </div>
           </div>
           <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
             <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. Carol Davis</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Assistant Professor, Computer Science</p>
+              <h3 style="margin: 0; color: var(--text);">Dr. Karpagam</h3>
+              <p style="margin: 4px 0 0 0; color: var(--muted);">Assistant Professor / CINTEL</p>
               <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
+              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 96777 91903</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:karpagam1@srmist.edu.in">karpagam1@srmist.edu.in</a></p>
+            </div>
+          </div>
+          <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
+            <div style="flex: 1;">
+              <h3 style="margin: 0; color: var(--text);">Dr. Gopirajan</h3>
+              <p style="margin: 4px 0 0 0; color: var(--muted);">Associate Professor / CINTEL</p>
+              <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
+              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 94448 03672</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:gopirajp@srmist.edu.in">gopirajp@srmist.edu.in</a></p>
             </div>
           </div>
         </div>
