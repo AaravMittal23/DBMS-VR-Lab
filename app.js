@@ -288,52 +288,64 @@ class App {
       
       <div style="margin-top: 24px;">
         <h2 style="color: var(--primary); margin-bottom: 24px;">Faculty Coordinators</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 32px;">
-          <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
-            <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. M.S. Abirami</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Professor / CINTEL</p>
-              <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
-              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 98410 75462</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:abiramim@srmist.edu.in">abiramim@srmist.edu.in</a></p>
+        <div class="faculty-grid">
+          <div class="card faculty-card">
+            <div class="faculty-main">
+              <h3 class="faculty-name">Dr. M.S. Abirami</h3>
+              <p class="faculty-role">Professor / CINTEL</p>
+              <p class="faculty-org">SRM Institute of Science and Technology</p>
+            </div>
+            <div class="faculty-contact">
+              <p>📞 98410 75462</p>
+              <p>✉️ <a href="mailto:abiramim@srmist.edu.in">abiramim@srmist.edu.in</a></p>
             </div>
           </div>
-          <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
-            <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. S. Amudha</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Associate Professor / CINTEL</p>
-              <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
-              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 9791994531</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:amudhas@srmist.edu.in">amudhas@srmist.edu.in</a></p>
+          <div class="card faculty-card">
+            <div class="faculty-main">
+              <h3 class="faculty-name">Dr. S. Amudha</h3>
+              <p class="faculty-role">Associate Professor / CINTEL</p>
+              <p class="faculty-org">SRM Institute of Science and Technology</p>
+            </div>
+            <div class="faculty-contact">
+              <p>📞 9791994531</p>
+              <p>✉️ <a href="mailto:amudhas@srmist.edu.in">amudhas@srmist.edu.in</a></p>
             </div>
           </div>
-          <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
-            <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. Karpagam</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Assistant Professor / CINTEL</p>
-              <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
-              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 96777 91903</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:karpagam1@srmist.edu.in">karpagam1@srmist.edu.in</a></p>
+          <div class="card faculty-card">
+            <div class="faculty-main">
+              <h3 class="faculty-name">Dr. Karpagam</h3>
+              <p class="faculty-role">Assistant Professor / CINTEL</p>
+              <p class="faculty-org">SRM Institute of Science and Technology</p>
+            </div>
+            <div class="faculty-contact">
+              <p>📞 96777 91903</p>
+              <p>✉️ <a href="mailto:karpagam1@srmist.edu.in">karpagam1@srmist.edu.in</a></p>
             </div>
           </div>
-          <div class="card" style="display: flex; align-items: center; gap: 16px; border-left: 4px solid var(--primary);">
-            <div style="flex: 1;">
-              <h3 style="margin: 0; color: var(--text);">Dr. Gopirajan</h3>
-              <p style="margin: 4px 0 0 0; color: var(--muted);">Associate Professor / CINTEL</p>
-              <p style="margin: 8px 0 0 0; font-size: 14px;">SRM Institute of Science and Technology</p>
-              <p style="margin: 6px 0 0 0; font-size: 13px;">📞 94448 03672</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">✉️ <a href="mailto:gopirajp@srmist.edu.in">gopirajp@srmist.edu.in</a></p>
+          <div class="card faculty-card">
+            <div class="faculty-main">
+              <h3 class="faculty-name">Dr. Gopirajan</h3>
+              <p class="faculty-role">Associate Professor / CINTEL</p>
+              <p class="faculty-org">SRM Institute of Science and Technology</p>
+            </div>
+            <div class="faculty-contact">
+              <p>📞 94448 03672</p>
+              <p>✉️ <a href="mailto:gopirajp@srmist.edu.in">gopirajp@srmist.edu.in</a></p>
             </div>
           </div>
         </div>
 
         <h2 style="color: var(--primary); margin-bottom: 24px;">Lead Developer</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
-          <div class="card" style="text-align: center;">
-            <div style="width: 80px; height: 80px; background: var(--bg-color); border-radius: 50%; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; font-size: 32px; border: 2px solid var(--border);">👨‍💻</div>
-            <h3 style="margin: 0;">Aarav Mittal</h3>
-            <p style="margin: 4px 0 0 0; color: var(--muted); font-size: 14px;">Full-Stack Developer</p>
-            <p style="margin: 8px 0 0 0; font-size: 13px;">Designed and implemented the core interactive architecture and virtual lab simulations.</p>
+          <div class="card" style="border-left: 4px solid var(--primary);">
+            <h3 style="margin: 0; font-size: 24px; line-height: 1.2; color: var(--text);">Aarav Mittal</h3>
+            <p style="margin: 8px 0 0 0; color: var(--muted); font-size: 14px; font-weight: 600;">Lead Developer</p>
+            <p style="margin: 12px 0 0 0; font-size: 14px;">BTech CSE w/ AI and ML</p>
+            <div style="margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); display: grid; gap: 6px;">
+              <p style="margin: 0; font-size: 14px;"><strong>Contact:</strong> 8800852822</p>
+              <p style="margin: 0; font-size: 14px;"><strong>Email:</strong> <a href="mailto:aaravmittal.2307@gmail.com">aaravmittal.2307@gmail.com</a></p>
+            </div>
+            <p style="margin: 14px 0 0 0; font-size: 13px; color: var(--muted);">Designed and implemented the core interactive architecture and virtual lab simulations.</p>
           </div>
         </div>
       </div>

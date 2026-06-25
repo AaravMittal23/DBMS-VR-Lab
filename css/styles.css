@@ -225,6 +225,62 @@ main {
   margin-top: 20px;
 }
 
+.faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.faculty-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  border-left: 4px solid var(--primary);
+  min-height: 150px;
+}
+
+.faculty-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.faculty-name {
+  margin: 0;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.faculty-role {
+  margin: 6px 0 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.faculty-org {
+  margin: 10px 0 0 0;
+  font-size: 13px;
+}
+
+.faculty-contact {
+  min-width: 180px;
+  text-align: right;
+  margin-top: 34px;
+}
+
+.faculty-contact p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.faculty-contact p + p {
+  margin-top: 8px;
+}
+
 .question {
   margin-bottom: 24px;
 }
@@ -511,6 +567,22 @@ footer {
  
   .simulation-layout {
     grid-template-columns: 1fr;
+  }
+
+  .faculty-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .faculty-card {
+    flex-direction: column;
+    gap: 10px;
+    min-height: unset;
+  }
+
+  .faculty-contact {
+    min-width: 0;
+    text-align: left;
+    margin-top: 0;
   }
   
   header {
