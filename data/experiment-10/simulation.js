@@ -15,9 +15,29 @@ window.sim10_renderSimulation = function() {
       <div class="simulation-left" style="flex: 1;">
         <div class="card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2 style="margin: 0;">Transactions</h2>
+            <h2 style="margin: 0;">Preset Schedules</h2>
             <button onclick="openGuide10()" style="background: var(--accent); color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">📖 Guide</button>
           </div>
+           
+          <select id="scheduleSelector" style="width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; background: var(--card); color: var(--text); margin-bottom: 16px;" onchange="window.sim10_loadSchedule(this.value)">
+            <option value="">-- Select a Concurrency Anomaly --</option>
+            <option value="dirtyRead">Dirty Read (Uncommitted Data)</option>
+            <option value="deadlock">Deadlock Scenario</option>
+            <option value="nonRepeatableRead">Non-Repeatable Read</option>
+            <option value="serializableExecution">Serializable Execution (Correct)</option>
+          </select>
+           
+          <div id="sim10-timeline-container" style="margin-bottom: 16px; padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border); display: none;">
+            <h3 style="margin-top: 0; font-size: 14px;">Transaction Timeline</h3>
+            <div id="sim10-timeline-view" style="overflow-x: auto;"></div>
+            <div style="display: flex; gap: 8px; margin-top: 12px;">
+              <button onclick="window.sim10_prevStep()" class="sim-btn" style="flex: 1; padding: 8px; background: var(--card); border: 1px solid var(--border); border-radius: 4px; cursor: pointer;">◀ Previous</button>
+              <button onclick="window.sim10_nextStep()" class="sim-btn" style="flex: 1; padding: 8px; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer;">Next ▶</button>
+            </div>
+          </div>
+           
+          <div class="card">
+            <h3 style="margin-top: 0; font-size: 16px;">Manual Simulation</h3>
           
           <div style="display: flex; flex-direction: column; gap: 20px;">
             <!-- Transaction A -->
@@ -287,3 +307,62 @@ window.initQuiz10 = function() {
   if (window.quiz10Timer) clearTimeout(window.quiz10Timer);
   window.startQuiz10Timer();
 };
+
+// Schedule-based simulation functions
+window.sim10_currentSchedule = null;
+window.sim10_scheduleStep = 0;
+
+window.sim10_loadSchedule = function(scheduleType) {
+  if (!scheduleType) {
+    document.getElementById('sim10-timeline-container').style.display = 'none';
+    return;
+  }
+
+  if (typeof window.ConcurrencyTimeline !== 'undefined') {
+    const timeline = new window.ConcurrencyTimeline('sim10-timeline-view');
+    timeline.loadSchedule(scheduleType);
+    window.sim10_currentSchedule = timeline;
+    window.sim10_scheduleStep = 0;
+    
+    document.getElementById('sim10-timeline-container').style.display = 'block';
+    window.sim10_log(`Loaded ${scheduleType} schedule. Click 'Next' to step through operations.`);
+    window.sim10_renderScheduleTimeline();
+  }
+};
+
+window.sim10_nextStep = function() {
+  if (!window.sim10_currentSchedule) return;
+  
+  const result = window.sim10_currentSchedule.executeNextStep();
+  if (result.complete) {
+    window.sim10_log('Schedule execution complete!');
+    return;
+  }
+  
+  window.sim10_scheduleStep++;
+  window.sim10_log(`[Step ${result.step + 1}] ${result.transaction}: ${result.operation} on ${result.resource}`);
+  window.sim10_renderScheduleTimeline();
+};
+
+window.sim10_prevStep = function() {
+  if (window.sim10_scheduleStep > 0) {
+    window.sim10_scheduleStep--;
+    window.sim10_log(`Stepped back to step ${window.sim10_scheduleStep}`);
+  }
+};
+
+window.sim10_renderScheduleTimeline = function() {
+  if (!window.sim10_currentSchedule) return;
+  
+  const timeline = window.sim10_currentSchedule;
+  const container = document.getElementById('sim10-timeline-view');
+  
+  // Render simple timeline
+  container.innerHTML = timeline.renderTimeline();
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('quiz10Content')) {
+    window.startQuiz10Timer();
+  }
+});

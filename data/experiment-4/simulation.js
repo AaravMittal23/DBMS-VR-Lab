@@ -5,7 +5,7 @@ window.sim4_renderSimulation = function() {
     <div class="card" style="margin-bottom: 24px;">
       <h2 style="margin-top: 0;">Joins & Subqueries Simulator</h2>
       <p style="color: var(--muted); margin-bottom: 0;">
-        Explore how <code>JOIN</code> operations merge data from multiple tables and how Subqueries can be used for nested data retrieval.
+        Explore how <code>JOIN</code> operations merge data from multiple tables and how Subqueries can be used for nested data retrieval. Click on operators in the tree to see intermediate results.
       </p>
     </div>
 
@@ -16,6 +16,9 @@ window.sim4_renderSimulation = function() {
             <h2 style="margin: 0;">Query Console</h2>
             <button onclick="openGuide4()" style="background: var(--accent); color: white; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: 600;">📖 Guide</button>
           </div>
+           
+          <!-- Query Tree Visualization -->
+          <div id="sim4-tree-container" style="margin-bottom: 20px; border-radius: 8px; background: var(--card);"></div>
           
           <div style="background: #1e293b; color: #f8fafc; font-family: monospace; padding: 16px; border-radius: 8px;">
             <textarea id="join-input" rows="5" style="width: 100%; background: transparent; color: #10b981; border: none; outline: none; resize: none; font-family: monospace; font-size: 14px;" placeholder="SELECT E.Name, D.DeptName 
@@ -28,6 +31,9 @@ INNER JOIN Departments D ON E.DeptID = D.DeptID;"></textarea>
           </div>
           
           <div id="join-output" style="margin-top: 16px; padding: 12px; border-radius: 4px; display: none; font-family: monospace; font-size: 13px;"></div>
+           
+          <!-- Node Details Panel -->
+          <div id="sim4-tree-details" style="margin-top: 16px; padding: 12px; border-radius: 4px; background: var(--bg-color); display: none; border-left: 4px solid #3b82f6;"></div>
           
           <div style="margin-top: 24px;">
             <h3 style="margin-top: 0; font-size: 14px; color: var(--muted);">Quick Examples:</h3>
@@ -138,6 +144,9 @@ window.executeJoin = function() {
   const input = document.getElementById('join-input').value.trim();
   const out = document.getElementById('join-output');
   const resultArea = document.getElementById('join-result-area');
+  const treeContainer = document.getElementById('sim4-tree-container');
+  const detailsPanel = document.getElementById('sim4-tree-details');
+  
   out.style.display = 'block';
   
   if (!input) {
@@ -150,6 +159,29 @@ window.executeJoin = function() {
   let results = [];
   
   try {
+    // Parse and validate query with pedagogical hints
+    if (typeof window.SQLParser !== 'undefined') {
+      const parser = new window.SQLParser();
+      const issues = parser.validate(input);
+      
+      if (issues.length > 0 && issues.some(i => i.level === 'warning')) {
+        const warnings = issues.filter(i => i.level === 'warning');
+        out.style.background = '#fef3c7'; out.style.color = '#92400e';
+        out.innerHTML = '<strong>⚠️ Pedagogical Hints:</strong><br>' + 
+          warnings.map(w => '• ' + w.message).join('<br>');
+      }
+    }
+
+    // Build and render the relational algebra tree
+    if (typeof window.RelationalAlgebraTree !== 'undefined') {
+      const tree = new window.RelationalAlgebraTree('sim4-tree-container', { width: 700, height: 300 });
+      tree.parseQuery(input);
+      tree.render();
+      
+      // Store reference for later use
+      window.sim4_tree = tree;
+    }
+
     if (uInput.includes('INNER JOIN')) {
       employeesTable.forEach(emp => {
         departmentsTable.forEach(dept => {
@@ -193,7 +225,9 @@ window.executeJoin = function() {
       throw new Error("Query type not fully supported in this simple simulation. Try the examples.");
     }
     
-    out.style.background = '#dcfce7'; out.style.color = '#16a34a';
+    if (out.style.background !== '#fef3c7') {
+      out.style.background = '#dcfce7'; out.style.color = '#16a34a';
+    }
     
     if (results.length === 0) {
       resultArea.innerHTML = '<p style="color: var(--muted); text-align: center;">No results found.</p>';
@@ -218,7 +252,15 @@ window.executeJoin = function() {
     
   } catch (err) {
     out.style.background = '#fee2e2'; out.style.color = '#ef4444';
-    out.textContent = 'ERROR: ' + err.message;
+    
+    // Try to provide pedagogical hint
+    let errorMsg = err.message;
+    if (typeof window.SQLErrorHandler !== 'undefined') {
+      const formatted = window.SQLErrorHandler.formatError(err, input);
+      errorMsg = formatted.pedagogical || err.message;
+    }
+    
+    out.textContent = 'ERROR: ' + errorMsg;
   }
 };
 

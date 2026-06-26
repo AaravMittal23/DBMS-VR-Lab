@@ -56,6 +56,14 @@ SELECT * FROM Employees WHERE Salary > 70000;"></textarea>
         </div>
 
         <div class="card">
+          <h2 style="margin-top: 0;">B+ Tree Index Structure</h2>
+          <p style="color: var(--muted); font-size: 12px; margin-bottom: 12px;">Visual representation of the B+ tree when an index is created. Try creating an index to see the tree structure!</p>
+          <div id="sim8-btree-container" style="border: 1px solid var(--border); border-radius: 8px; background: var(--bg-color); height: 250px; overflow: auto;">
+            <p style="color: var(--muted); text-align: center; padding: 100px 20px;">No index created yet. Create an index to visualize its B+ tree structure.</p>
+          </div>
+        </div>
+
+        <div class="card">
           <h2 style="margin-top: 0;">Result / Schema State</h2>
           <div class="simulation-result" id="vi-result-area">
             <p style="color: var(--muted); text-align: center; padding: 20px;">Run a query to see the results.</p>
@@ -132,6 +140,20 @@ window.executeVI = function() {
       out.style.background = '#dcfce7'; out.style.color = '#16a34a';
       out.textContent = 'Query OK, 0 rows affected. Index created.';
       resultArea.innerHTML = '<p style="color: var(--muted); text-align: center;">Index idx_salary created successfully.</p>';
+       
+      // Create and render B+ tree visualization
+      if (typeof window.BPlusTree !== 'undefined') {
+        const tree = new window.BPlusTree('sim8-btree-container', { order: 3 });
+         
+        // Insert sample values (employee salaries)
+        const salaries = [50000, 60000, 70000, 80000, 90000];
+        salaries.forEach(salary => {
+          tree.insert(Math.floor(salary / 10000) * 10); // Normalize for visualization
+        });
+         
+        tree.render();
+        window.sim8_btree = tree;
+      }
     }
     else if (uInput.includes('CREATE VIEW')) {
       hasView = true;

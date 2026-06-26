@@ -64,6 +64,18 @@ window.sim7_renderSimulation = function() {
             <li><strong>Transitive Dependency:</strong> dept_name depends on dept_id, which depends on student_id</li>
           </ul>
         </div>
+         
+        <!-- Functional Dependency Diagram -->
+        <div class="card" style="margin-top:20px">
+          <h3>Interactive Functional Dependency Diagram:</h3>
+          <p style="color:var(--muted);font-size:12px;margin-bottom:12px">Visual representation of how attributes depend on each other. This helps identify which normal form violations exist.</p>
+          <div id="sim7-fd-diagram" style="border:1px solid var(--border);border-radius:8px;background:var(--bg-color);height:300px;">
+            <p style="color:var(--muted);text-align:center;padding:120px 20px;">FD diagram will appear here...</p>
+          </div>
+           
+          <!-- Analysis Results -->
+          <div id="sim7-fd-analysis" style="margin-top:16px;padding:12px;background:var(--bg-color);border-radius:8px;border-left:4px solid #3b82f6;display:none;"></div>
+        </div>
       </div>
     </div>
 
@@ -343,3 +355,43 @@ window.initQuiz7 = function() {
     startQuiz7Timer();
   }
 };
+
+// Initialize FD Canvas visualization
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof window.FunctionalDependencyCanvas !== 'undefined' && document.getElementById('sim7-fd-diagram')) {
+    const canvas = new window.FunctionalDependencyCanvas('sim7-fd-diagram', {
+      attributes: ['S_ID', 'S_Name', 'D_ID', 'D_Name', 'C_ID', 'C_Name', 'Instr', 'Grade'],
+      width: 700,
+      height: 280
+    });
+    
+    // Add the functional dependencies from the example
+    canvas.addDependency('S_ID', 'S_Name');
+    canvas.addDependency('S_ID', 'D_ID');
+    canvas.addDependency('D_ID', 'D_Name');
+    canvas.addDependency('C_ID', 'C_Name');
+    canvas.addDependency('C_ID', 'Instr');
+    canvas.addDependency('S_ID', 'Grade'); // Composite key
+    
+    // Render the diagram
+    canvas.renderDiagram();
+    
+    // Analyze and display normal form violations
+    const analysis = canvas.analyzeNormalForms();
+    const analysisDiv = document.getElementById('sim7-fd-analysis');
+    
+    let analysisHTML = '<h4 style="margin-top:0;">Normal Form Analysis:</h4>';
+    analysisHTML += '<p style="margin:0 0 8px 0;"><strong>1NF:</strong> ' + (analysis.isInFirstNF ? '✓ PASS' : '✗ FAIL') + '</p>';
+    analysisHTML += '<p style="margin:0 0 8px 0;"><strong>2NF:</strong> ' + (analysis.isInSecondNF ? '✓ PASS' : '✗ FAIL - Has partial dependencies') + '</p>';
+    analysisHTML += '<p style="margin:0 0 8px 0;"><strong>3NF:</strong> ' + (analysis.isInThirdNF ? '✓ PASS' : '✗ FAIL - Has transitive dependencies') + '</p>';
+    
+    if (analysis.issues.length > 0) {
+      analysisHTML += '<div style="margin-top:12px; color:#b91c1c; font-size:12px;"><strong>Issues:</strong><br>' + analysis.issues.join('<br>') + '</div>';
+    }
+    
+    analysisDiv.innerHTML = analysisHTML;
+    analysisDiv.style.display = 'block';
+    
+    window.sim7_fdCanvas = canvas;
+  }
+});
